@@ -1967,64 +1967,118 @@ function frame(t, dt) {
 }
 `
 
-// La Fille mal gardée: a farmyard at dawn, the cockerel crowing on the
-// fence and the hens pecking. Lise dances with a pink ribbon and ties it
-// for Colas; they dance with it between them (she turns, rides it like
-// reins, they skip), until Widow Simone's clogs are heard coming and
-// Colas runs off.
+// La Fille mal gardée: a farmyard at dawn. First the chicken dance: the
+// Cockerel struts in and crows, the Hens follow him flapping, peck in
+// unison, hop in canon while he turns in the air, and he leads them off.
+// Then Lise leaps in, turns, hops in arabesque with her pink ribbon and
+// ties it for Colas; they dance with it between them (she turns in it,
+// jumps on it like reins, they skip); she whirls round the yard in piqué
+// turns, until Widow Simone's clogs are heard and Colas runs for it.
 const FILLE = String.raw`
-const ROUTINE = 22;
+const ROUTINE = 27;
 const LISE = { tutu: '#f4b8c8', frill: '#ffffff', crown: '.p.p.\nppppp', crownColors: { p: '#ff7aa0' } };
 const COLAS = { bare: true, breeches: '#6a5a3a', shoes: '#3a2a1a' };
-key(0, P(-0.3, 'right', SECOND, 'stand'));
-key(2.2, P(0.35, 'right', SECOND, 'stand'));
-balances(2.4, 0.35, 4, SECOND, 0.55, { eyes: 'happy' });
-key(4.8, P(0.38, 'right', RAISED.right, 'stand', { eyes: 'happy' }));
-key(6.2, P(0.38, 'right', RAISED.right, 'stand', { eyes: 'happy' }));
-key(7, M(0.5, -13, 'right', ['down', 'out'], 'stand'));
-key(7.4, M(0.5, -13, 'front', SECOND, 'plie'));
-key(7.6, M(0.5, -13, 'front', FIFTH, 'passe', { spinning: true, spin: 0 }));
-key(8.6, M(0.5, -13, 'front', FIFTH, 'passe', { spinning: true, spin: 720 }));
-key(8.8, M(0.5, -13, 'right', ['down', 'out'], 'stand', { spin: 720 }));
-key(9.2, M(0.5, -13, 'right', ['down', 'out'], 'derriere'));
-key(10.8, M(0.5, -13, 'right', ['down', 'out'], 'derriere'));
-// Skipping together, the ribbon between them.
-for (let i = 0; i < 6; i++) {
-  const x = 0.5 + 0.12 * Math.sin(i * 0.9);
-  const legs = i % 2 ? 'stand' : 'plie';
-  key(11 + i * 0.4, M(x, -13, 'right', ['down', 'out'], legs, { eyes: 'happy' }));
+// The Hens in white with red combs and orange feet; the Cockerel in red.
+const HEN = { tutu: '#f4f0e4', frill: '#d8b888', shoes: '#f0a020', crown: '.rr.\n.rr.', crownColors: { r: '#e02020' } };
+const COCK = { bare: true, breeches: '#c03018', shoes: '#f0a020', crown: '.r.r.\nrrrrr', crownColors: { r: '#e02020' } };
+// The Hens, a track each, a beat apart in the canon, the one at the front
+// of the line first (so none catches up with the next); placed in a line
+// at draw time.
+const HK = [[], [], [], []];
+for (let i = 0; i < 4; i++) {
+  const add = (t, p) => HK[i].push([t, p]);
+  const c = (3 - i) * 0.15;
+  add(0, M(-0.4, 0, 'right', SECOND, 'stand'));
+  add(0.6 + c, M(-0.4, 0, 'right', SECOND, 'stand'));
+  add(2.6, M(0.25, 0, 'right', SECOND, 'stand'));
+  add(2.8, M(0.25, 0, 'front', BAS, 'stand', { eyes: 'happy' }));
+  add(4.2, M(0.25, 0, 'front', BAS, 'stand', { eyes: 'happy' }));
+  for (let j = 0; j < 2; j++) {
+    add(4.3 + j * 0.6 + c, M(0.25, 0, 'front', SECOND, 'plie'));
+    add(4.6 + j * 0.6 + c, M(0.25, 0, 'front', FIFTH, 'stand', { air: 4 }));
+  }
+  add(5.6 + c, M(0.25, 0, 'front', SECOND, 'plie'));
+  add(6 + c, M(0.25, 0, 'right', SECOND, 'stand'));
+  add(7.8 + c, M(1.5, 0, 'right', SECOND, 'stand'));
 }
-key(13.4, M(0.45, -13, 'right', SECOND, 'stand'));
-leaps(13.6, 0.45, 0.15, 2);
-entrechats(15.4, 0.15, 2);
-key(17.6, P(0.15, 'right', RAISED.right, 'stand', { eyes: 'happy' }));
-key(19.2, P(0.15, 'right', RAISED.right, 'stand', { eyes: 'happy' }));
-reverence(19.4, 0.25, 'right', 1);
-key(21, P(0.25, 'left', SECOND, 'stand'));
-key(22, P(-0.3, 'left', SECOND, 'stand'));
+// The Cockerel: a strut in, a crow (a jump), tours, another crow, and off.
+ckey(0, M(1.4, 0, 'left', SECOND, 'stand'));
+for (let j = 0; j < 4; j++) ckey(0.4 + j * 0.4, M(1.4 - (j + 1) * 0.1375, 0, 'left', j % 2 ? SECOND : BAS, j % 2 ? 'stand' : 'plie'));
+ckey(1.8, M(0.85, 0, 'front', SECOND, 'plie'));
+ckey(2.1, M(0.85, 0, 'front', FIFTH, 'stand', { air: 4 }));
+ckey(2.5, M(0.85, 0, 'front', SECOND, 'plie'));
+ckey(2.8, M(0.85, 0, 'left', SECOND, 'stand'));
+ckey(4.2, M(0.85, 0, 'left', SECOND, 'stand'));
+tourOn(ckey, 4.4, 0.85, 0, 2);
+ckey(5.4, M(0.85, 0, 'front', FIFTH, 'stand', { eyes: 'closed', spin: 720 }));
+ckey(5.8, M(0.85, 0, 'front', FIFTH, 'stand', { eyes: 'closed' }));
+ckey(6, M(0.85, 0, 'right', SECOND, 'stand'));
+ckey(7.2, M(1.5, 0, 'right', SECOND, 'stand'));
+// Lise: in on grand jetés, a double pirouette, hops in arabesque.
+key(0, P(-0.4, 'right', SECOND, 'stand'));
+key(7, P(-0.4, 'right', SECOND, 'stand'));
+leaps(7, -0.4, 0.35, 3);
+pirouettes(9.4, 1.2, 0.35, 2);
+for (let j = 0; j < 3; j++) {
+  key(10.8 + j * 0.5, P(0.35 + j * 0.03, 'right', RAISED.right, 'derriere'));
+  key(11.05 + j * 0.5, P(0.365 + j * 0.03, 'right', RAISED.right, 'derriere', { air: 3 }));
+}
+// The ribbon: she turns in it, jumps on it like reins, and they skip.
+key(12.4, M(0.5, -13, 'right', ['down', 'out'], 'stand'));
+key(12.6, M(0.5, -13, 'front', SECOND, 'plie'));
+key(12.8, M(0.5, -13, 'front', FIFTH, 'passe', { spinning: true, spin: 0 }));
+key(14, M(0.5, -13, 'front', FIFTH, 'passe', { spinning: true, spin: 1080 }));
+key(14.2, M(0.5, -13, 'right', ['down', 'out'], 'plie', { spin: 1080 }));
+for (let j = 0; j < 3; j++) {
+  key(14.6 + j * 0.5, M(0.5, -13, 'right', ['down', 'out'], 'derriere'));
+  key(14.85 + j * 0.5, M(0.5, -13, 'right', ['down', 'out'], 'derriere', { air: 3 }));
+}
+for (let i = 0; i < 6; i++) key(16.2 + i * 0.4, M(0.5 + 0.12 * Math.sin(i * 0.9), -13, 'right', ['down', 'out'], i % 2 ? 'stand' : 'plie', { eyes: 'happy' }));
+key(18.8, M(0.45, -13, 'right', SECOND, 'stand'));
+leaps(19, 0.45, 0.15, 2);
+// A manège of piqué turns back across the yard, then entrechats.
+key(20.6, P(0.15, 'front', FIFTH, 'passe', { spinning: true, spin: 0 }));
+key(22.2, P(0.4, 'front', FIFTH, 'passe', { spinning: true, spin: 1440 }));
+key(22.4, P(0.4, 'front', SECOND, 'plie', { spin: 1440 }));
+entrechats(22.6, 0.4, 2);
+key(24, P(0.4, 'left', BAS, 'stand', { eyes: 'closed' }));
+key(24.8, P(0.4, 'right', RAISED.right, 'stand', { eyes: 'happy' }));
+key(25.4, P(0.4, 'right', RAISED.right, 'stand', { eyes: 'happy' }));
+leaps(25.6, 0.4, -0.4, 2);
+// Colas: in, the ribbon, double tours, and off at the sound of clogs.
 rkey(0, M(1.4, 0, 'left', BAS, 'stand'));
-rkey(5.6, M(1.4, 0, 'left', BAS, 'stand'));
-rkey(7, M(0.5, 13, 'left', ['out', 'down'], 'stand'));
-rkey(9.2, M(0.5, 13, 'left', ['out', 'high'], 'plie'));
-rkey(10.8, M(0.5, 13, 'left', ['out', 'high'], 'plie'));
-for (let i = 0; i < 6; i++) rkey(11 + i * 0.4, M(0.5 + 0.12 * Math.sin(i * 0.9), 13, 'left', ['out', 'down'], i % 2 ? 'stand' : 'plie', { eyes: 'happy' }));
-rkey(13.4, M(0.8, 0, 'left', SECOND, 'stand'));
-tourOn(rkey, 15.4, 0.8, 0, 2);
-rkey(17, M(0.8, 0, 'left', SECOND, 'stand', { eyes: 'closed' }));
-rkey(17.4, M(0.8, 0, 'right', SECOND, 'stand'));
-rkey(18.8, M(1.4, 0, 'right', SECOND, 'stand'));
-line(0.2, 2.2, ['cock-a-doodle-doo!', 'cock-a-doodle-DOO!', 'bawk... doodle-doo!']);
-line(2.5, 4.6, ['what a morning!', 'good morning, hens!', 'la la la...']);
-line(4.9, 6.3, ['a ribbon, for colas.', 'a love knot!', 'tied with a bow.']);
-line(6.4, 7.3, ['lise!', 'good morning, lise!', 'is that for me?']);
-line(7.6, 8.8, ['round i go!', 'all wrapped up!', 'twirl!']);
-line(9.3, 10.8, ['giddy-up!', 'hold the reins, colas!', 'whoa there!']);
-line(11.2, 13.2, ['skip, skip!', 'tra la la!', 'hand in hand!']);
-line(13.7, 15.2, ['wheee!', 'hop!', 'look, colas!']);
-line(15.5, 16.8, ['and beat, beat!', 'entrechat!', 'top that!']);
-line(17, 18.6, ['LISE! the butter!!', 'clack clack clack!', 'mother is coming!']);
-line(19, 20.4, ['bye, colas!', 'see you at harvest!', 'coming, mother!']);
-line(20.5, 21.8, ['tee hee.', 'she never knows.', 'la la la.']);
+rkey(11, M(1.4, 0, 'left', BAS, 'stand'));
+rkey(12.2, M(0.5, 13, 'left', ['out', 'down'], 'stand'));
+rkey(14.4, M(0.5, 13, 'left', ['out', 'high'], 'plie'));
+rkey(16, M(0.5, 13, 'left', ['out', 'high'], 'plie'));
+for (let i = 0; i < 6; i++) rkey(16.2 + i * 0.4, M(0.5 + 0.12 * Math.sin(i * 0.9), 13, 'left', ['out', 'down'], i % 2 ? 'stand' : 'plie', { eyes: 'happy' }));
+rkey(18.8, M(0.8, 0, 'left', SECOND, 'stand'));
+tourOn(rkey, 19.2, 0.8, 0, 2);
+rkey(20.4, M(0.8, 0, 'left', FIFTH, 'stand', { air: 4 }));
+rkey(20.8, M(0.8, 0, 'left', SECOND, 'plie'));
+tourOn(rkey, 21.2, 0.8, 0, 2);
+rkey(23, M(0.8, 0, 'left', SECOND, 'stand', { eyes: 'closed' }));
+rkey(23.4, M(0.8, 0, 'right', SECOND, 'stand'));
+rkey(24.6, M(1.4, 0, 'right', SECOND, 'stand'));
+line(0.3, 1.6, ['strut, strut, strut.', 'make way, ladies!', 'the farmyard king!']);
+line(1.8, 2.6, ['cock-a-doodle-doo!', 'cock-a-doodle-DOO!', 'doodle-doo!']);
+line(2.8, 4.2, ['peck! peck! peck!', 'bawk bawk!', 'cluck cluck cluck!']);
+line(4.4, 6, ['and flap!', 'up, girls!', 'everybody up!']);
+line(6.2, 7.2, ['this way, girls!', 'cluck cluck!', 'breakfast!']);
+line(7.3, 9.2, ['what a morning!', 'good morning, hens!', 'la la la!']);
+line(9.5, 10.6, ['and turn!', 'twirl!', 'wheee!']);
+line(10.9, 11.8, ['a ribbon, for colas.', 'a love knot!', 'tied with a bow.']);
+line(11.9, 12.7, ['lise!', 'good morning, lise!', 'is that for me?']);
+line(12.9, 14.2, ['round i go!', 'all wrapped up!', 'twirl!']);
+line(14.6, 16, ['giddy-up!', 'hold the reins, colas!', 'hop! hop!']);
+line(16.3, 18.6, ['skip, skip!', 'tra la la!', 'hand in hand!']);
+line(19.1, 20.4, ['wheee!', 'hop!', 'look, colas!']);
+line(20.7, 22.8, ['and turn, turn, turn!', 'pique, pique!', 'round we go!']);
+line(23, 24.4, ['LISE! the butter!!', 'clack clack clack!', 'mother is coming!']);
+line(24.6, 25.6, ['bye, colas!', 'see you at harvest!', 'coming, mother!']);
+line(25.7, 26.8, ['tee hee.', 'she never knows.', 'la la la.']);
+// Who says each line: the Cockerel, a Hen, Colas, the Widow (offstage).
+const BY = [[0.3, 2.6, 'cock'], [4.4, 6, 'cock'], [2.8, 4.2, 'hen'], [6.2, 7.2, 'hen'], [11.9, 12.7, 'colas'], [23, 24.4, 'widow']];
 
 // The farmhouse on the left, a fence along the back.
 function farm(floor) {
@@ -2035,20 +2089,13 @@ function farm(floor) {
   fill(1, 1, 12, 1, ' ', '#5a1a14', '#5a1a14');
   fill(6, floor - 3, 2, 3, ' ', '#4a1810', '#4a1810');
 }
-// The hens, pecking about on the right.
+// The farm's own hens, pecking about on the right once the dance is over.
 function hens(t, floor) {
   for (let i = 0; i < 3; i++) {
     const x = Math.round(w * 0.62 + i * 9 + Math.sin(t * 0.5 + i * 2) * 4);
     const down = Math.floor(t * 2 + i * 0.7) % 2;
     pixels(x, floor * 2 - 4, down ? '....\n.r..\nwwwo\nwww.' : '.r..\nwwwo\nwww.\n.o..', { w: '#f4f0e4', r: '#e02020', o: '#f0a020' });
   }
-}
-// The cockerel, crowing on the fence at first light.
-function cockerel(t, u, floor) {
-  if (u > 2.4) return 0;
-  const x = w - 16;
-  pixels(x, floor * 2 - 8, Math.floor(t * 4) % 2 ? '..r.\n.ryo\nrrrr\n.o..' : '.r..\nryo.\nrrrr\n.o..', { r: '#c03018', y: '#ffd040', o: '#f0a020' });
-  return x;
 }
 // The ribbon from Lise's hand to Colas's, in whole cells, sagging.
 function ribbon(l, r) {
@@ -2061,6 +2108,11 @@ function ribbon(l, r) {
     pixel(x, l.top + 3 + sag, '#ff7aa0');
   }
 }
+// Wings flapping: the arms down and out, quickly.
+function flapping(p, t) {
+  p.arms = Math.floor(t * 6) % 2 ? SECOND : BAS;
+  return p;
+}
 
 function frame(t, dt) {
   const u = mod(t, ROUTINE);
@@ -2069,23 +2121,40 @@ function frame(t, dt) {
   const ground = floor * 2 - 1;
   const at = p => Math.round(12 + (w - 24) * p.x + (p.dx || 0));
   farm(floor);
-  hens(t, floor);
-  const rooster = cockerel(t, u, floor);
-  let l = blinking(track(KEYS, u), t);
-  if (u < 2.2 || u > 21) l = bourree(l, t);
-  l = beating(l, t);
+  if (u > 7.6) hens(t, floor);
+  // The chicken dance: as many Hens as the strip has room for, 20 columns
+  // apart so their tutus don't run together.
+  const count = w >= 130 ? 4 : w >= 100 ? 3 : w >= 72 ? 2 : 0;
+  let dh;
+  for (let i = 0; i < count && u < 8.4; i++) {
+    let q = blinking(track(HK[i], u), t + i);
+    if (u < 2.6 || u > 6) q = flapping(bourree(q, t + i * 0.1), t + i * 0.15);
+    // Pecking: bobbing down and up, out of step with each other.
+    if (u > 2.8 && u < 4.2) q.legs = Math.floor(t * 4 + i * 0.5) % 2 ? 'plie' : 'stand';
+    const hd = dancer(q, at(q) + Math.round((i - (count - 1) / 2) * 20), ground, HEN);
+    if (i === 0) dh = hd;
+  }
+  let k = blinking(track(CK, u), t + 0.7);
+  if (u < 1.6 || u > 6) k = flapping(k, t);
+  const dk = u < 7.4 ? dancer(k, at(k), ground, COCK) : undefined;
+  let l = beating(blinking(track(KEYS, u), t), t);
   const c = blinking(track(RK, u), t + 0.3);
   const dc = dancer(c, at(c), ground, COLAS);
   const d = dancer(l, at(l), ground, LISE);
-  if (u > 7 && u < 13.4 && !l.spinning) ribbon(d, dc);
+  if (u > 12.4 && u < 18.8 && !l.spinning) ribbon(d, dc);
+  if ((u > 12.8 && u < 14) || (u > 20.6 && u < 22.2)) sparkles(t, d, floor, '#ffc8e0');
   // Widow Simone's clogs, heard from the farmhouse.
-  if (u > 16.8 && u < 18.8) put(2 + Math.floor(t * 8) % 3, floor - 1, Math.floor(t * 8) % 2 ? '!' : '*', '#ffe070');
+  if (u > 22.8 && u < 24.6) put(2 + Math.floor(t * 8) % 3, floor - 1, Math.floor(t * 8) % 2 ? '!' : '*', '#ffe070');
   const said = saying(u, n);
   if (!said) return;
-  if (u < 2.2) say(said, rooster - 12, 0);
-  else if (u > 6.4 && u < 7.3) speak(said, dc);
-  else if (u > 17 && u < 18.6) say(said, 16, 0);
-  else speak(said, d);
+  const by = BY.find(b => u >= b[0] && u < b[1]);
+  const who = by ? by[2] : 'lise';
+  if (who === 'cock' && dk) speak(said, dk);
+  else if (who === 'hen' && dh) speak(said, dh);
+  else if (who === 'colas') speak(said, dc);
+  else if (who === 'widow') say(said, 16, 0);
+  else if (who === 'lise') speak(said, d);
+  else say(said, Math.round(w / 2), 0);
 }
 `
 
@@ -2261,7 +2330,7 @@ export const PIECES: Piece[] = [
   piece('untitled 2023', 'Wayne McGregor: a white canvas cut with green', 22, { effect: 'pulse', palette: ['#eeede8', '#eeede8', '#eeede8'], speed: 0.1, intensity: 0 }, [], DUETS + UNTITLED),
   piece('don quixote', 'Kitri with her fan in a square in Barcelona', 23, { effect: 'aurora', palette: ['#3a1a14', '#5a2a18', '#7a3a1c'], speed: 0.3, intensity: 0 }, [], DONQ),
   piece('giselle', 'Giselle among the Wilis in the moonlit forest', 24, { effect: 'starfield', palette: ['#101c24', '#2a3c50', '#c0d0e0'], speed: 0.2, intensity: 0 }, [], DUETS + GISELLE),
-  piece('la fille mal gardee', 'Lise and Colas in the farmyard, with a ribbon and the hens', 22, { effect: 'aurora', palette: ['#3a4a6a', '#5a6a8a', '#8a90a8'], speed: 0.2, intensity: 0 }, [], DUETS + FILLE),
+  piece('la fille mal gardee', 'The chicken dance, then Lise and Colas with a ribbon in the farmyard', 27, { effect: 'aurora', palette: ['#3a4a6a', '#5a6a8a', '#8a90a8'], speed: 0.2, intensity: 0 }, [], DUETS + FILLE),
   piece('manon', 'Manon meets Des Grieux in the inn yard at Amiens', 23, { effect: 'pulse', palette: ['#1a1614', '#221c18', '#2a221c'], speed: 0.2, intensity: 0 }, [], DUETS + MANON),
   piece('class', 'Clawd takes ballet class at the barre', 20, { effect: 'pulse', palette: ['#1e1e2a', '#24243a', '#2a2a40'], speed: 0.2, intensity: 0 }, [], CLASS),
 ]

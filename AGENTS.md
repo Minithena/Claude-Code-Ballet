@@ -61,7 +61,9 @@ at how toons does a thing before doing it differently here.
   champagne pop, like Swan Lake's), Don Quixote (Kitri's fan, a prop over
   the raised hand; the windmill), Giselle (act II; she sinks back into her
   grave with negative `air`, the mist drawn over her), La Fille mal gardée
-  (the hens, a whole-cell ribbon between partners) and MacMillan's Manon
+  (the chicken dance: the Cockerel on `CK`, the Hens on `HK`, a track each,
+  20 columns apart so tutus don't merge, their canon led from the front of
+  the line; a whole-cell ribbon between partners) and MacMillan's Manon
   (act I, the coach hiding whoever is aboard), and class (the barre, the
   teacher counting from a piano with a metronome). Keep endings light (the
   person found Mayerling's faithful one too dark), and partners at least

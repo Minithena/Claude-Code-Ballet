@@ -62,10 +62,14 @@ Claude works long enough:
   hops in arabesque; Albrecht brings lilies, and the Wilis make him dance
   until she leads them off. Dawn saves him, and she waves goodnight and
   sinks back under the mist.
-- **La Fille mal gardée**: a farmyard at first light, the cockerel crowing
-  on the fence and the hens pecking. Lise ties a pink ribbon for Colas and
-  they dance with it between them (she turns in it, rides it like reins,
-  they skip), until Widow Simone's clogs are heard and Colas runs off.
+- **La Fille mal gardée**: a farmyard at first light, opening with the
+  chicken dance: the Cockerel struts in and crows, the Hens (white tutus,
+  red combs, orange pointe shoes) follow him flapping, peck in unison and
+  hop in canon while he turns in the air. Then Lise leaps in, turns, hops
+  in arabesque and ties a pink ribbon for Colas; they dance with it between
+  them (she turns in it, jumps on it like reins, they skip), she whirls
+  round the yard in piqué turns, and Widow Simone's clogs send Colas
+  running.
 - **Manon** (Kenneth MacMillan), act I: the inn yard at Amiens. The coach
   brings Manon; Des Grieux looks up from his book, dances for her and
   kneels with his heart; lifts; he tries to write to his father and she

@@ -28,12 +28,12 @@ for (const piece of PIECES) {
   const length = (piece.scene.code as string).length
   if (length > 20_000) note(`${piece.name}: ${length} characters of scene code, over toons' 20,000`)
   // The tracks as the scene built them: each time no earlier than the last.
-  const tracks = parseProgram(`${piece.scene.code}\nfunction __tracks() { return [KEYS, typeof RK === 'undefined' ? [] : RK, typeof CK === 'undefined' ? [] : CK, typeof OK === 'undefined' ? [] : OK]; }`)
+  const tracks = parseProgram(`${piece.scene.code}\nfunction __tracks() { return [KEYS, typeof RK === 'undefined' ? [] : RK, typeof CK === 'undefined' ? [] : CK, typeof OK === 'undefined' ? [] : OK].concat(typeof HK === 'undefined' ? [] : HK); }`)
   const none = () => {}
   tracks.start({ put: none, text: none, pixel: none, pixels: none, say: none, sprite: none, fill: none, mix: () => 0, w: 100, h: 9, t: 0, dt: 0 }, 1_000_000)
   const built = tracks.call('__tracks', [], { w: 100, h: 9, t: 0, dt: 0 }, 1_000_000) as [number, unknown][][]
   built.forEach((keys, k) => {
-    for (let i = 1; i < keys.length; i++) if (keys[i]![0] < keys[i - 1]![0]) note(`${piece.name}: ${['KEYS', 'RK', 'CK', 'OK'][k]} keyframe at ${keys[i]![0]}s after one at ${keys[i - 1]![0]}s`)
+    for (let i = 1; i < keys.length; i++) if (keys[i]![0] < keys[i - 1]![0]) note(`${piece.name}: ${['KEYS', 'RK', 'CK', 'OK'][k] ?? `HK[${k - 4}]`} keyframe at ${keys[i]![0]}s after one at ${keys[i - 1]![0]}s`)
   })
   for (const cols of [20, 72, 120, 220]) {
     // Each pose the dancer draws is reported before it is drawn.
