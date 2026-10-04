@@ -67,32 +67,28 @@ An independent project, not affiliated with or endorsed by Anthropic.
 
 ## Install
 
-You need Claude Code with plugin hook modules, an early-access feature
-(built against 2.1.288).
+You need Claude Code in a terminal with plugin hook modules, an
+early-access feature (built against 2.1.288). In Claude Code, run:
 
-1. Try it for one session:
+```
+/plugin marketplace add <owner>/ballet-clawd
+/plugin install ballet-clawd@ballet-clawd
+```
 
-   ```sh
-   claude --plugin-dir "/Users/athenaba/Projects/mods cc/ballet-clawd"
-   ```
+Clawd dances from your next turn on. If you also use claude-toons, both
+would draw while Claude works, so you'll likely want only one.
 
-2. To load it in every session, add the folder to the `env` block of
-   `~/.claude/settings.json`, then restart Claude Code:
+**From a clone instead**, for one session:
 
-   ```json
-   {
-     "env": {
-       "CLAUDE_CODE_PLUGIN_DIRS": "/Users/athenaba/Projects/mods cc/ballet-clawd"
-     }
-   }
-   ```
-
-   If you also use claude-toons, separate the two folders with `:`; both
-   would draw while Claude works, so you'll likely want only one.
+```sh
+git clone https://github.com/<owner>/ballet-clawd
+claude --plugin-dir ballet-clawd
+```
 
 **Nothing shows up?** Run `claude --debug` and look for a `ballet-clawd`
 line. If it says hook modules are turned off, your Claude Code doesn't have
-the feature switched on yet.
+the feature switched on yet. It draws in the terminal only, not in the
+desktop app or an IDE panel, and wants a terminal with 24-bit colour.
 
 ## Using it
 
@@ -100,8 +96,14 @@ the feature switched on yet.
   `/ballet off` also work. The choice is remembered across sessions.
 - **`/ballet gala`**, **`swan`**, **`nutcracker`**, **`firebird`**,
   **`mayerling`**, **`chroma`**, **`infra`**, **`untitled`** or **`class`**
-  picks the piece the next turn starts with (a ballet in acts starts at its
-  first act).
+  picks the piece the next turn starts with. A ballet in acts starts at its
+  first act; add the act to start there: `/ballet mayerling 3`,
+  `/ballet swan lake act ii`. Typos and starts of names are fine
+  (`/ballet mayerlinf`, `/ballet nut 2`); words that name no piece get a
+  list of what there is and leave the ballet as it was.
+- While you type `/ballet ...`, a dim row above the prompt shows what it
+  can complete to, and **Tab** (or → at the end) completes it; Tab again
+  steps to the next match.
 
 ## Preview without Claude Code
 

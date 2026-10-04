@@ -1,6 +1,7 @@
 {
   "name": "ballet-clawd",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Clawd in a pink tutu, dancing ballet on a little stage above the prompt while Claude works",
+  "author": { "name": "Athena" },
   "license": "MIT"
 }

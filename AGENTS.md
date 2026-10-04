@@ -82,8 +82,13 @@ at how toons does a thing before doing it differently here.
   grows from 1 row to 9 over 700 ms; each frame is `stage()` from toons,
   through `solidify`, repainted at about 20 fps with `$.ui.blit`. Each turn
   starts the next piece; a piece plays once, then dissolves into the next.
-  `/ballet` toggles it; `/ballet <piece>` picks what plays next. A frame
-  costs about 1 ms at 220 columns: keep it so.
+  `/ballet` toggles it; `/ballet <piece>` picks what plays next, loosely
+  (`hooks/choose.ts`: typos, starts of names, acts as `mayerling 3`), and
+  words naming no piece reply without toggling. Claude Code has no argument
+  completion for commands, so a `prompt.edit` hook completes `/ballet ...`
+  on Tab and the idle band shows a dim hint row of the matches. Helpers
+  given `$` must be top-level functions (the engine refuses the module
+  otherwise). A frame costs about 1 ms at 220 columns: keep it so.
 - **Judge pixel art in a real terminal, not a rendering.** Terminal.app
   draws a cell whose two pixels share a colour solid, but a cell with only
   one half coloured as a short bar set low (its block glyphs leave room for

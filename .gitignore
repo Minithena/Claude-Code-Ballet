@@ -3,3 +3,5 @@
 hooks/*.js
 node_modules/
 .DS_Store
+# Notes between working sessions; kept locally, not published.
+HANDOVER.md
