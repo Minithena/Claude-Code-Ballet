@@ -88,6 +88,10 @@ test('/ballet picks a piece loosely, acts included', async ($, on) => {
   expect(await run('nut 2')).toBe('Next up: Nutcracker II.')
   expect(await run('glaa')).toBe('Next up: Gala.')
   expect(store.next).toBe(0)
+  expect(await run('don q')).toBe('Next up: Don Quixote.')
+  expect(await run('fille')).toBe('Next up: La Fille Mal Gardee.')
+  expect(await run('manon')).toBe('Next up: Manon.')
+  expect(await run('gisele')).toBe('Next up: Giselle.')
 })
 
 test('/ballet with words that name no piece says so and leaves the ballet on', async ($, on) => {

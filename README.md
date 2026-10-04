@@ -10,7 +10,7 @@ costs nothing.
 
 ![Clawd dancing ballet above the prompt](docs/demo.gif)
 
-Fifteen pieces take turns, the acts of each ballet in order (Swan Lake
+Nineteen pieces take turns, the acts of each ballet in order (Swan Lake
 in four, the Nutcracker in two, Mayerling in three, a Wayne McGregor
 triple bill), one per turn, each dissolving into the next if
 Claude works long enough:
@@ -53,6 +53,23 @@ Claude works long enough:
   Herrera's white canvas cut with green, a trio in green and cream,
   frozen, slow, a burst, one long slow turn. (McGregor's extreme lines
   are beyond Clawd's block of a body, so it's in the staging.)
+- **Don Quixote**, act III: a square in Barcelona at sunset, bunting
+  overhead and Don Quixote's windmill on the hill. Kitri leaps in, her fan
+  fluttering, holds the long balance, whips through fouettés (the windmill
+  spins to keep up), leaps to the corner, turns back round, and ole.
+- **Giselle**, act II: midnight by Giselle's grave, mist on the ground and
+  the Wilis drifting in the dark. She rises, spins at Myrtha's command,
+  hops in arabesque; Albrecht brings lilies, and the Wilis make him dance
+  until she leads them off. Dawn saves him, and she waves goodnight and
+  sinks back under the mist.
+- **La Fille mal gardée**: a farmyard at first light, the cockerel crowing
+  on the fence and the hens pecking. Lise ties a pink ribbon for Colas and
+  they dance with it between them (she turns in it, rides it like reins,
+  they skip), until Widow Simone's clogs are heard and Colas runs off.
+- **Manon** (Kenneth MacMillan), act I: the inn yard at Amiens. The coach
+  brings Manon; Des Grieux looks up from his book, dances for her and
+  kneels with his heart; lifts; he tries to write to his father and she
+  won't let him; the coach comes back and takes them both to Paris.
 - **Class**: the studio barre, with the teacher counting from the piano,
   its metronome ticking. Pliés, kicks, a
   balance, then pirouettes, sautés and a bow in the center.
@@ -95,7 +112,8 @@ desktop app or an IDE panel, and wants a terminal with 24-bit colour.
 - **`/ballet`** shows or hides the dancer, even mid-task. `/ballet on` and
   `/ballet off` also work. The choice is remembered across sessions.
 - **`/ballet gala`**, **`swan`**, **`nutcracker`**, **`firebird`**,
-  **`mayerling`**, **`chroma`**, **`infra`**, **`untitled`** or **`class`**
+  **`mayerling`**, **`chroma`**, **`infra`**, **`untitled`**, **`don`**,
+  **`giselle`**, **`fille`**, **`manon`** or **`class`**
   picks the piece the next turn starts with. A ballet in acts starts at its
   first act; add the act to start there: `/ballet mayerling 3`,
   `/ballet swan lake act ii`. Typos and starts of names are fine

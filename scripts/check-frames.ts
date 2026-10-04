@@ -6,7 +6,9 @@
 // - every arm, leg and view name exists;
 // - legs drawn for a three-quarter view (pointed behind, a leap's stride)
 //   only in a three-quarter view, where they point the way Clawd faces;
-// - a leap's stride only in the air, and feet on the floor otherwise.
+// - a leap's stride only in the air, and feet on the floor otherwise;
+// - every dancer's keyframes in time order (track() reads them in order,
+//   so one added out of order puts a dancer in the wrong place).
 
 import './resolve.ts'
 
@@ -25,6 +27,14 @@ for (const piece of PIECES) {
   // toons reads only the first 20,000 characters of a scene's code.
   const length = (piece.scene.code as string).length
   if (length > 20_000) note(`${piece.name}: ${length} characters of scene code, over toons' 20,000`)
+  // The tracks as the scene built them: each time no earlier than the last.
+  const tracks = parseProgram(`${piece.scene.code}\nfunction __tracks() { return [KEYS, typeof RK === 'undefined' ? [] : RK, typeof CK === 'undefined' ? [] : CK, typeof OK === 'undefined' ? [] : OK]; }`)
+  const none = () => {}
+  tracks.start({ put: none, text: none, pixel: none, pixels: none, say: none, sprite: none, fill: none, mix: () => 0, w: 100, h: 9, t: 0, dt: 0 }, 1_000_000)
+  const built = tracks.call('__tracks', [], { w: 100, h: 9, t: 0, dt: 0 }, 1_000_000) as [number, unknown][][]
+  built.forEach((keys, k) => {
+    for (let i = 1; i < keys.length; i++) if (keys[i]![0] < keys[i - 1]![0]) note(`${piece.name}: ${['KEYS', 'RK', 'CK', 'OK'][k]} keyframe at ${keys[i]![0]}s after one at ${keys[i - 1]![0]}s`)
+  })
   for (const cols of [20, 72, 120, 220]) {
     // Each pose the dancer draws is reported before it is drawn.
     const code = (piece.scene.code as string).replace('function dancer(p, cx, ground, look) {', 'function dancer(p, cx, ground, look) {\n  __probe(p, look);')

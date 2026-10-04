@@ -58,8 +58,16 @@ at how toons does a thing before doing it differently here.
   Untitled, 2023), with `phrase` for sharp pose sequences; a dancer in
   breeches never takes `derriere` or `jete` (check-frames checks); the person found the
   faithful ending with the shots too dark, so it ends on a joke, a
-  champagne pop, like Swan Lake's), and class (the barre, the teacher counting
-  from a piano with a metronome). New moves are combinations of the poses
+  champagne pop, like Swan Lake's), Don Quixote (Kitri's fan, a prop over
+  the raised hand; the windmill), Giselle (act II; she sinks back into her
+  grave with negative `air`, the mist drawn over her), La Fille mal gardée
+  (the hens, a whole-cell ribbon between partners) and MacMillan's Manon
+  (act I, the coach hiding whoever is aboard), and class (the barre, the
+  teacher counting from a piano with a metronome). Keep endings light (the
+  person found Mayerling's faithful one too dark), and partners at least
+  14 columns apart, or two orange bodies read as one. A track's keyframes
+  must be added in time order (check-frames checks): a loop adding to two
+  tracks at once is the usual slip. New moves are combinations of the poses
   Clawd has: don't add pixel art for a move without the person's say.
   A spin's landing keyframe keeps the spin it ended on (`spin: 360 * n`):
   blending to 0 turns Clawd backwards while it still spins. Keep

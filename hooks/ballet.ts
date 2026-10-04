@@ -1741,6 +1741,489 @@ function frame(t, dt) {
 }
 `
 
+// Don Quixote, act III: Kitri in a square in Barcelona at sunset, a fan
+// in her raised hand. In on leaps, the fan variation in little hops, the
+// long balance, fouettés (the windmill on the hill turns faster to keep
+// up), leaps to the corner, a manège back, and ole.
+const DONQ = String.raw`
+const ROUTINE = 23;
+const LOOK = { tutu: '#d42a2a', frill: '#ffcc40', shoes: '#f0c0c8', crown: 'rr....\nrr....', crownColors: { r: '#ff3a5a' } };
+key(0, P(-0.3, 'right', SECOND, 'stand'));
+leaps(0.1, -0.3, 0.45, 3);
+key(2.6, P(0.45, 'right', RAISED.right, 'derriere', { eyes: 'happy' }));
+key(3.6, P(0.45, 'right', RAISED.right, 'derriere', { eyes: 'happy' }));
+// The fan variation: little hops, the fan fluttering overhead.
+for (let i = 0; i < 6; i++) {
+  key(3.9 + i * 0.4, P(0.45 - i * 0.04, 'left', RAISED.left, 'plie'));
+  key(4.1 + i * 0.4, P(0.43 - i * 0.04, 'left', RAISED.left, 'stand', { air: 2 }));
+}
+// The balance: up on one leg, arms overhead, held and held.
+key(6.6, P(0.25, 'right', FIFTH, 'derriere'));
+key(8.4, P(0.25, 'right', FIFTH, 'derriere'));
+key(8.8, P(0.5, 'front', SECOND, 'plie'));
+key(9.2, P(0.5, 'front', SECOND, 'passe', { spinning: true, spin: 0 }));
+key(12.6, P(0.5, 'front', SECOND, 'passe', { spinning: true, spin: 4320 }));
+key(12.9, P(0.5, 'front', SECOND, 'plie', { spin: 4320 }));
+leaps(13.2, 0.5, 0.9, 3);
+tour(15.6, 0.9, 2);
+// A manège of turns back to the middle, carrying on from the tour's spin.
+key(16.6, P(0.9, 'front', FIFTH, 'passe', { spinning: true, spin: 720 }));
+key(18.6, P(0.5, 'front', FIFTH, 'passe', { spinning: true, spin: 2880 }));
+key(18.9, P(0.5, 'front', SECOND, 'plie', { spin: 2880 }));
+key(19.2, P(0.5, 'right', RAISED.right, 'derriere', { eyes: 'happy' }));
+key(20.4, P(0.5, 'right', RAISED.right, 'derriere', { eyes: 'happy' }));
+reverence(20.6, 0.5, 'right', 0.8);
+leaps(21.5, 0.5, -0.3, 2);
+line(0.2, 2.2, ['ole!', 'make way, barcelona!', 'kitri is here!']);
+line(2.7, 3.7, ['ta-da!', '*flick*', 'and... fan!']);
+line(4, 6.2, ['flutter, flutter!', 'hop, hop, hop!', 'fan, fan, fan!']);
+line(6.7, 7.5, ['hold...', 'balance...', 'steady...']);
+line(7.5, 8.5, ['...still holding.', 'look, no hands!', 'basilio, watching?']);
+line(9.3, 12.5, ['fouettes! with doubles!', 'faster than the windmill!', 'double! single! double!']);
+line(13.3, 15.3, ['to the corner!', 'wheee!', 'kitri jete!']);
+line(16.7, 18.6, ['and around!', 'manege!', 'round and round!']);
+line(19.3, 20.5, ['OLE!', 'brava, me!', 'viva barcelona!']);
+line(20.7, 21.4, ['gracias!', 'muchas gracias!', 'thank you!']);
+line(21.6, 22.8, ['adios!', 'off to the wedding!', 'bye, don quixote!']);
+
+// Terracotta tiles, warm where Clawd dances; bunting along the top.
+function square(floor, cx) {
+  for (let x = 0; x < w; x++) {
+    const pool = clamp(1 - Math.abs(x - cx) / 14);
+    put(x, floor, '▀', mix(x % 4 < 2 ? '#b85a34' : '#a04a2a', '#ffd8a0', pool * 0.4), mix('#7a3a20', '#ffd8a0', pool * 0.2));
+  }
+  const flags = ['#e02838', '#ffcc40', '#e8e0d0'];
+  for (let x = 1; x < w - (w >= 60 ? 18 : 0); x += 3) put(x, 0, '▼', flags[(x - 1) / 3 % 3]);
+}
+// Don Quixote's windmill on the right, its sails turning; faster in the
+// fouettés.
+let sail = 0;
+function windmill(u, dt, floor) {
+  sail += dt * (u > 9.2 && u < 12.6 ? 6 : 0.8);
+  const x0 = w - 9;
+  for (let y = 3; y < floor; y++) for (let x = -2; x <= 2; x++) put(x0 + x, y, '█', x === 0 && y >= floor - 2 ? '#4a2e1c' : y === 3 ? '#8a4a2a' : '#d8c8a0');
+  // Each sail a line out from the hub, a cell twice as tall as wide.
+  for (let k = 0; k < 4; k++) {
+    const a = sail + k * Math.PI / 2;
+    for (let r = 1; r <= 6; r++) {
+      const col = x0 + Math.round(Math.cos(a) * r);
+      const row = 2 + Math.round(Math.sin(a) * r / 2);
+      if (row >= 0 && row < floor) put(col, row, '█', r > 3 ? '#f0e4c4' : '#a07850');
+    }
+  }
+  put(x0, 2, '█', '#4a2e1c');
+}
+// The fan over whichever hand is raised, opening and closing.
+function fan(t, p, d) {
+  const side = p.arms[1] === 'up' ? 1 : p.arms[0] === 'up' ? -1 : 0;
+  if (!side || p.spinning) return;
+  const open = Math.floor(t * 6) % 2 === 0;
+  pixels(d.x + (side > 0 ? 2 : -6), d.top - 4, open ? 'rrrr\n.yy.' : '.rr.\n.yy.', { r: '#e02838', y: '#ffcc40' });
+}
+
+function frame(t, dt) {
+  const u = mod(t, ROUTINE);
+  const n = Math.floor(t / ROUTINE);
+  const floor = h - 1;
+  const R = w - (w >= 60 ? 26 : 12);
+  let p = blinking(track(KEYS, u), t);
+  if (u > 9.2 && u < 12.6) p.arms = mod(p.spin, 360) < 180 ? FIFTH : SECOND;
+  const cx = Math.round(12 + (R - 12) * p.x);
+  square(floor, cx);
+  if (w >= 60) windmill(u, dt, floor);
+  const d = dancer(p, cx, floor * 2 - 1, LOOK);
+  fan(t, p, d);
+  if ((u > 9.2 && u < 12.6) || p.air > 3.5) sparkles(t, d, floor, '#ffcc40');
+  if (u > 19.2 && u < 20.6) sparkles(t, d, floor, '#ff5a6a');
+  const said = saying(u, n);
+  if (said) speak(said, d);
+}
+`
+
+// Giselle, act II: midnight in the forest by Giselle's grave, mist on the
+// ground, the Wilis drifting in the dark. She rises, spins at Myrtha's
+// command, hops in arabesque; Albrecht comes with lilies, and the Wilis
+// make him dance (entrechats) until she leads them off; dawn breaks, he
+// is saved, and she waves goodnight and sinks back into the mist.
+const GISELLE = String.raw`
+const ROUTINE = 24;
+const LOOK = { tutu: '#e8eef8', frill: '#ffffff', crown: '.g.g.\nwgwgw', crownColors: { w: '#ffffff', g: '#7ab08a' } };
+const ALBRECHT = { bare: true, breeches: '#2a2a40', shoes: '#16120e' };
+key(0, M(0.12, 6, 'front', BAS, 'plie', { eyes: 'closed' }));
+key(1.6, M(0.12, 6, 'front', BAS, 'plie', { eyes: 'closed' }));
+key(2.4, M(0.12, 6, 'front', FIFTH, 'stand', { eyes: 'closed' }));
+key(2.6, M(0.12, 6, 'front', FIFTH, 'passe', { spinning: true, spin: 0 }));
+key(4.2, M(0.12, 6, 'front', FIFTH, 'passe', { spinning: true, spin: 1440 }));
+key(4.4, M(0.12, 6, 'front', SECOND, 'plie', { spin: 1440 }));
+// Hops in arabesque across, barely touching the ground.
+for (let i = 0; i < 6; i++) {
+  key(4.6 + i * 0.6, P(0.15 + i * 0.06, 'right', RAISED.right, 'derriere'));
+  key(4.9 + i * 0.6, P(0.18 + i * 0.06, 'right', RAISED.right, 'derriere', { air: 2 }));
+}
+key(8.4, M(0.5, -10, 'front', SECOND, 'stand'));
+key(9.2, M(0.5, -10, 'right', FIFTH, 'derriere'));
+key(11, M(0.5, -10, 'right', FIFTH, 'derriere'));
+key(11.4, M(0.5, -11, 'front', SECOND, 'stand'));
+key(15, M(0.5, -11, 'front', SECOND, 'stand'));
+leaps(15.4, 0.38, 0.2, 2);
+key(17.2, P(0.2, 'right', FIFTH, 'stand', { eyes: 'happy' }));
+key(19.6, P(0.2, 'left', RAISED.left, 'stand', { eyes: 'happy' }));
+key(21.6, M(0.12, 6, 'left', RAISED.left, 'stand', { eyes: 'happy' }));
+key(22.2, M(0.12, 6, 'front', BAS, 'plie', { eyes: 'closed' }));
+// Back into the ground, under the mist.
+key(23.4, M(0.12, 6, 'front', BAS, 'plie', { eyes: 'closed', air: -12 }));
+rkey(0, M(1.4, 0, 'left', BAS, 'stand'));
+rkey(6.8, M(1.4, 0, 'left', BAS, 'stand'));
+rkey(9, M(0.5, 10, 'left', BAS, 'stand'));
+rkey(9.4, M(0.5, 10, 'left', ['out', 'high'], 'kneel'));
+rkey(11, M(0.5, 10, 'left', ['out', 'high'], 'kneel'));
+// Made to dance by the Wilis: entrechats, over and over.
+for (let i = 0; i < 6; i++) {
+  rkey(11.6 + i * 0.55, M(0.5, 10, 'front', BAS, 'plie'));
+  rkey(11.87 + i * 0.55, M(0.5, 10, 'front', BAS, 'stand', { air: 4 }));
+}
+rkey(15, M(0.5, 10, 'front', SECOND, 'plie', { eyes: 'closed' }));
+rkey(15.6, M(0.5, 10, 'left', BAS, 'kneel', { eyes: 'closed' }));
+rkey(17.4, M(0.5, 10, 'left', BAS, 'kneel', { eyes: 'closed' }));
+rkey(17.8, M(0.5, 10, 'left', SECOND, 'stand', { eyes: 'happy' }));
+rkey(22.4, M(0.5, 10, 'left', ['out', 'high'], 'stand'));
+rkey(24, M(0.5, 10, 'left', ['out', 'high'], 'stand'));
+line(0.3, 2.4, ['giselle, act two.', 'midnight. the wilis rise.', 'oh! i am a ghost now.']);
+line(2.8, 4.3, ['myrtha says: spin!', 'wheee... spooky!', 'round and round!']);
+line(4.8, 7, ['hop... hop... hop...', 'light as mist.', 'no feet on the ground!']);
+line(7.2, 8.8, ['giselle...?', 'lilies, for you...', 'is that you?']);
+line(9.4, 11, ['i forgive you.', 'hold on to me.', 'albrecht!']);
+line(11.6, 14.8, ['dance! dance! dance!', 'entrechat six! again?!', 'my legs! my legs!']);
+line(15.4, 16.8, ['this way, wilis!', 'leave him alone!', 'catch me if you can!']);
+line(17.3, 19.4, ['the dawn!', 'sunrise! you are saved!', 'the wilis must go!']);
+line(19.8, 22, ['see you tomorrow night!', 'same time next week?', 'bye, albrecht!']);
+line(22.4, 23.6, ['sweet dreams...', 'back to bed.', 'zzz...']);
+const HIS = [[7.2, 8.8], [11.6, 14.8]];
+
+// The grave: a stone cross on the left, with lilies once Albrecht comes.
+function grave(u, gx, floor) {
+  pixels(gx - 1, floor * 2 - 6, '.s.\nsss\n.s.\n.s.\n.s.\n.s.', { s: '#8a9aa0' });
+  if (u > 9.2) for (const i of [2, 3]) put(gx + i, floor - 1, '*', '#ffffff');
+}
+// Mist rolling over the grass; thinner as dawn comes.
+function mist(t, floor, fade) {
+  for (let x = 0; x < w; x++) {
+    const m = (0.5 + 0.25 * Math.sin(x * 0.35 + t * 0.7) + 0.25 * Math.sin(x * 0.11 - t * 0.4)) * fade;
+    put(x, floor, '▀', mix('#1a2a24', '#9ab0c4', m * 0.7), mix('#101a16', '#7a90a4', m * 0.6));
+  }
+}
+// The Wilis: veiled shapes drifting at the back, gone by dawn.
+function wilis(t, d, fade) {
+  if (fade <= 0) return;
+  for (let i = 0; i < 5; i++) {
+    const col = Math.round(mod(i * w / 5 + t * 3 * (i % 2 ? 1 : -1), w));
+    const py = 2 * Math.round(1 + Math.sin(t * 0.8 + i * 2));
+    if (Math.abs(col - d.x) < 14) continue;
+    pixels(col - 1, py, '.w.\nwww', { w: mix('#2a3a44', mix('#8a9ab0', '#e8f0ff', 0.5 + 0.5 * Math.sin(t * 2 + i)), fade) });
+  }
+}
+// The night sky paling to dawn, the moon fading.
+function sky(u, floor) {
+  const k = clamp((u - 17) / 2.5);
+  if (k < 1) pixels(w - 12, 2, '..mm\n.m..\n.m..\n..mm', { m: mix('#f0ecc8', '#c8b0c0', k) });
+  if (k <= 0) return;
+  for (let y = 0; y < floor; y++) {
+    const c = mix('#0c1418', mix('#8aa0c8', '#f4b0a0', y / floor), k * 0.8);
+    fill(0, y, w, 1, ' ', c, c);
+  }
+}
+
+function frame(t, dt) {
+  const u = mod(t, ROUTINE);
+  const n = Math.floor(t / ROUTINE);
+  const floor = h - 1;
+  const ground = floor * 2 - 1;
+  const at = p => Math.round(12 + (w - 24) * p.x + (p.dx || 0));
+  const gx = Math.round(12 + (w - 24) * 0.12) - 6;
+  const dawn = clamp((u - 17) / 2.5);
+  sky(u, floor);
+  let g = blinking(track(KEYS, u), t);
+  if (u > 11.4 && u < 15) {
+    g = bourree(g, t);
+    g.arms = Math.floor(t * 3) % 2 ? FIFTH : SECOND;
+  }
+  if (u > 19.6 && u < 21.6) g = bourree(g, t);
+  const a = beating(blinking(track(RK, u), t + 0.4), t);
+  const gcx = at(g);
+  const acx = at(a);
+  wilis(t, { x: (gcx + acx) / 2 }, (u > 4 ? 1 : u / 4) * (1 - dawn));
+  grave(u, gx, floor);
+  mist(t, floor, 1 - dawn * 0.6);
+  const da = dancer(a, acx, ground, ALBRECHT);
+  const d = dancer(g, gcx, ground, LOOK);
+  // Sinking, she goes under the ground: the grass drawn over her.
+  if (u > 22.2) mist(t, floor, 1 - dawn * 0.6);
+  if (u > 2.6 && u < 4.2) sparkles(t, d, floor, '#c0d0ff');
+  const said = saying(u, n);
+  if (!said) return;
+  if (u < 2.4 && u > 1.6) say(said, Math.round(w / 2), 0);
+  else if (HIS.some(r => u >= r[0] && u < r[1])) speak(said, da);
+  else speak(said, d);
+}
+`
+
+// La Fille mal gardée: a farmyard at dawn, the cockerel crowing on the
+// fence and the hens pecking. Lise dances with a pink ribbon and ties it
+// for Colas; they dance with it between them (she turns, rides it like
+// reins, they skip), until Widow Simone's clogs are heard coming and
+// Colas runs off.
+const FILLE = String.raw`
+const ROUTINE = 22;
+const LISE = { tutu: '#f4b8c8', frill: '#ffffff', crown: '.p.p.\nppppp', crownColors: { p: '#ff7aa0' } };
+const COLAS = { bare: true, breeches: '#6a5a3a', shoes: '#3a2a1a' };
+key(0, P(-0.3, 'right', SECOND, 'stand'));
+key(2.2, P(0.35, 'right', SECOND, 'stand'));
+balances(2.4, 0.35, 4, SECOND, 0.55, { eyes: 'happy' });
+key(4.8, P(0.38, 'right', RAISED.right, 'stand', { eyes: 'happy' }));
+key(6.2, P(0.38, 'right', RAISED.right, 'stand', { eyes: 'happy' }));
+key(7, M(0.5, -13, 'right', ['down', 'out'], 'stand'));
+key(7.4, M(0.5, -13, 'front', SECOND, 'plie'));
+key(7.6, M(0.5, -13, 'front', FIFTH, 'passe', { spinning: true, spin: 0 }));
+key(8.6, M(0.5, -13, 'front', FIFTH, 'passe', { spinning: true, spin: 720 }));
+key(8.8, M(0.5, -13, 'right', ['down', 'out'], 'stand', { spin: 720 }));
+key(9.2, M(0.5, -13, 'right', ['down', 'out'], 'derriere'));
+key(10.8, M(0.5, -13, 'right', ['down', 'out'], 'derriere'));
+// Skipping together, the ribbon between them.
+for (let i = 0; i < 6; i++) {
+  const x = 0.5 + 0.12 * Math.sin(i * 0.9);
+  const legs = i % 2 ? 'stand' : 'plie';
+  key(11 + i * 0.4, M(x, -13, 'right', ['down', 'out'], legs, { eyes: 'happy' }));
+}
+key(13.4, M(0.45, -13, 'right', SECOND, 'stand'));
+leaps(13.6, 0.45, 0.15, 2);
+entrechats(15.4, 0.15, 2);
+key(17.6, P(0.15, 'right', RAISED.right, 'stand', { eyes: 'happy' }));
+key(19.2, P(0.15, 'right', RAISED.right, 'stand', { eyes: 'happy' }));
+reverence(19.4, 0.25, 'right', 1);
+key(21, P(0.25, 'left', SECOND, 'stand'));
+key(22, P(-0.3, 'left', SECOND, 'stand'));
+rkey(0, M(1.4, 0, 'left', BAS, 'stand'));
+rkey(5.6, M(1.4, 0, 'left', BAS, 'stand'));
+rkey(7, M(0.5, 13, 'left', ['out', 'down'], 'stand'));
+rkey(9.2, M(0.5, 13, 'left', ['out', 'high'], 'plie'));
+rkey(10.8, M(0.5, 13, 'left', ['out', 'high'], 'plie'));
+for (let i = 0; i < 6; i++) rkey(11 + i * 0.4, M(0.5 + 0.12 * Math.sin(i * 0.9), 13, 'left', ['out', 'down'], i % 2 ? 'stand' : 'plie', { eyes: 'happy' }));
+rkey(13.4, M(0.8, 0, 'left', SECOND, 'stand'));
+tourOn(rkey, 15.4, 0.8, 0, 2);
+rkey(17, M(0.8, 0, 'left', SECOND, 'stand', { eyes: 'closed' }));
+rkey(17.4, M(0.8, 0, 'right', SECOND, 'stand'));
+rkey(18.8, M(1.4, 0, 'right', SECOND, 'stand'));
+line(0.2, 2.2, ['cock-a-doodle-doo!', 'cock-a-doodle-DOO!', 'bawk... doodle-doo!']);
+line(2.5, 4.6, ['what a morning!', 'good morning, hens!', 'la la la...']);
+line(4.9, 6.3, ['a ribbon, for colas.', 'a love knot!', 'tied with a bow.']);
+line(6.4, 7.3, ['lise!', 'good morning, lise!', 'is that for me?']);
+line(7.6, 8.8, ['round i go!', 'all wrapped up!', 'twirl!']);
+line(9.3, 10.8, ['giddy-up!', 'hold the reins, colas!', 'whoa there!']);
+line(11.2, 13.2, ['skip, skip!', 'tra la la!', 'hand in hand!']);
+line(13.7, 15.2, ['wheee!', 'hop!', 'look, colas!']);
+line(15.5, 16.8, ['and beat, beat!', 'entrechat!', 'top that!']);
+line(17, 18.6, ['LISE! the butter!!', 'clack clack clack!', 'mother is coming!']);
+line(19, 20.4, ['bye, colas!', 'see you at harvest!', 'coming, mother!']);
+line(20.5, 21.8, ['tee hee.', 'she never knows.', 'la la la.']);
+
+// The farmhouse on the left, a fence along the back.
+function farm(floor) {
+  for (let x = 0; x < w; x++) put(x, floor, '▀', x % 5 === 0 ? '#c8a050' : '#b08a40', '#7a5a28');
+  for (let x = 13; x < w; x++) put(x, floor - 2, x % 5 === 0 ? '┼' : '─', '#b89060');
+  if (w < 60) return;
+  fill(2, 2, 10, floor - 2, ' ', '#8a2a20', '#8a2a20');
+  fill(1, 1, 12, 1, ' ', '#5a1a14', '#5a1a14');
+  fill(6, floor - 3, 2, 3, ' ', '#4a1810', '#4a1810');
+}
+// The hens, pecking about on the right.
+function hens(t, floor) {
+  for (let i = 0; i < 3; i++) {
+    const x = Math.round(w * 0.62 + i * 9 + Math.sin(t * 0.5 + i * 2) * 4);
+    const down = Math.floor(t * 2 + i * 0.7) % 2;
+    pixels(x, floor * 2 - 4, down ? '....\n.r..\nwwwo\nwww.' : '.r..\nwwwo\nwww.\n.o..', { w: '#f4f0e4', r: '#e02020', o: '#f0a020' });
+  }
+}
+// The cockerel, crowing on the fence at first light.
+function cockerel(t, u, floor) {
+  if (u > 2.4) return 0;
+  const x = w - 16;
+  pixels(x, floor * 2 - 8, Math.floor(t * 4) % 2 ? '..r.\n.ryo\nrrrr\n.o..' : '.r..\nryo.\nrrrr\n.o..', { r: '#c03018', y: '#ffd040', o: '#f0a020' });
+  return x;
+}
+// The ribbon from Lise's hand to Colas's, in whole cells, sagging.
+function ribbon(l, r) {
+  const a = l.x + 7;
+  const b = r.x - 8;
+  if (b <= a) return;
+  for (let x = a; x <= b; x++) {
+    const sag = Math.round(Math.sin(Math.PI * (x - a) / Math.max(1, b - a))) * 2;
+    pixel(x, l.top + 2 + sag, '#ff7aa0');
+    pixel(x, l.top + 3 + sag, '#ff7aa0');
+  }
+}
+
+function frame(t, dt) {
+  const u = mod(t, ROUTINE);
+  const n = Math.floor(t / ROUTINE);
+  const floor = h - 1;
+  const ground = floor * 2 - 1;
+  const at = p => Math.round(12 + (w - 24) * p.x + (p.dx || 0));
+  farm(floor);
+  hens(t, floor);
+  const rooster = cockerel(t, u, floor);
+  let l = blinking(track(KEYS, u), t);
+  if (u < 2.2 || u > 21) l = bourree(l, t);
+  l = beating(l, t);
+  const c = blinking(track(RK, u), t + 0.3);
+  const dc = dancer(c, at(c), ground, COLAS);
+  const d = dancer(l, at(l), ground, LISE);
+  if (u > 7 && u < 13.4 && !l.spinning) ribbon(d, dc);
+  // Widow Simone's clogs, heard from the farmhouse.
+  if (u > 16.8 && u < 18.8) put(2 + Math.floor(t * 8) % 3, floor - 1, Math.floor(t * 8) % 2 ? '!' : '*', '#ffe070');
+  const said = saying(u, n);
+  if (!said) return;
+  if (u < 2.2) say(said, rooster - 12, 0);
+  else if (u > 6.4 && u < 7.3) speak(said, dc);
+  else if (u > 17 && u < 18.6) say(said, 16, 0);
+  else speak(said, d);
+}
+`
+
+// Manon (Kenneth MacMillan), act I: the inn yard at Amiens. The coach
+// brings Manon; Des Grieux, a student, looks up from his book, dances for
+// her and kneels with his heart; their first pas de deux, lifts and all;
+// he tries to write to his father and she won't let him; and the coach
+// comes back to take them both to Paris.
+const MANON = String.raw`
+const ROUTINE = 23;
+const LOOK = { tutu: '#c8d8f0', frill: '#f4f0ff', shoes: '#f4e0e8' };
+const DG = { bare: true, breeches: '#6a5a4a', shoes: '#16120e' };
+key(0, M(0.78, 0, 'left', BAS, 'stand'));
+key(2.2, M(0.78, 0, 'left', BAS, 'stand'));
+key(2.8, M(0.62, 0, 'left', SECOND, 'stand'));
+key(3.2, M(0.62, 0, 'left', BAS, 'stand', { eyes: 'happy' }));
+key(8.2, M(0.62, 0, 'left', BAS, 'stand'));
+key(8.4, M(0.6, 0, 'front', SECOND, 'plie'));
+key(8.6, M(0.6, 0, 'front', FIFTH, 'passe', { spinning: true, spin: 0 }));
+key(9.4, M(0.5, 7, 'front', FIFTH, 'passe', { spinning: true, spin: 720 }));
+key(9.6, M(0.5, 7, 'left', ['out', 'down'], 'stand', { spin: 720 }));
+// Lifted high in arabesque.
+key(10, M(0.5, 7, 'left', RAISED.left, 'derriere', { air: 6 }));
+key(11.2, M(0.5, 7, 'left', RAISED.left, 'derriere', { air: 6 }));
+key(11.6, M(0.5, 7, 'left', SECOND, 'stand'));
+balances(11.9, 0.5, 2, SECOND, 0.7, { dx: 7, eyes: 'happy' });
+key(13.6, M(0.62, 0, 'left', SECOND, 'stand'));
+key(15.2, M(0.5, 0, 'left', FIFTH, 'stand', { eyes: 'happy' }));
+pirouettes(16.6, 1.6, 0.5, 3);
+key(18.4, M(0.5, 7, 'left', FIFTH, 'stand', { air: 6, eyes: 'happy' }));
+key(19.2, M(0.5, 7, 'left', FIFTH, 'stand', { air: 6, eyes: 'happy' }));
+key(19.6, M(0.5, 7, 'right', SECOND, 'stand'));
+key(20.8, M(0.8, 0, 'right', SECOND, 'stand'));
+rkey(0, M(0.2, 0, 'right', BAS, 'kneel', { eyes: 'closed' }));
+rkey(3.4, M(0.2, 0, 'right', BAS, 'kneel', { eyes: 'happy' }));
+rkey(4, M(0.2, 0, 'right', SECOND, 'stand'));
+tourOn(rkey, 4.4, 0.25, 0, 1);
+rkey(5.4, M(0.3, 0, 'right', ['out', 'high'], 'plie'));
+rkey(6.2, M(0.35, 0, 'right', ['out', 'high'], 'stand'));
+tourOn(rkey, 6.6, 0.38, 0, 2);
+rkey(7.6, M(0.4, 0, 'right', ['down', 'out'], 'kneel'));
+rkey(8.4, M(0.4, 0, 'right', ['down', 'out'], 'kneel'));
+rkey(8.8, M(0.5, -7, 'right', ['down', 'out'], 'stand'));
+rkey(9.8, M(0.5, -7, 'right', ['high', 'high'], 'plie'));
+rkey(11.4, M(0.5, -7, 'right', ['high', 'high'], 'plie'));
+rkey(11.8, M(0.5, -7, 'right', SECOND, 'stand'));
+for (let i = 0; i < 2; i++) {
+  rkey(11.9 + i * 0.7, M(0.5, -7, i % 2 ? 'left' : 'right', SECOND, 'plie'));
+  rkey(12.25 + i * 0.7, M(0.5, -7, i % 2 ? 'left' : 'right', SECOND, 'stand'));
+}
+// Writing to his father, kneeling; Manon won't have it.
+rkey(13.8, M(0.3, 0, 'right', BAS, 'kneel'));
+rkey(15.2, M(0.3, 0, 'right', BAS, 'kneel'));
+rkey(15.4, M(0.3, 0, 'right', SECOND, 'stand', { eyes: 'happy' }));
+rkey(16.4, M(0.5, -17, 'right', ['down', 'out'], 'stand'));
+rkey(18.2, M(0.5, -17, 'right', ['down', 'out'], 'stand'));
+rkey(18.4, M(0.5, -7, 'right', ['high', 'high'], 'plie'));
+rkey(19.2, M(0.5, -7, 'right', ['high', 'high'], 'plie'));
+rkey(19.6, M(0.5, -7, 'right', SECOND, 'stand'));
+rkey(20.9, M(0.8, 0, 'right', SECOND, 'stand'));
+line(0.2, 2.2, ['manon, act one.', 'amiens. the inn yard.', 'the coach from arras!']);
+line(2.4, 3.4, ['what a long ride.', 'so this is amiens.', 'hello, everyone!']);
+line(3.5, 4.3, ['...oh.', 'who is she?', '*drops book*']);
+line(4.6, 7.4, ['look at me, manon!', 'for you, my dance.', 'a student... of love.']);
+line(7.7, 8.6, ['my heart is yours!', 'run away with me!', 'be mine?']);
+line(9.4, 11.2, ['wheee!', 'higher!', 'oh, des grieux!']);
+line(12, 13.4, ['to paris!', 'together!', 'one, two, three...']);
+line(13.9, 15.2, ['dear father...', 'writing home...', 'how do you spell...']);
+line(15.3, 16.4, ['boo!', 'come and play!', 'forget the letter!']);
+line(16.8, 18.2, ['spin me!', 'and again!', 'dizzy in love.']);
+line(18.5, 19.4, ['ta-da!', 'up!', 'bliss.']);
+line(19.6, 21, ['the coach! hurry!', 'quick, before lescaut!', 'paris, here we come!']);
+line(21.4, 22.8, ['off to paris!', 'happily ever... for now.', 'giddy-up!']);
+const HIS = [[3.5, 4.3], [4.6, 8.6], [13.9, 15.2]];
+
+// The inn yard: cobbles, the inn's sign hanging on the left.
+function yard(floor, cx) {
+  for (let x = 0; x < w; x++) {
+    const pool = clamp(1 - Math.abs(x - cx) / 16);
+    put(x, floor, '▀', mix((x + Math.floor(x / 3)) % 2 ? '#6a6460' : '#5a5450', '#ffe0b0', pool * 0.3), '#3a3430');
+  }
+  if (w < 60) return;
+  put(4, 0, '┃', '#6a4428');
+  text(1, 1, '[ inn ]', '#d8b060');
+}
+// The coach, at stage fraction x: a box with a window, two wheels and a
+// horse leading; it hides whoever stands where it is.
+function coach(t, x, floor, faces) {
+  const cx = Math.round(12 + (w - 24) * x);
+  fill(cx - 7, floor - 4, 14, 3, ' ', '#3a2418', '#3a2418');
+  fill(cx - 3, floor - 3, 6, 1, ' ', '#e8c870', '#e8c870');
+  fill(cx - 8, floor - 5, 16, 1, ' ', '#1a1210', '#1a1210');
+  const spin = Math.floor(t * 8) % 2;
+  put(cx - 5, floor - 1, spin ? '●' : '◉', '#1a1210');
+  put(cx + 4, floor - 1, spin ? '◉' : '●', '#1a1210');
+  pixels(cx + faces * 10 - 2, floor * 2 - 8, faces < 0 ? 'hh...\nhhhhh\n.hhhh\n.h..h' : '...hh\nhhhhh\nhhhh.\nh..h.', { h: '#8a5a30' });
+}
+function coachAt(u) {
+  if (u < 2) return [lerp(1.4, 0.78, ease(u / 2)), -1];
+  if (u < 2.8) return [0.78, -1];
+  if (u < 4.4) return [lerp(0.78, 1.5, ease((u - 2.8) / 1.6)), 1];
+  if (u < 19.2) return undefined;
+  if (u < 20.8) return [lerp(1.5, 0.8, ease((u - 19.2) / 1.6)), -1];
+  if (u < 21.2) return [0.8, 1];
+  return [lerp(0.8, 1.5, ease((u - 21.2) / 1.8)), 1];
+}
+
+function frame(t, dt) {
+  const u = mod(t, ROUTINE);
+  const n = Math.floor(t / ROUTINE);
+  const floor = h - 1;
+  const ground = floor * 2 - 1;
+  const at = p => Math.round(12 + (w - 24) * p.x + (p.dx || 0));
+  let m = blinking(track(KEYS, u), t);
+  if (u > 13.6 && u < 15.2) m = bourree(m, t);
+  const r = blinking(track(RK, u), t + 0.3);
+  yard(floor, at(m));
+  const isAboard = u < 2.2 || u > 21;
+  const dr = isAboard && u > 21 ? { x: at(r), row: 0 } : dancer(r, at(r), ground, DG);
+  const d = isAboard ? { x: Math.round(w / 2), row: 0 } : dancer(m, at(m), ground, LOOK);
+  // His book while he reads, his heart for her, then quill and paper.
+  if (u < 3.6) put(dr.x + 6, floor - 2, '▬', '#c8b890');
+  if (u > 7.6 && u < 8.4) put(dr.x + 7, Math.max(0, dr.row), '♥', '#ff4a6a');
+  if (u > 13.8 && u < 15.2) {
+    put(dr.x + 6, floor - 2, '/', '#f0f0f0');
+    put(dr.x + 7, floor - 1, '▬', '#f4f0e0');
+  }
+  const c = coachAt(u);
+  if (c) coach(t, c[0], floor, c[1]);
+  if (u > 9.8 && u < 11.4) sparkles(t, d, floor, '#ffe0f0');
+  const said = saying(u, n);
+  if (!said) return;
+  if (u < 2.2 || u > 21.2) say(said, Math.round(w / 2), 0);
+  else if (HIS.some(q => u >= q[0] && u < q[1])) speak(said, dr);
+  else speak(said, d);
+}
+`
+
 export type Piece = { name: string; concept: string; routine: number; scene: Record<string, unknown> }
 
 // The scene code without its comment lines: they stay here for reading but
@@ -1776,6 +2259,10 @@ export const PIECES: Piece[] = [
   piece('chroma', 'Wayne McGregor: a sharp duet in a white room', 22, { effect: 'pulse', palette: ['#e4e2dc', '#e4e2dc', '#e4e2dc'], speed: 0.1, intensity: 0 }, [], DUETS + CHROMA),
   piece('infra', 'Wayne McGregor: under an LED screen of walking figures', 24, { effect: 'pulse', palette: ['#08090c', '#0c0d10', '#101216'], speed: 0.2, intensity: 0 }, [], DUETS + INFRA),
   piece('untitled 2023', 'Wayne McGregor: a white canvas cut with green', 22, { effect: 'pulse', palette: ['#eeede8', '#eeede8', '#eeede8'], speed: 0.1, intensity: 0 }, [], DUETS + UNTITLED),
+  piece('don quixote', 'Kitri with her fan in a square in Barcelona', 23, { effect: 'aurora', palette: ['#3a1a14', '#5a2a18', '#7a3a1c'], speed: 0.3, intensity: 0 }, [], DONQ),
+  piece('giselle', 'Giselle among the Wilis in the moonlit forest', 24, { effect: 'starfield', palette: ['#101c24', '#2a3c50', '#c0d0e0'], speed: 0.2, intensity: 0 }, [], DUETS + GISELLE),
+  piece('la fille mal gardee', 'Lise and Colas in the farmyard, with a ribbon and the hens', 22, { effect: 'aurora', palette: ['#3a4a6a', '#5a6a8a', '#8a90a8'], speed: 0.2, intensity: 0 }, [], DUETS + FILLE),
+  piece('manon', 'Manon meets Des Grieux in the inn yard at Amiens', 23, { effect: 'pulse', palette: ['#1a1614', '#221c18', '#2a221c'], speed: 0.2, intensity: 0 }, [], DUETS + MANON),
   piece('class', 'Clawd takes ballet class at the barre', 20, { effect: 'pulse', palette: ['#1e1e2a', '#24243a', '#2a2a40'], speed: 0.2, intensity: 0 }, [], CLASS),
 ]
 
