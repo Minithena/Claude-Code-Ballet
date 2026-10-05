@@ -149,7 +149,7 @@ You need Claude Code in a terminal with plugin hook modules, an
 early-access feature (built against 2.1.288). In Claude Code, run:
 
 ```
-/plugin marketplace add <owner>/ballet-clawd
+/plugin marketplace add Minithena/ballet-clawd
 /plugin install ballet-clawd@ballet-clawd
 ```
 
@@ -159,7 +159,7 @@ would draw while Claude works, so you'll likely want only one.
 **From a clone instead**, for one session:
 
 ```sh
-git clone https://github.com/<owner>/ballet-clawd
+git clone https://github.com/Minithena/ballet-clawd
 claude --plugin-dir ballet-clawd
 ```
 
@@ -197,6 +197,6 @@ node --experimental-transform-types scripts/frames.ts --piece 0 | python3 script
 
 ## License
 
-MIT. `hooks/script.ts`, `lang.ts`, `effects.ts`, `clawd.ts` and `render3d.ts`
+MIT (see `LICENSE`). `hooks/script.ts`, `lang.ts`, `effects.ts`, `clawd.ts` and `render3d.ts`
 are from claude-toons, MIT, Copyright (c) 2026 Anshu Chimala; see
 `LICENSE-claude-toons`.

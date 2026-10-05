@@ -2,6 +2,9 @@
   "name": "ballet-clawd",
   "version": "0.2.0",
   "description": "Clawd in a pink tutu, dancing ballet on a little stage above the prompt while Claude works",
-  "author": { "name": "Athena" },
-  "license": "MIT"
+  "author": { "name": "Athena", "url": "https://github.com/Minithena" },
+  "homepage": "https://github.com/Minithena/ballet-clawd",
+  "repository": "https://github.com/Minithena/ballet-clawd",
+  "license": "MIT",
+  "keywords": ["ballet", "clawd", "animation", "claude-toons"]
 }
