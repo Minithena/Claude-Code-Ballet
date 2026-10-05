@@ -7,7 +7,8 @@
 #
 #   scripts/terminal.sh poses out.png              # every pose, labelled
 #                                                  # (POSES_ARGS passes poses.ts more)
-#   scripts/terminal.sh piece <0-14> out <s> [s...] # a piece, at those seconds
+#   scripts/terminal.sh piece <0-18> out <s> [s...] # a piece, at those seconds
+#   scripts/terminal.sh piece live out <s> [s...]   # the live dancer (play.ts --live)
 #
 # The window is opened, photographed and closed again.
 dir=${0:A:h:h}
@@ -18,7 +19,7 @@ else
   piece=$1; out=$2; shift 2; times=("$@")
   # It plays until just after the last photograph, so it has exited when the
   # window closes (else Terminal asks first, and the window stays open).
-  cmd="node --experimental-transform-types --no-warnings scripts/play.ts --piece $piece --seconds $(( ${times[-1]} + 0.5 ))"; cols=100; rows=14
+  cmd="node --experimental-transform-types --no-warnings scripts/play.ts $([[ $piece == live ]] && echo --live || echo --piece $piece) --seconds $(( ${times[-1]} + 0.5 ))"; cols=100; rows=14
 fi
 osascript - "$dir" "$cmd" "$cols" "$rows" "$out" "$mode" "${times[@]}" <<'OSA'
 on run argv

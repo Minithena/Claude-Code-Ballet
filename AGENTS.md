@@ -90,6 +90,69 @@ at how toons does a thing before doing it differently here.
   with `;` (the interpreter reads the next line into it), and keep each
   scene's code under toons' 20,000 characters (comment lines are stripped
   when a piece is built, by `bare`, so comments cost nothing).
+- **`hooks/live.ts`** is the other mode, `/ballet live`: one Clawd in
+  Class's studio whose dancing is made of what Claude does, as toons'
+  ready-made scenes follow the work's phase (toons' `hooks/library.ts`;
+  `actOf` reads a tool call the way toons' `phaseOf` does, and a shell
+  command by its first word, past a `cd ... &&`, as `COMMANDS` lists
+  them). No model is asked. One set and one look throughout (the person
+  asked for that over a set or lighting per kind of work). The shape is
+  the person's: between tool calls Clawd holds still, in a pose for the
+  moment (`hold`: light tendus and élevés while thinking, which the
+  person found too idle standing still; a slow port de bras while
+  writing the reply; the move's own pose while its
+  tool still runs, balances in turn for tests, never one frozen pose,
+  which the person found idle); each tool call fires one
+  quick move of its own, about a second (`MOVES`, one per entry of the
+  TS `MOVES`, which check-frames holds the scene to), with a label naming
+  what set it off (`tag`: a chip in one place at the top left, as the
+  person asked; bright for the move in hand, news included, dim for what
+  Claude is at between moves); calls in quick succession chain.
+  A first cut that looped phrases per kind of work read as one long idle
+  animation, and thinking looked like reading. A queue (`QUEUE`) keeps
+  only the last two moves waiting, so a burst never leaves Clawd behind;
+  a new move cuts a held pose at once, and news (`ANSWERS`: a new task, a
+  tool that failed or was denied, tests or a build that passed) cuts
+  anything, unless Clawd is turning, in the air or off in the wings (an
+  `ssh`; it leaps back on before anything else). Others come on as the
+  work calls for them: a stagehand (`SK`, a track of his own, in grey
+  with a cap) runs git's ribbon in (the ribbon on a wand, which the
+  person chose over a crate that read badly, trails Clawd's hand for 12
+  seconds after (30 stayed too long); it is a band half a cell thick
+  (lower half blocks, half-width ones up, down and on a slant; whole
+  cells were too chunky for the person, a box-drawing line too thin),
+  drawn behind every dancer:
+  circling Clawd on a turn, streaming back along the hand's path,
+  fluttering out from the wand when still, away from a partner) and the web's letters
+  (`PROPS` pass between hands); an MCP server's partner (`PK`, a colour
+  per server) lifts Clawd and partners its turns, and bows out about 2
+  seconds after the server's last call, cutting a held pose to go (the
+  person found the helpers lingering; the stagehand and messenger are
+  on and off in about a second). All of them keep 16 columns from Clawd, and the bare
+  ones never take `derriere` or `jete`. Subagents bring a corps in white,
+  at slots 22 columns either side of the middle (38 while a partner is
+  on), as many as fit; they bourrée on only once Clawd is in the middle,
+  dance its moves a beat behind, and while any are on Clawd's moves stay
+  in place. Each corps dancer also dances a move of its own (`CREW`) for
+  each of its subagent's tool calls (`liveCrewN`, `liveCrewWho`,
+  `liveCrewMove`), so the agents' work shows (the person found the stage
+  idle while subagents were out), and Clawd leads them with a lively
+  phrase in place. Little signs (`signs`: thought bubbles, !, a count, notes,
+  z's, a paper ball, a spark, a spin's whirl) mark what a pose alone
+  can't. The plugin passes the moment in as the scene's globals
+  (`liveAct`, `liveMove`, `liveLabel`, `liveToolN`, `liveBusy`,
+  `liveNews`, `liveNewsN`, `liveCorps`, `liveGuest`, `liveCrew*`) by wrapping the
+  program toons' renderer runs (`wire`), which also parses the code
+  whole: it is the plugin's own and over the 20,000 characters toons'
+  loader keeps, so `script.ts` stays toons' own; without the globals (the
+  scripts) the scene reads `typeof` and stands ready. The scene is kept
+  from turn to turn, and the band keeps whatever it shows through a blink
+  of under 4 seconds mid-turn (`paused` in register.tsx: a subagent's
+  message landing redraws the screen, and it used to grow in again from
+  the bottom). `demoAt` is a made-up session of every move, held poses
+  and news, for `play.ts --live`, `frames.ts --live` and check-frames.
+  Speech only for news; the label names what set a move off or what
+  Claude is at, never the step.
 - **`hooks/cells.ts`** is a last pass over each frame (`solidify`) for
   terminals with line spacing, where a block glyph leaves a strip at the top
   of its cell showing the cell's background: with toons' upper half blocks
@@ -105,7 +168,14 @@ at how toons does a thing before doing it differently here.
   grows from 1 row to 9 over 700 ms; each frame is `stage()` from toons,
   through `solidify`, repainted at about 20 fps with `$.ui.blit`. Each turn
   starts the next piece; a piece plays once, then dissolves into the next.
-  `/ballet` toggles it; `/ballet <piece>` picks what plays next, loosely
+  In live mode the live scene plays on instead, and the hooks watch for
+  it: `tool.call` (passed through untouched; a subagent's calls only mark
+  it at work), the `Spinner`'s mode (thinking, writing the reply; drawn by
+  the engine as ever), `prompt.submit` and `turn.complete`. The mode is
+  stored (`mode`) and read again as each turn's dancing starts, as `next`
+  is, since a reload starts the module afresh.
+  `/ballet` toggles it; `/ballet live` and `/ballet repertoire` switch
+  mode; `/ballet <piece>` picks what plays next, loosely
   (`hooks/choose.ts`: typos, starts of names, acts as `mayerling 3`), and
   words naming no piece reply without toggling. Claude Code has no argument
   completion for commands, so a `prompt.edit` hook completes `/ballet ...`
@@ -131,8 +201,11 @@ at how toons does a thing before doing it differently here.
   frame by frame at four widths and checks each scene's code fits toons'
   20,000 characters (it cuts the rest silently) and each pose drawn exists
   and fits its view (legs pointed behind or striding only in a three-quarter view, a
-  stride only in the air). `claude plugin test .` runs the engine tests.
-- **`scripts/`**: `play.ts` plays it in a terminal and `frames.ts` prints
+  stride only in the air); it plays the live dancer too, ten minutes of
+  `demoAt` at each width, its keyframes checked in time order as they're
+  added. `claude plugin test .` runs the engine tests.
+- **`scripts/`**: `play.ts` plays it in a terminal (`--live` the live
+  dancer, `terminal.sh piece live` to photograph it) and `frames.ts` (`--live` too) prints
   frames for `gif.py` (which draws `docs/demo.gif` under a spinner line).
   toons runs its scripts with bun; here they run under Node 24 with
   `--experimental-transform-types` (toons' interpreter uses parameter

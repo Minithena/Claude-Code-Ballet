@@ -3,6 +3,7 @@ import type { EngineInterface, Register } from 'claude-code'
 import { PIECES } from './ballet'
 import { solidify } from './cells'
 import { choose, completions, summary, title } from './choose'
+import { actOf, LIVE_SCENE, mcpOf, wire, type Act, type Moment, type Move, type News } from './live'
 import { cleanScript, stage, type Script } from './script'
 
 const COMMAND = 'ballet'
@@ -13,9 +14,41 @@ const ROWS = 9
 // as in claude-toons.
 const GROW_MS = 700
 
+// The pieces in turn (the repertoire), or the live dancer, whose steps
+// follow what Claude does (hooks/live.ts).
+type Mode = 'repertoire' | 'live'
+
+// What Claude is doing, for the live dancer, as the hooks below see it.
+type Watch = {
+  act: Act
+  // The shell command's own steps, if it has some.
+  // The last tool call's move and the label shown over Clawd for it.
+  move: Move | ''
+  label: string
+  news: News | ''
+  newsN: number
+  // Main-loop tool calls so far: each one is a cue for the dancer.
+  toolN: number
+  // Tools running on the main loop, and the Agent calls among them.
+  tools: number
+  agentCalls: number
+  // When each subagent last called a tool: a background agent's call
+  // returns at once, so its own tools show it still at work.
+  agentsSeen: Map<string, number>
+  // The MCP server partnering Clawd, until a few moments after its call.
+  guest: string
+  guestUntil: number
+  // The subagents' tool calls: how many, whose was the last (by the order
+  // the subagents started) and its move, for that dancer of the corps.
+  crewN: number
+  crewWho: number
+  crewMove: Move | ''
+}
+
 type Stage = {
   isShown: boolean
   isAnimating: boolean
+  mode: Mode
   // The band being drawn on while Claude works (its request), when the turn's
   // dancing began (the band grows in there), the strip's size and the height
   // drawn so far.
@@ -32,6 +65,16 @@ type Stage = {
   previousAt: number
   // The piece the next turn starts with.
   next: number
+  // The live dancer's scene, kept from turn to turn so Clawd dances on, and
+  // when it began; what it is told; and the time of the frame being drawn.
+  live?: Script
+  liveAt: number
+  watch: Watch
+  now: number
+  // What was showing when the band last went (the scene, its clock and the
+  // band's), so a blink of it (a subagent's message landing) picks up where
+  // it was rather than growing in again.
+  paused?: { scene: Script; sceneAt: number; shownAt: number; previous?: Script; previousAt: number; mode: Mode; at: number }
   // The hint row shown while the box holds `/ballet ...`, and what Tab is
   // stepping through: the matches and the one it last put in.
   hint?: string
@@ -42,11 +85,25 @@ type Stage = {
 // as working while /ballet runs) plays again next time instead of being
 // skipped.
 const SEEN_MS = 3000
+// How long the partner stays on after an MCP call, and how long a subagent
+// counts as at work after its last tool call.
+const GUEST_MS = 2500
+// How long the band may be gone mid-turn (a subagent's message landing
+// redraws the screen) and still pick up where it was.
+const BLINK_MS = 4000
+const AGENT_MS = 20_000
 
 // When a turn's dancing ends: the next turn picks up after the piece that
-// was playing, if it played long enough to be seen.
+// was playing, if it played long enough to be seen. The live dancer just
+// pauses.
 function finish($: EngineInterface, s: Stage, at: number) {
   if (!s.scene) return
+  s.paused = { scene: s.scene, sceneAt: s.sceneAt, shownAt: s.shownAt, previous: s.previous, previousAt: s.previousAt, mode: s.mode, at }
+  if (s.mode === 'live') {
+    s.scene = undefined
+
+    return
+  }
   s.next = at - s.sceneAt > SEEN_MS ? (s.piece + 1) % PIECES.length : s.piece
   s.scene = undefined
   void $.store.set('next', s.next).catch(() => {})
@@ -67,13 +124,40 @@ function begin(s: Stage, index: number, at: number) {
   s.sceneAt = at
 }
 
+// What the live dancer is told at a moment.
+function momentOf(s: Stage): Moment {
+  const w = s.watch
+  let recent = 0
+  for (const [id, at] of w.agentsSeen) {
+    if (s.now - at < AGENT_MS) recent++
+    else w.agentsSeen.delete(id)
+  }
+
+  return { act: w.act, move: w.move, label: w.label, toolN: w.toolN, busy: w.tools > 0, news: w.news, newsN: w.newsN, corps: Math.min(4, Math.max(w.agentCalls, recent)), guest: s.now < w.guestUntil ? w.guest : '', crewN: w.crewN, crewWho: w.crewWho, crewMove: w.crewMove }
+}
+
+// Starts the live dancer's turn: the scene it danced last turn, or a new
+// one the first time (or if its code broke).
+function beginLive(s: Stage, at: number) {
+  if (!s.live || s.live.code?.error) {
+    const script = cleanScript(LIVE_SCENE)
+    if (!script) return
+    s.live = wire(script, () => momentOf(s))
+    s.liveAt = at
+  }
+  s.scene = s.live
+  s.sceneAt = s.liveAt
+}
+
 function frameAt(s: Stage, at: number, rows: number) {
+  s.now = at
   // A piece plays through once, then dissolves into the next.
-  if (s.scene && at - s.sceneAt > PIECES[s.piece]!.routine * 1000) {
+  if (s.mode === 'repertoire' && s.scene && at - s.sceneAt > PIECES[s.piece]!.routine * 1000) {
     s.previous = s.scene
     s.previousAt = s.sceneAt
     begin(s, s.piece + 1, at)
   }
+  if (s.mode === 'live' && s.scene?.code?.error) beginLive(s, at)
   if (!s.scene) return undefined
 
   return solidify(
@@ -118,6 +202,27 @@ async function toggle($: EngineInterface, s: Stage, show: boolean) {
   $.ui.invalidate('ui.render')
 }
 
+// Switches mode; the next frame starts the new one's dancing.
+async function switchTo($: EngineInterface, s: Stage, mode: Mode) {
+  s.mode = mode
+  s.scene = undefined
+  s.paused = undefined
+  s.previous = undefined
+  await $.store.set('mode', mode).catch(() => {})
+  if (!s.isShown) await toggle($, s, true)
+  else $.ui.invalidate('ui.render')
+}
+
+// What the live dancer is told: the work, and news.
+function tell(w: Watch, act: Act) {
+  w.act = act
+}
+
+function announce(w: Watch, news: News) {
+  w.news = news
+  w.newsN++
+}
+
 // `/ballet <words>` picks a piece by its name, loosely (hooks/choose.ts): a
 // ballet alone starts at its first act, and its acts play on in order.
 const NAMES = PIECES.map(p => p.name)
@@ -127,7 +232,7 @@ const DRAFT = /^\/ballet (.*)$/s
 
 // What the hint row above the prompt says for a draft of `/ballet <words>`.
 function hintFor(arg: string): string {
-  if (!arg.trim()) return `${summary(NAMES)}, on, off`
+  if (!arg.trim()) return `${summary(NAMES)}, live, repertoire, on, off`
   const fits = completions(NAMES, arg)
 
   return fits.length ? `${fits.join(' · ')}   (tab completes)` : 'no piece by that name'
@@ -143,16 +248,31 @@ function showHint($: EngineInterface, s: Stage, text: string) {
 }
 
 export const register: Register = on => {
-  const s: Stage = { isShown: true, isAnimating: false, shownAt: 0, cols: 60, drawnRows: 1, piece: -1, sceneAt: 0, previousAt: 0, next: 0 }
+  const s: Stage = {
+    isShown: true,
+    isAnimating: false,
+    mode: 'repertoire',
+    shownAt: 0,
+    cols: 60,
+    drawnRows: 1,
+    piece: -1,
+    sceneAt: 0,
+    previousAt: 0,
+    next: 0,
+    liveAt: 0,
+    watch: { act: 'idle', move: '', label: '', news: '', newsN: 0, toolN: 0, tools: 0, agentCalls: 0, agentsSeen: new Map(), guest: '', guestUntil: 0, crewN: 0, crewWho: 0, crewMove: '' },
+    now: 0,
+  }
 
   on('session.start', async ($, e, next_) => {
     s.isShown = (await $.store.get('isShown')) !== false
     const saved = await $.store.get('next').catch(() => undefined)
     if (typeof saved === 'number') s.next = saved
+    if ((await $.store.get('mode').catch(() => undefined)) === 'live') s.mode = 'live'
     await $.command.register({
       name: COMMAND,
-      description: `Show or hide Clawd dancing ballet above the prompt, or pick the piece (${summary(NAMES)})`,
-      argumentHint: '[on|off|<ballet> [act]]',
+      description: `Show or hide Clawd dancing ballet above the prompt, pick the piece (${summary(NAMES)}), or dance live to what Claude does`,
+      argumentHint: '[on|off|live|repertoire|<ballet> [act]]',
       immediate: true,
     })
 
@@ -166,15 +286,26 @@ export const register: Register = on => {
     if (!arg || arg === 'on' || arg === 'off') {
       await toggle($, s, arg === 'on' ? true : arg === 'off' ? false : !s.isShown)
 
-      return { text: s.isShown ? 'Ballet on: Clawd dances while Claude works.' : 'Ballet off. /ballet brings Clawd back.' }
+      return { text: s.isShown ? `Ballet on: Clawd dances ${s.mode === 'live' ? 'live, to what Claude does' : 'the repertoire'} while Claude works.` : 'Ballet off. /ballet brings Clawd back.' }
+    }
+    if (arg === 'live') {
+      await switchTo($, s, 'live')
+
+      return { text: 'Live: Clawd dances on while Claude works, its steps following what Claude does. /ballet repertoire for the pieces.' }
+    }
+    if (arg === 'repertoire') {
+      const saved = await $.store.get('next').catch(() => undefined)
+      if (typeof saved === 'number') s.next = saved
+      await switchTo($, s, 'repertoire')
+
+      return { text: `The repertoire: next up, ${title(PIECES[s.next]!.name)}.` }
     }
     // Words that name no piece say so, and leave the ballet as it was.
     const picked = choose(NAMES, arg)
     if ('error' in picked) return { text: picked.error }
     s.next = picked.index
-    s.scene = undefined
     await $.store.set('next', s.next).catch(() => {})
-    if (!s.isShown) await toggle($, s, true)
+    await switchTo($, s, 'repertoire')
 
     return { text: `Next up: ${title(PIECES[picked.index]!.name)}.` }
   })
@@ -206,16 +337,72 @@ export const register: Register = on => {
     return box
   })
 
+  // A new task: the live dancer begins it with a preparation.
   on('prompt.submit', async ($, e, next_) => {
     showHint($, s, '')
     s.tab = undefined
+    tell(s.watch, 'thinking')
+    announce(s.watch, 'task')
+
+    return next_(e)
+  })
+
+  // Every tool call on the main loop tells the live dancer what Claude is
+  // doing, and how it went; a subagent's calls show it still at work. The
+  // call itself goes on untouched.
+  on('tool.call', async ($, e, next_) => {
+    const w = s.watch
+    const at = await $.clock.now().catch(() => s.now)
+    if (e.agentId) {
+      w.agentsSeen.set(e.agentId, at)
+      w.crewWho = [...w.agentsSeen.keys()].indexOf(e.agentId)
+      w.crewMove = actOf(e.tool, e as unknown as Record<string, unknown>).move
+      w.crewN++
+
+      return next_(e)
+    }
+    const { act, move, label } = actOf(e.tool, e as unknown as Record<string, unknown>)
+    const mcp = mcpOf(e.tool)
+    const isAgent = act === 'agents'
+    tell(w, act)
+    w.move = move
+    w.label = label
+    w.toolN++
+    w.tools++
+    if (isAgent) w.agentCalls++
+    if (mcp) {
+      w.guest = mcp.server
+      w.guestUntil = Infinity
+    }
+    try {
+      const result = await next_(e)
+      if (('deny' in result && result.deny) || result.isError) announce(w, 'fail')
+      else if (act === 'testing' || act === 'building') announce(w, 'pass')
+
+      return result
+    } finally {
+      w.tools--
+      if (isAgent) w.agentCalls--
+      if (mcp) w.guestUntil = (await $.clock.now().catch(() => at)) + GUEST_MS
+    }
+  })
+
+  // The spinner says when Claude turns to thinking or to writing its reply;
+  // the engine draws it as ever.
+  on('ui.render', { component: 'Spinner' }, ($, e, next_) => {
+    const w = s.watch
+    if (w.tools === 0 && e.props.mode === 'thinking' && w.act !== 'thinking') tell(w, 'thinking')
+    if (w.tools === 0 && e.props.mode === 'responding' && w.act !== 'writing') tell(w, 'writing')
 
     return next_(e)
   })
 
   on('turn.complete', async ($, e, next_) => {
     s.spinner = undefined
+    tell(s.watch, 'idle')
     finish($, s, await $.clock.now())
+    // A turn that ended is over: the next starts afresh.
+    s.paused = undefined
     $.ui.invalidate('ui.render')
 
     return next_(e)
@@ -242,14 +429,31 @@ export const register: Register = on => {
     }
     const { Raster } = $.ui.resolve(e)
     const now = await $.clock.now()
-    // A new turn grows the band in and starts the next piece from its top.
+    // A new turn grows the band in and starts the next piece from its top,
+    // or the live dancer where it left off.
     if (!s.scene) {
       // The store has the last word: a reload starts this module afresh.
-      const saved = await $.store.get('next').catch(() => undefined)
-      if (typeof saved === 'number') s.next = saved
+      s.mode = (await $.store.get('mode').catch(() => undefined)) === 'live' ? 'live' : 'repertoire'
+      const paused = s.paused
+      s.paused = undefined
       s.shownAt = now
       s.previous = undefined
-      begin(s, s.next, now)
+      if (paused && paused.mode === s.mode && now - paused.at < BLINK_MS) {
+        // Back after a blink, mid-turn: as it was.
+        s.scene = paused.scene
+        s.sceneAt = paused.sceneAt
+        s.shownAt = paused.shownAt
+        s.previous = paused.previous
+        s.previousAt = paused.previousAt
+        s.now = now
+      } else if (s.mode === 'live') {
+        s.now = now
+        beginLive(s, now)
+      } else {
+        const saved = await $.store.get('next').catch(() => undefined)
+        if (typeof saved === 'number') s.next = saved
+        begin(s, s.next, now)
+      }
     }
     s.spinner = e.requestId
     s.cols = Math.max(20, Math.min(220, e.props.bodyColumns))

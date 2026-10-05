@@ -1,13 +1,14 @@
 // Prints the routine's frames as JSON, for scripts/gif.py to draw, rendered
 // by toons' renderer the way the plugin draws them:
 //
-//   node --experimental-transform-types scripts/frames.ts [--piece N] [--seconds N] [--fps N] [--cols N] [--raw]
+//   node --experimental-transform-types scripts/frames.ts [--piece N | --live] [--seconds N] [--fps N] [--cols N] [--raw]
 //
 // --raw skips the plugin's last pass over the cells (hooks/cells.ts).
 
 import './resolve.ts'
 
 const { PIECES, moveAt } = await import('../hooks/ballet.ts')
+const { LIVE_SCENE, demoAt, wire } = await import('../hooks/live.ts')
 const { cleanScript, stage } = await import('../hooks/script.ts')
 const { solidify } = await import('../hooks/cells.ts')
 
@@ -18,21 +19,26 @@ const opt = (name: string, fallback: number) => {
   return i >= 0 ? Number(args[i + 1] ?? fallback) : fallback
 }
 const piece = PIECES[opt('piece', 0)]!
-const seconds = opt('seconds', piece.routine)
+// --live: the live dancer, through a made-up session (hooks/live.ts).
+const isLive = args.includes('--live')
+let now = 0
+const seconds = opt('seconds', isLive ? 60 : piece.routine)
 const fps = opt('fps', 20)
 const cols = opt('cols', 90)
 const rows = 9
 // The band fades in over its first moments, as under the spinner.
 const GROW_MS = 700
-const script = cleanScript(piece.scene)
-if (!script) process.exit(1)
+const clean = cleanScript(isLive ? LIVE_SCENE : piece.scene)
+if (!clean) process.exit(1)
+const script = isLive ? wire(clean, () => demoAt(now)) : clean
 const frames: string[] = []
 const moves: string[] = []
 for (let n = 0; n < seconds * fps; n++) {
   const since = (n * 1000) / fps
+  now = since / 1000
   // Drawn at full height, its top rows empty until the band has risen.
   const cells = stage({ cols, rows, t: since / 1000, script, since, reveal: Math.min(1, since / (GROW_MS * 1.6)) })
   frames.push(args.includes('--raw') ? cells : solidify(cells))
-  moves.push(moveAt(piece, since / 1000))
+  moves.push(isLive ? `live · ${demoAt(now).move || demoAt(now).act}` : moveAt(piece, since / 1000))
 }
 console.log(JSON.stringify({ cols, rows, fps, frames, moves, error: script.code?.error }))

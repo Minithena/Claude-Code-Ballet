@@ -77,11 +77,14 @@ export function choose(names: readonly string[], arg: string): Choice {
   return { error: acts.length > 1 ? `${title(best)} has acts ${acts.map(p => ROMAN[p.act - 1]!.toUpperCase()).join(', ')}.` : `${title(best)} is a single act.` }
 }
 
-// What Tab offers for the words typed so far: every name (and on/off) that
-// starts with them, else the one piece they name loosely.
+// The modes: the live dancer, or the pieces in turn.
+export const MODES = ['live', 'repertoire'] as const
+
+// What Tab offers for the words typed so far: every name (the modes and
+// on/off too) that starts with them, else the one piece they name loosely.
 export function completions(names: readonly string[], arg: string): string[] {
   const typed = normal(arg)
-  const starting = [...names, 'on', 'off'].filter(n => n.startsWith(typed))
+  const starting = [...names, ...MODES, 'on', 'off'].filter(n => n.startsWith(typed))
   if (starting.length) return starting
   const picked = choose(names, arg)
 

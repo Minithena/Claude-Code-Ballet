@@ -10,7 +10,7 @@ import { DANCER } from './dance'
 // by time (said from beside Clawd, clear of its arms and tutu), a blink now and then, a bourrée's quick steps, the boards, and
 // sparkles that keep off Clawd and the floor. Arms are named for each side
 // ([left, right]): down, out, high, or up (the sticker's raised stub).
-const COMMON = String.raw`
+export const COMMON = String.raw`
 const BAS = ['down', 'down'], SECOND = ['out', 'out'], FIFTH = ['high', 'high'];
 // The ballet sticker's arms: the front one raised, the back one out.
 const RAISED = { right: ['out', 'up'], left: ['up', 'out'], front: ['out', 'up'], back: ['out', 'up'] };
@@ -2471,7 +2471,7 @@ export type Piece = { name: string; concept: string; routine: number; scene: Rec
 
 // The scene code without its comment lines: they stay here for reading but
 // would count toward toons' 20,000 characters.
-const bare = (code: string) => code.replace(/^[ \t]*\/\/.*\n/gm, '')
+export const bare = (code: string) => code.replace(/^[ \t]*\/\/.*\n/gm, '')
 
 const piece = (name: string, concept: string, routine: number, background: Record<string, unknown>, particles: unknown[], code: string): Piece => ({
   name,

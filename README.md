@@ -90,6 +90,50 @@ Claude works long enough:
   its metronome ticking. Pliés, kicks, a
   balance, then pirouettes, sautés and a bow in the center.
 
+**Live** (`/ballet live`) is the other mode: one Clawd in the studio whose
+dancing is made of what Claude does, as claude-toons' scenes follow the
+work. Between tool calls Clawd holds still, in a pose for the moment:
+light tendus and élevés, thought bubbles rising, while Claude thinks; a slow, calm port de bras while it writes the reply; held in
+balances while tests run, passés while a build does, sitting with z's
+through a `sleep`. Each tool call or shell command fires one quick move,
+about a second, and calls in quick succession chain their moves
+together into one piece. A label at the top left says what set off the
+move in hand (`grep`, `read live.ts`, `git log`), and between moves what
+Claude is at (thinking, writing the reply, tests running):
+
+- **Reading** a file: up on pointe, the arms opening. `cat` a pas de chat,
+  `head` reaching up, `tail` an arabesque and a look back, `wc` three
+  counted jumps, `diff` a glance in the mirror.
+- **Searching**: `grep` a quick twirl, `rg` a double, a glob or `find`
+  turning across the studio to the thing (!), `ls` pointing this way and
+  that, `pwd` a turn looking all round.
+- **Editing**: a beaten jump; a new file a grand jeté; `rm` a kick sending
+  a paper ball into the wings; `mv` a glissade; `cp` a pose and its copy
+  the other way; `mkdir` and `touch` down to the floor and up with a
+  spark; `chmod` and `sudo` a curtsy to the piano; `tar` and `zip`
+  squashed small and out again.
+- **Other commands**: a double pirouette; `echo` singing; `kill` the dying
+  swan (who gets up again); `cd` a glissade; `sort` chassés; `open` a
+  presentation; `ssh` a leap off into the wings and back from the other
+  side.
+- **git**: a stagehand runs in with a ribbon on a wand and Clawd twirls
+  with it; the ribbon, a twisting pink band, circles Clawd on its turns and
+  streams after every move for a few seconds. A **commit**
+  or **push**: a sparkling révérence.
+- **The web**: a messenger runs in with a letter; Clawd jumps for it and
+  reads it overhead.
+- **An MCP server**: a partner (each server its own colour) walks on and
+  lifts Clawd, partners its turns while the server's in use, and bows out
+  as soon as it's done.
+- **Subagents**: a corps in white joins, as many as the strip has room
+  for, dancing Clawd's moves a beat behind, and each dancer a move of its
+  own whenever its agent uses a tool.
+
+A new task begins with a preparation; a tool that fails sends Clawd off
+balance ("oops"); tests or a build that pass get a double tour and
+sparkles. Clawd carries on from turn to turn rather than starting a
+piece. Like the pieces, it asks no model and costs nothing.
+
 Clawd is drawn as on the official stickers (the ballet one above all):
 the same block, two arm stubs and four little legs, a pink checked tutu,
 and three-quarter views with the far side in shade when it turns. Now and
@@ -136,6 +180,9 @@ desktop app or an IDE panel, and wants a terminal with 24-bit colour.
   `/ballet swan lake act ii`. Typos and starts of names are fine
   (`/ballet mayerlinf`, `/ballet nut 2`); words that name no piece get a
   list of what there is and leave the ballet as it was.
+- **`/ballet live`** switches to the live dancer, and **`/ballet
+  repertoire`** (or naming a piece) back to the pieces. The mode is
+  remembered across sessions.
 - While you type `/ballet ...`, a dim row above the prompt shows what it
   can complete to, and **Tab** (or → at the end) completes it; Tab again
   steps to the next match.
@@ -143,7 +190,8 @@ desktop app or an IDE panel, and wants a terminal with 24-bit colour.
 ## Preview without Claude Code
 
 ```sh
-node --experimental-transform-types scripts/play.ts --piece 1   # plays a piece (0-14) in the terminal; Ctrl-C stops
+node --experimental-transform-types scripts/play.ts --piece 1   # plays a piece (0-18) in the terminal; Ctrl-C stops
+node --experimental-transform-types scripts/play.ts --live      # the live dancer, through a made-up session
 node --experimental-transform-types scripts/frames.ts --piece 0 | python3 scripts/gif.py docs/demo.gif   # needs Pillow
 ```
 
