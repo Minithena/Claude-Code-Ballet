@@ -43,8 +43,8 @@ const LEGS = {
 
 // A pose: where on the stage (0 to 1), the view (front, right, left, back),
 // the arms [left, right] and legs by name, and anything more (eyes, air in
-// pixels, spin in degrees while spinning).
-const P = (x, view, arms, legs, more) => Object.assign({ x, view, arms, legs, eyes: 'open', air: 0, spin: 0, spinning: false, swirl: 0 }, more || {});
+// pixels, spin in degrees while spinning, dx columns aside for partners).
+const P = (x, view, arms, legs, more) => Object.assign({ x, view, arms, legs, eyes: 'open', air: 0, spin: 0, spinning: false, swirl: 0, dx: 0 }, more || {});
 // Numbers blend eased; names switch halfway, like sprite frames.
 function blend(p, q, k) {
   const out = {};

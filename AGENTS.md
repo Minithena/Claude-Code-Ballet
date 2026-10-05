@@ -55,17 +55,30 @@ at how toons does a thing before doing it differently here.
   partner code, three tracks: `KEYS`, `RK`, `CK`) also serves Swan Lake's
   and the Nutcracker's acts (Swan Lake's shared set, Odette, the prince,
   the owl and `lightning` are in `SWAN_COMMON`) and the McGregor triple bill (Chroma, Infra,
-  Untitled, 2023), with `phrase` for sharp pose sequences; a dancer in
+  Untitled, 2023), with `phrase` for sharp pose sequences, `steps` for
+  travelling in little jumps and `pirouettesOn` for turns on any track; a dancer in
   breeches never takes `derriere` or `jete` (check-frames checks); the person found the
   faithful ending with the shots too dark, so it ends on a joke, a
-  champagne pop, like Swan Lake's), Don Quixote (Kitri's fan, a prop over
-  the raised hand; the windmill), Giselle (act II; she sinks back into her
+  champagne pop, like Swan Lake's, popped in the light so it can be
+  seen: the bottle in Rudolf's hand, the cork, the foam), Don Quixote (the act III grand pas
+  de deux with Basilio; Kitri's fan, a prop over the raised hand; the
+  windmill, the stage stopping short of it), Giselle (act II; she sinks back into her
   grave with negative `air`, the mist drawn over her), La Fille mal gardée
   (the chicken dance: the Cockerel on `CK`, the Hens on `HK`, a track each,
   20 columns apart so tutus don't merge, their canon led from the front of
   the line; a whole-cell ribbon between partners) and MacMillan's Manon
   (act I, the coach hiding whoever is aboard), and class (the barre, the
-  teacher counting from a piano with a metronome). Keep endings light (the
+  teacher counting from a piano with a metronome). A piece is a dance, not
+  an animation (the person said so of a first cut of the four newest):
+  nobody glides across on straight legs (bourrée, leap or `steps`), nobody
+  stands still for long while another dances (sway in balancés, answer in
+  arabesque), and the story is told in ballet's own forms (entrée, adagio,
+  variations, coda; lifts, supported pirouettes) rather than in props.
+  A corps dances in unison or canon, never stands. Speech is sparse
+  (the person found every piece over-explained, more play than ballet):
+  a title card, a story beat, a joke; never a line naming the step
+  being danced ("pirouette!", "hop, hop!").
+  Keep endings light (the
   person found Mayerling's faithful one too dark), and partners at least
   14 columns apart, or two orange bodies read as one. A track's keyframes
   must be added in time order (check-frames checks): a loop adding to two

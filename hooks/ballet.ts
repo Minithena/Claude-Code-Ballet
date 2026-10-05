@@ -145,13 +145,7 @@ reverence(17.4, 0.3, 'right', 1.5);
 key(19.2, P(0.3, 'left', SECOND, 'stand'));
 key(20, P(-0.3, 'left', SECOND, 'stand'));
 line(2.6, 3.8, ['and 5, 6, 7, 8!', 'and... begin!', 'from the top!']);
-line(4.1, 5.2, ['plie... and up!', 'down... and rise!', 'and breathe...']);
-line(5.6, 7.3, ['pirouette!', 'spot, and turn!', 'triple!']);
-line(8.3, 9.6, ['ta-da!', 'and... hold!', 'bravo, me!']);
-line(9.8, 11, ['grand jete!', 'up, up!', 'leap!']);
-line(12.5, 13.7, ['arabesque~', 'hold it...', 'so graceful.']);
-line(14, 15.2, ['wheee!', 'back we go!', 'and again!']);
-line(16.8, 19, ['merci, merci!', 'thank you, thank you!', 'roses! for me?']);
+line(16.8, 18.6, ['merci, merci!', 'thank you, thank you!', 'roses! for me?']);
 
 // The curtains: drawn across the stage at open 0, tied back in the wings
 // at open 1, the hems leading as they part and close.
@@ -263,10 +257,8 @@ key(18.6, P(0.5, 'front', BAS, 'plie', { eyes: 'closed' }));
 key(19.4, P(0.5, 'front', FIFTH, 'stand', { eyes: 'happy' }));
 key(19.8, P(0.5, 'left', SECOND, 'stand'));
 key(22, P(-0.3, 'left', SECOND, 'stand'));
-line(0.5, 2.6, ['by the lake, at midnight...', 'a swan glides in...', 'swan lake, act two.']);
-line(3.5, 5.2, ['arabesque~', 'so still...', 'wings...']);
-line(8.6, 13.8, ['the little swans!', 'and step, and step...', 'heads, together!']);
-line(14.8, 18.4, ['the dying swan...', 'farewell...', 'so tragic.']);
+line(0.5, 2.4, ['by the lake, at midnight...', 'a swan glides in...', 'swan lake, act two.']);
+line(14.8, 16.4, ['the dying swan...', 'farewell...', 'so tragic.']);
 line(19.2, 21, ['...just kidding!', 'i feel better now.', 'encore!']);
 
 // Von Rothbart, the sorcerer as an owl, flying across the moon as the
@@ -343,11 +335,7 @@ key(18.2, P(0.2, 'front', BAS, 'plie', { eyes: 'closed' }));
 key(19.2, P(0.2, 'left', SECOND, 'stand'));
 key(20, P(-0.3, 'left', SECOND, 'stand'));
 line(0.4, 1.6, ['sugar plum, coming through!', 'tinkle tinkle!', 'a winter night...']);
-line(2, 4.2, ['pique, pique, pique!', 'and turn, and turn!', 'chaine turns!']);
-line(4.6, 6.4, ['hop! hop! and hop!', 'echappe!', 'jump!']);
-line(7.6, 10.4, ['so sweet.', 'like candy.', 'and the other way...']);
-line(12.9, 15.5, ['fouettes!', 'whee!', 'dizzy yet?']);
-line(16.1, 18.2, ['the sugar plum fairy!', 'ta-da!', 'merry everything!']);
+line(16.1, 17.8, ['the sugar plum fairy!', 'ta-da!', 'merry everything!']);
 
 const LIGHTS = ['#ff5a5a', '#ffd84a', '#5ad0ff', '#9aff6a'];
 function tree(t, floor) {
@@ -416,13 +404,11 @@ key(17.4, P(0.6, 'right', RAISED.right, 'derriere'));
 key(18.2, P(0.6, 'front', BAS, 'plie', { eyes: 'closed' }));
 key(19.2, P(0.3, 'right', BAS, 'stand'));
 key(20, P(0.3, 'right', BAS, 'stand'));
-line(0.2, 2.6, ['and plie, 2, 3, 4...', 'at the barre, please.', 'class, begin!']);
-line(3.2, 5, ['tendu, and close.', 'point those toes!', 'and back! and close.']);
-line(5.3, 9.4, ['passe... and balance.', 'pull up! pull up!', 'hold it... hold it...']);
-line(10.2, 12, ['center, double pirouette!', 'spot your head!', 'turn, turn!']);
-line(12.2, 14.4, ['saute! saute!', 'and jump!', 'light as a feather!']);
-line(15, 17, ['lovely!', 'beautiful line!', 'very nice, clawd.']);
-line(17.4, 19.2, ['merci, madame.', 'thank you!', 'same time tomorrow?']);
+line(0.2, 2.2, ['and plie, 2, 3, 4...', 'at the barre, please.', 'class, begin!']);
+line(6.4, 8.4, ['passe... and balance.', 'pull up! pull up!', 'hold it... hold it...']);
+line(10.2, 11.4, ['center, double pirouette!', 'spot your head!', 'turn, turn!']);
+line(15, 16.6, ['lovely!', 'beautiful line!', 'very nice, clawd.']);
+line(17.4, 18.8, ['merci, madame.', 'thank you!', 'same time tomorrow?']);
 
 // The piano, where the teacher plays and counts, a metronome on it ticking
 // and notes rising; where the strip has room.
@@ -503,16 +489,10 @@ entrechats(15.2, 0.75, 2);
 balances(16.8, 0.6, 4, FIFTH, 0.7, { eyes: 'closed' });
 key(19.6, P(0.6, 'left', SECOND, 'stand'));
 leaps(19.8, 0.6, -0.4, 3);
-line(0.3, 2.4, ['whoosh!', 'here i come!', 'all aflame!']);
 line(2.7, 3.6, ['the firebird!', 'ta-da!', 'hot hot hot!']);
-line(3.7, 5.4, ['golden apples!', 'ooh, shiny...', 'just one...']);
 line(5.7, 6.5, ['mine!', 'yoink!', 'yum.']);
-line(6.7, 8.9, ['eek! let me go!', 'who grabbed me?!', 'unhand me, ivan!']);
-line(9.4, 11, ['take this feather.', 'call me if you need me.', 'a gift, for you.']);
-line(11.5, 13.8, ['the infernal dance!', 'everybody, dance!', 'faster! faster!']);
-line(14.3, 16.4, ['up, and turn!', 'and beat, beat!', 'entrechat!']);
-line(16.9, 19.4, ['hush... a lullaby.', 'sleep now, monsters...', 'rock-a-bye...']);
-line(19.9, 21.2, ['farewell!', 'bye, ivan!', 'whoosh!']);
+line(6.7, 8.2, ['eek! let me go!', 'who grabbed me?!', 'unhand me, ivan!']);
+line(9.4, 10.8, ['take this feather.', 'call me if you need me.', 'a gift, for you.']);
 
 // The tree of golden apples, at the left; the apple Clawd takes is gone
 // from then on.
@@ -616,6 +596,25 @@ function tourOn(add, t0, x, dx, n) {
   add(t0 + 0.65, M(x, dx, 'front', FIFTH, 'stand', { spinning: true, spin: 360 * n }));
   add(t0 + 0.8, M(x, dx, 'front', SECOND, 'plie', { spin: 360 * n }));
 }
+// Pirouettes on a track, placed as M places them: n turns in passé from a
+// plié, landing on the spin they end on.
+function pirouettesOn(add, t0, length, x, dx, n) {
+  add(t0, M(x, dx, 'front', SECOND, 'plie'));
+  add(t0 + 0.2, M(x, dx, 'front', FIFTH, 'passe', { spinning: true, spin: 0 }));
+  add(t0 + length - 0.3, M(x, dx, 'front', FIFTH, 'passe', { spinning: true, spin: 360 * n }));
+  add(t0 + length, M(x, dx, 'front', SECOND, 'plie', { spin: 360 * n }));
+}
+// Travelling steps on a track: n little jumps from x0 to x1, each from a
+// plié, a beat apart, facing the way they go: dancers run on in steps
+// rather than glide.
+function steps(add, t0, x0, x1, dx, n, arms, beat) {
+  const view = x1 > x0 ? 'right' : 'left';
+  for (let i = 0; i < n; i++) {
+    add(t0 + i * beat, M(x0 + (x1 - x0) * i / n, dx, view, arms, 'plie'));
+    add(t0 + (i + 0.5) * beat, M(x0 + (x1 - x0) * (i + 0.5) / n, dx, view, arms, 'stand', { air: 2 }));
+  }
+  add(t0 + n * beat, M(x1, dx, view, arms, 'plie'));
+}
 // A phrase of sharp poses, one every dt seconds, on a track: each step
 // [view, arms, legs, columns aside]. A dancer in breeches (isBare) has no
 // room for a leg behind or a stride, so those become a plié.
@@ -695,11 +694,8 @@ key(21, M(0.5, -9, 'left', BAS, 'stand'));
 key(22, M(-0.2, 0, 'left', BAS, 'stand'));
 line(0.3, 2.2, ['vienna, 1881.', 'the royal wedding ball.', 'the hofburg, ablaze.']);
 line(2.5, 3.4, ['your highness.', 'charmed.', 'princess.']);
-line(4, 8, ['one, two, three...', 'a waltz!', 'everyone is watching.']);
-line(8.7, 9.8, ['wheee!', 'twirl!', 'and round...']);
 line(10.6, 11.6, ['how dull.', 'excuse me.', 'i need air.']);
-line(12, 15, ['hup!', 'and turn!', 'leave me be!']);
-line(17.4, 20.4, ['some wedding...', 'rudolf?', 'well then.']);
+line(17.6, 19.4, ['some wedding...', 'rudolf?', 'well then.']);
 
 // The ballroom: cream and gold pilasters on dark rose walls, chandeliers
 // twinkling, a parquet floor.
@@ -788,12 +784,9 @@ okey(19, M(0, 0, 'front', FIFTH, 'kneel', { eyes: 'happy' }));
 okey(22, M(0, 0, 'front', FIFTH, 'kneel', { eyes: 'happy' }));
 const STAMPING = [[0, 7.6], [10.6, 18.6]];
 line(0.3, 2.4, ['the tavern of mitzi caspar.', 'the hungarian officers!', 'vienna by night.']);
-line(2.7, 7.3, ['hej! hej!', 'mitzi! mitzi!', 'more wine!']);
-line(7.9, 10.4, ['and turn!', 'opa!', 'show-offs.']);
-line(11.6, 13, ['rudolf, darling!', 'my prince!', 'you came!']);
+line(2.7, 4.2, ['hej! hej!', 'mitzi! mitzi!', 'more wine!']);
 line(13.4, 14.6, ['die with me, mitzi.', 'a pact, mitzi?', 'together, forever...']);
-line(15.2, 18.2, ['die? i would rather dance!', 'ha! no thank you!', 'dance with me instead!']);
-line(19, 21.5, ['bravo, mitzi!', 'ta-da!', 'the queen of vienna!']);
+line(15.2, 16.8, ['die? i would rather dance!', 'ha! no thank you!', 'dance with me instead!']);
 
 // The tavern: dark beams and lanterns flickering.
 function tavern(t, floor) {
@@ -869,9 +862,10 @@ key(11.2, M(0.5, -20, 'right', SECOND, 'stand'));
 key(11.5, M(0.5, -20, 'right', BAS, 'plie'));
 key(11.9, M(0.5, -8, 'right', RAISED.right, 'jete', { air: 4 }));
 key(12.2, M(0.5, 0, 'right', RAISED.right, 'jete', { air: 4 }));
-// In the dark, the joke: a pop, the lights up, both grinning, and a bow.
-key(18.3, M(0.5, -9, 'front', FIFTH, 'stand', { eyes: 'happy' }));
-key(20.4, M(0.5, -9, 'front', FIFTH, 'stand', { eyes: 'happy' }));
+// After the dark, the joke: the lights up on both grinning, his bottle
+// and her glass raised, the cork pops, and a bow.
+key(17.9, M(0.5, -9, 'front', ['high', 'out'], 'stand', { eyes: 'happy' }));
+key(20.4, M(0.5, -9, 'front', ['high', 'out'], 'stand', { eyes: 'happy' }));
 key(20.6, M(0.5, -9, 'right', SECOND, 'derriere'));
 key(21, M(0.5, -9, 'right', BAS, 'derriere', { eyes: 'closed' }));
 key(22.4, M(0.5, -9, 'right', BAS, 'derriere', { eyes: 'closed' }));
@@ -886,9 +880,9 @@ rkey(8.2, M(0.5, 7, 'left', ['out', 'high'], 'stand'));
 rkey(8.6, M(0.5, 7, 'left', SECOND, 'stand'));
 rkey(11, M(0.5, 7, 'left', SECOND, 'stand'));
 rkey(11.6, M(0.5, 7, 'left', FIFTH, 'kneel'));
-rkey(18.2, M(0.5, 7, 'left', FIFTH, 'kneel'));
-rkey(18.3, M(0.5, 7, 'front', FIFTH, 'stand', { eyes: 'happy' }));
-rkey(20.4, M(0.5, 7, 'front', FIFTH, 'stand', { eyes: 'happy' }));
+rkey(17.8, M(0.5, 7, 'left', FIFTH, 'kneel'));
+rkey(17.9, M(0.5, 7, 'front', ['out', 'high'], 'stand', { eyes: 'happy' }));
+rkey(20.4, M(0.5, 7, 'front', ['out', 'high'], 'stand', { eyes: 'happy' }));
 rkey(20.6, M(0.5, 7, 'left', BAS, 'plie', { eyes: 'closed' }));
 rkey(22.4, M(0.5, 7, 'left', BAS, 'plie', { eyes: 'closed' }));
 rkey(22.8, M(0.5, 7, 'front', FIFTH, 'stand', { eyes: 'happy' }));
@@ -898,8 +892,8 @@ line(0.3, 2.5, ['mayerling, 1889.', 'the hunting lodge...', 'a winter night.']);
 line(3.2, 5.5, ['never let me go.', 'rudolf...', 'hold on to me.']);
 line(6.2, 7.8, ['catch me...', 'spin me round.', 'like a dream.']);
 line(9.4, 11, ['wait for me!', 'here i come!', 'mary...']);
-line(18.8, 20.4, ['...just kidding!', 'champagne, anyone?', 'plot twist: we are fine!']);
-line(20.8, 23.4, ['thank you, vienna!', 'encore!', 'bravo, us!']);
+line(19.4, 20.6, ['...just kidding!', 'champagne, anyone?', 'plot twist: we are fine!']);
+line(21, 22.6, ['thank you, vienna!', 'encore!', 'bravo, us!']);
 
 // The kiss: Rudolf kneeling, body on the floor, his near arm up round
 // her; Mary upside down above him, set four columns aside so the two
@@ -938,6 +932,35 @@ function hearts(t, u, x, floor) {
     const row = Math.round((floor - 4) * (1 - k));
     const col = Math.round(x + 10 + i * 3 + Math.sin(k * 6 + i) * 2);
     if (u - KISS_AT > i * 0.7) put(col, row, '♥', mix('#ff8aa8', '#3a2028', k * k));
+  }
+}
+// The champagne: a bottle in Rudolf's raised hand, a glass in Mary's; at
+// POP the cork flies off in an arc to the floor and the foam sprays up
+// and falls.
+const POP_AT = 18.6;
+function champagne(t, u, dr, d, floor) {
+  pixels(dr.x + 6, dr.top - 6, '.y.
+.g.
+ggg
+ggg
+ggg
+ggg', { y: '#ffd84a', g: '#1e6a30' });
+  pixels(d.x - 9, d.top - 4, 'c.c
+cyc
+.c.
+ccc', { c: '#e8eef0', y: '#ffe070' });
+  const k = u - POP_AT;
+  if (k < 0) return;
+  const top = Math.max(0, Math.floor(dr.top / 2) - 3);
+  if (k < 0.25) put(dr.x + 7, top, '✶', '#ffffff');
+  if (k < 0.9) put(dr.x + 8 + Math.round(k * 24), Math.round(lerp(top, floor - 1, (k / 0.9) * (k / 0.9))), '●', '#d8b080');
+  // The foam: spilling out of the neck to both sides and falling.
+  for (let i = 0; i < 14 && k < 1.8; i++) {
+    const a = k - rand(i) * 0.5;
+    if (a < 0 || a > 1.2) continue;
+    const col = dr.x + 7 + Math.round((rand(i * 3) - 0.5) * 18 * a);
+    const row = top + Math.round(a * a * 7);
+    if (row < floor) put(col, row, a < 0.7 ? '●' : '•', mix('#fffbe8', '#ffe070', a / 1.2));
   }
 }
 // The window: night outside, snow falling past it.
@@ -999,25 +1022,26 @@ function frame(t, dt) {
   if (hasCandles) candelabra(t, floor, 6, 3);
   if (w >= 90) snowWindow(t, floor, w - 22);
   let d;
-  if (u < KISS_AT || u > 18.25) {
+  if (u < KISS_AT || u > 17.9) {
     // Rudolf leans back in the pull, Mary with him.
     const lean = u > 3 && u < 5.6 ? Math.round(Math.sin((u - 3) * 2.4)) : 0;
-    dancer(r, rcx + lean, ground, RUDOLF);
+    const dr = dancer(r, rcx + lean, ground, RUDOLF);
     d = dancer(m, mcx + lean, ground, MARY);
+    if (u > 17.9 && u < 20.4) champagne(t, u, dr, d, floor);
   } else {
     kiss(t, rcx, ground);
     if (u < 15.6) hearts(t, u, rcx, floor);
     d = { x: rcx, row: 0, top: 0 };
   }
-  // The lights close in on the kiss and go to black; a pop in the dark
-  // (a champagne cork), and the lights come up on the two of them, fine.
-  if (u > 15 && u < 19) {
-    const radius = u < 17.4 ? 40 * (1 - (u - 15) / 2.4) : u < 18.4 ? 0 : 60 * (u - 18.4) / 0.6;
+  // The lights close in on the kiss and go to black; then they come up
+  // on the two of them, fine, with champagne.
+  if (u > 15 && u < 18.4) {
+    const radius = u < 17.4 ? 40 * (1 - (u - 15) / 2.4) : u < 17.9 ? 0 : 60 * (u - 17.9) / 0.5;
     lights(rcx - 2, Math.max(0, radius), floor);
-    if (u > 17.8 && u < 18.5) say('pop!', Math.round(w / 2), 1);
-    if (u < 18.4) return;
+    if (u < 17.9) return;
   }
-  if (u > 18.6 && u < 21) sparkles(t, d, floor, '#ffe080');
+  if (u > POP_AT && u < POP_AT + 0.7) say('POP!', at(r) - 4, 0);
+  if (u > 19.2 && u < 21) sparkles(t, d, floor, '#ffe080');
   const said = saying(u, n);
   if (said && u < 2.6) say(said, Math.round(w / 2), 0);
   else if (said) speak(said, d);
@@ -1307,8 +1331,8 @@ const SWAN1 = String.raw`
 const ROUTINE = 22;
 const PINK = { tutu: '#f0c0d4', frill: '#fff0f6' };
 const BLUE = { tutu: '#b8d4f0', frill: '#eef6ff' };
-rkey(0, M(-0.3, 0, 'right', BAS, 'stand'));
-rkey(2.2, M(0.5, 0, 'right', BAS, 'stand'));
+rkey(0, M(-0.3, 0, 'right', SECOND, 'stand'));
+steps(rkey, 0.2, -0.3, 0.5, 0, 4, SECOND, 0.5);
 rkey(2.6, M(0.5, 0, 'front', SECOND, 'stand'));
 key(0, M(1.3, 0, 'left', SECOND, 'stand'));
 key(2.4, M(0.5, 20, 'left', SECOND, 'stand'));
@@ -1333,25 +1357,27 @@ ckey(7.6, M(0.5, -20, 'right', BAS, 'derriere', { eyes: 'closed' }));
 ckey(8.8, M(0.5, -20, 'right', BAS, 'derriere', { eyes: 'closed' }));
 ckey(9.2, M(0.5, -20, 'left', SECOND, 'stand'));
 ckey(11, M(-0.4, 0, 'left', SECOND, 'stand'));
-// The crossbow; then alone, wondering whom he must marry.
+// The crossbow, from his mother; then alone at dusk, his slow solo,
+// wondering whom he must marry: the arms opening, a slow double
+// pirouette, a reach to each side, double tours.
 rkey(7.6, M(0.5, 0, 'front', BAS, 'plie', { eyes: 'happy' }));
 rkey(9.4, M(0.5, 0, 'front', ['out', 'high'], 'stand', { eyes: 'happy' }));
-rkey(11.4, M(0.5, 0, 'front', ['out', 'high'], 'stand', { eyes: 'happy' }));
-rkey(11.8, M(0.5, 0, 'front', BAS, 'stand', { eyes: 'closed' }));
-rkey(13.2, M(0.45, 0, 'left', ['high', 'down'], 'plie', { eyes: 'closed' }));
-rkey(14.4, M(0.55, 0, 'right', ['down', 'high'], 'plie', { eyes: 'closed' }));
-rkey(15.6, M(0.5, 0, 'front', BAS, 'stand'));
-// Swans fly over; he points to them, and follows.
-rkey(16.8, M(0.5, 0, 'right', ['out', 'up'], 'stand'));
-rkey(19.2, M(0.5, 0, 'right', ['out', 'up'], 'stand'));
-rkey(19.6, M(0.6, 0, 'right', SECOND, 'stand'));
-rkey(22, M(1.4, 0, 'right', SECOND, 'stand'));
+rkey(10.6, M(0.5, 0, 'front', ['out', 'high'], 'stand', { eyes: 'happy' }));
+rkey(11, M(0.5, 0, 'front', BAS, 'stand', { eyes: 'closed' }));
+rkey(11.5, M(0.5, 0, 'front', SECOND, 'plie', { eyes: 'closed' }));
+rkey(12, M(0.5, 0, 'front', FIFTH, 'stand'));
+pirouettesOn(rkey, 12.2, 1.6, 0.5, 0, 2);
+rkey(14.2, M(0.45, 0, 'left', ['high', 'down'], 'plie', { eyes: 'closed' }));
+rkey(14.8, M(0.55, 0, 'right', ['down', 'high'], 'plie', { eyes: 'closed' }));
+tourOn(rkey, 15.2, 0.55, 0, 2);
+rkey(16.2, M(0.55, 0, 'front', BAS, 'stand'));
+// Swans fly over; he points to them, and runs after them.
+rkey(16.8, M(0.55, 0, 'right', ['out', 'up'], 'stand'));
+rkey(18.6, M(0.55, 0, 'right', ['out', 'up'], 'stand'));
+steps(rkey, 18.9, 0.55, 1.4, 0, 6, SECOND, 0.5);
 line(0.3, 2.2, ['swan lake, act one.', 'the palace garden.', 'a birthday!']);
-line(3.2, 6.4, ['happy birthday, prince!', 'pas de trois!', 'and jump!']);
-line(9.6, 11.4, ['a crossbow? for me?', 'thank you, mother!', 'how... practical.']);
-line(12, 15.4, ['must i marry?', 'sigh...', 'twenty-one already...']);
-line(17, 19.2, ['look... swans!', 'swans, at dusk!', 'what was that?']);
-line(19.8, 21.4, ['to the lake!', 'follow them!', 'wait for me!']);
+line(3.2, 4.6, ['happy birthday, prince!', 'many happy returns!', 'twenty-one today!']);
+line(9.6, 10.6, ['a crossbow? for me?', 'thank you, mother!', 'how... practical.']);
 
 // Dusk deepening over the garden, the palace's towers dark against it.
 function dusk(u, floor) {
@@ -1397,7 +1423,7 @@ function frame(t, dt) {
   dancer(a, at(a), ground, PINK);
   dancer(c, at(c), ground, BLUE);
   const d = dancer(r, at(r), ground, PRINCE);
-  if (u > 9.6 && u < 11.6) pixels(d.x + 6, d.top - 4, 'bbbbb\n..b..\n..b..\n..b..', { b: '#8a5a2a' });
+  if (u > 9.6 && u < 10.8) pixels(d.x + 6, d.top - 4, 'bbbbb\n..b..\n..b..\n..b..', { b: '#8a5a2a' });
   const said = saying(u, n);
   if (said && u < 2.2) say(said, Math.round(w / 2), 0);
   else if (said && u < 6.6) speak(said, { x: at(a), row: d.row });
@@ -1413,54 +1439,74 @@ const SWAN3 = String.raw`
 const ROUTINE = 24;
 const ODILE = { tutu: '#18181e', frill: '#44445a', crown: '.r.r.\nkkkkk', crownColors: { r: '#e03040', k: '#101014' } };
 const ROTHBART = { bare: true, breeches: '#3a1a3a', shoes: '#101010', crown: 'k...k\nkkkkk', crownColors: { k: '#1a0a1a' } };
+// Odile bourrées in; Rothbart steps in behind her, and the prince comes
+// to meet her.
 key(0, M(-0.3, 0, 'right', SECOND, 'stand'));
 key(2.4, M(0.5, -7, 'right', SECOND, 'stand'));
 ckey(0, M(-0.4, 0, 'right', BAS, 'stand'));
-ckey(2.4, M(0.12, 0, 'right', ['out', 'high'], 'stand'));
+steps(ckey, 0.2, -0.4, 0.12, 0, 4, BAS, 0.5);
 rkey(0, M(0.8, 0, 'left', BAS, 'stand'));
-rkey(2.6, M(0.8, 0, 'left', BAS, 'stand'));
-rkey(3.2, M(0.5, 7, 'left', SECOND, 'plie'));
-// The pas de deux: the pull, turns in his hands, her arabesque.
+rkey(2, M(0.8, 0, 'left', BAS, 'stand'));
+steps(rkey, 2.2, 0.8, 0.59, 0, 2, SECOND, 0.45);
+// The adagio: her arabesque, a balance in passé, arabesque again, a look
+// back to her father, three turns in the prince's hands, and arabesque;
+// Rothbart, behind, works her like a puppet.
 key(3.2, M(0.5, -7, 'right', ['down', 'out'], 'derriere'));
-key(5.6, M(0.5, -7, 'right', ['down', 'out'], 'derriere'));
+key(4, M(0.5, -7, 'front', FIFTH, 'passe'));
+key(4.6, M(0.5, -7, 'right', RAISED.right, 'derriere'));
+key(5.2, M(0.5, -7, 'left', RAISED.left, 'derriere'));
+key(5.6, M(0.5, -7, 'left', RAISED.left, 'derriere'));
 key(5.8, M(0.5, -9, 'front', SECOND, 'plie'));
 key(6, M(0.5, -9, 'front', FIFTH, 'passe', { spinning: true, spin: 0 }));
 key(7.2, M(0.5, -9, 'front', FIFTH, 'passe', { spinning: true, spin: 1080 }));
 key(7.5, M(0.5, -9, 'right', RAISED.right, 'derriere', { spin: 1080, eyes: 'happy' }));
 key(8.8, M(0.5, -9, 'right', RAISED.right, 'derriere', { eyes: 'happy' }));
+rkey(3.2, M(0.5, 7, 'left', SECOND, 'plie'));
+rkey(4, M(0.5, 7, 'left', ['out', 'high'], 'stand'));
+rkey(4.6, M(0.5, 7, 'left', SECOND, 'plie'));
 rkey(5.6, M(0.5, 7, 'left', SECOND, 'plie'));
 rkey(5.8, M(0.5, 7, 'left', ['out', 'high'], 'stand'));
 rkey(8.8, M(0.5, 7, 'left', ['out', 'high'], 'stand'));
-rkey(9.2, M(0.5, 24, 'left', BAS, 'stand'));
+rkey(9.2, M(0.5, 24, 'left', ['out', 'high'], 'stand'));
+phrase(ckey, 2.6, 0.8, 0.12, 0, [
+  ['right', ['out', 'high'], 'stand'], ['right', FIFTH, 'plie'], ['right', ['out', 'high'], 'stand'], ['right', FIFTH, 'plie'],
+  ['right', ['out', 'high'], 'stand'], ['right', FIFTH, 'plie'], ['right', ['out', 'high'], 'stand'],
+], true);
 // Thirty-two fouettés (well, twelve turns; nobody's counting. The counter is.)
 key(9.2, M(0.5, -4, 'front', SECOND, 'plie'));
 key(9.4, M(0.5, -4, 'front', FIFTH, 'passe', { spinning: true, spin: 0 }));
 key(14.2, M(0.5, -4, 'front', FIFTH, 'passe', { spinning: true, spin: 4320 }));
 key(14.5, M(0.5, -6, 'right', RAISED.right, 'derriere', { spin: 4320, eyes: 'happy' }));
-key(16.8, M(0.5, -6, 'right', RAISED.right, 'derriere', { eyes: 'happy' }));
-// He kneels and swears; Rothbart gloats; the prince sees, and runs.
+key(16.6, M(0.5, -6, 'right', RAISED.right, 'derriere', { eyes: 'happy' }));
+// He kneels and swears; Rothbart gloats, turning in the air in the
+// lightning, and Odile dances her triumph; the prince sees, and runs.
 rkey(14.6, M(0.5, 10, 'left', FIFTH, 'kneel'));
-rkey(17, M(0.5, 10, 'left', FIFTH, 'kneel'));
-rkey(17.2, M(0.5, 10, 'left', SECOND, 'stand'));
+rkey(16.4, M(0.5, 10, 'left', FIFTH, 'kneel'));
+rkey(16.8, M(0.5, 10, 'left', SECOND, 'stand'));
+rkey(19.2, M(0.5, 10, 'left', SECOND, 'stand'));
 rkey(19.4, M(0.5, 10, 'right', SECOND, 'stand'));
-rkey(20.8, M(1.4, 0, 'right', SECOND, 'stand'));
-ckey(16.9, M(0.2, 0, 'right', FIFTH, 'stand', { eyes: 'happy' }));
+steps(rkey, 19.6, 0.5, 1.4, 10, 4, SECOND, 0.3);
+ckey(16.6, M(0.12, 0, 'right', ['out', 'high'], 'stand'));
+tourOn(ckey, 16.9, 0.2, 0, 2);
+ckey(18, M(0.2, 0, 'right', FIFTH, 'stand', { eyes: 'happy' }));
 ckey(21, M(0.2, 0, 'right', FIFTH, 'stand', { eyes: 'happy' }));
 ckey(21.4, M(0.2, 0, 'left', SECOND, 'stand'));
-ckey(24, M(-0.4, 0, 'left', SECOND, 'stand'));
+steps(ckey, 21.6, 0.2, -0.4, 0, 4, SECOND, 0.55);
 key(17, M(0.5, -6, 'front', FIFTH, 'stand', { eyes: 'happy' }));
-key(20.6, M(0.5, -6, 'right', BAS, 'derriere', { eyes: 'closed' }));
+balances(17.4, 0.5, 4, FIFTH, 0.6, { dx: -6, eyes: 'happy' });
+key(20, M(0.5, -6, 'right', SECOND, 'derriere'));
+key(20.4, M(0.5, -6, 'right', BAS, 'derriere', { eyes: 'closed' }));
 key(21.6, M(0.5, -6, 'right', BAS, 'derriere', { eyes: 'closed' }));
 key(22, M(0.5, -6, 'left', SECOND, 'stand'));
 key(24, M(-0.3, 0, 'left', SECOND, 'stand'));
 line(0.3, 2.4, ['swan lake, act three.', 'the palace ball.', 'a mysterious guest...']);
-line(3.3, 5.5, ['odette? is it you?', 'you came!', 'my swan...']);
-line(7.6, 8.8, ['hee hee.', 'of course it is me.', 'trust me~']);
-line(14.8, 16.8, ['i swear to love you forever!', 'i promise!', 'marry me!']);
-line(17.3, 19.2, ['ha! wrong swan!', 'fooled you!', 'she is my daughter!']);
-line(19.5, 20.7, ['oops.', 'oh no.', 'odette!!']);
-line(21, 23, ['tee hee!', 'bravo, us!', 'curtain!']);
-const WHO = [[2.4, 'r'], [5.6, 'o'], [9, 'x'], [14.6, 'o'], [17, 'r'], [19.4, 'c'], [20.9, 'r'], [24, 'o']];
+line(3.3, 4.8, ['odette? is it you?', 'you came!', 'my swan...']);
+line(14.8, 16.4, ['i swear to love you forever!', 'i promise!', 'marry me!']);
+line(17.9, 19.2, ['ha! wrong swan!', 'fooled you!', 'she is my daughter!']);
+line(19.5, 20.5, ['oops.', 'oh no.', 'odette!!']);
+// Who says each line: up to each time, the prince (r), Odile (o), or
+// Rothbart (c).
+const WHO = [[5.6, 'r'], [14.6, 'o'], [17, 'r'], [19.4, 'c'], [21, 'r'], [24, 'o']];
 
 // The ballroom: dark rose walls, gold pilasters, a marble floor, and the
 // window where Odette beats her wings unseen.
@@ -1514,24 +1560,35 @@ function frame(t, dt) {
 // comes up, and everyone is happy (this is the happy-ending version).
 const SWAN4 = String.raw`
 const ROUTINE = 24;
+// Odette mourning, then her lament: up, and bourrées with slow wingbeats.
 key(0, M(0.5, -7, 'front', BAS, 'plie', { eyes: 'closed' }));
-key(4, M(0.5, -7, 'front', BAS, 'plie', { eyes: 'closed' }));
+key(2.4, M(0.5, -7, 'front', BAS, 'plie', { eyes: 'closed' }));
+key(3, M(0.5, -7, 'front', SECOND, 'stand', { eyes: 'closed' }));
+key(4.8, M(0.42, -7, 'left', SECOND, 'stand', { eyes: 'closed' }));
 key(6.4, M(0.5, -7, 'left', BAS, 'stand', { eyes: 'closed' }));
 key(7.8, M(0.5, -7, 'left', BAS, 'stand', { eyes: 'closed' }));
+// Forgiven: her arabesque to him, and turns.
 key(8.2, M(0.5, -7, 'right', ['down', 'out'], 'stand', { eyes: 'happy' }));
 key(8.6, M(0.5, -7, 'right', ['down', 'out'], 'derriere'));
 key(10, M(0.5, -7, 'right', ['down', 'out'], 'derriere'));
 key(10.2, M(0.5, -9, 'front', FIFTH, 'passe', { spinning: true, spin: 0 }));
 key(11.6, M(0.5, -9, 'front', FIFTH, 'passe', { spinning: true, spin: 720 }));
 key(11.9, M(0.5, -9, 'front', SECOND, 'plie', { spin: 720 }));
+// The storm: she flutters in fear while he fights; then the spell breaks,
+// and he lifts her into the sunrise, a double, and arabesque.
 key(15.8, M(0.5, -9, 'front', SECOND, 'plie'));
-key(16.4, M(0.5, -9, 'right', RAISED.right, 'derriere', { eyes: 'happy' }));
-key(20.8, M(0.5, -9, 'right', RAISED.right, 'derriere', { eyes: 'happy' }));
-key(21.2, M(0.5, -9, 'right', BAS, 'derriere', { eyes: 'closed' }));
-key(24, M(0.5, -9, 'right', BAS, 'derriere', { eyes: 'closed' }));
-rkey(0, M(1.4, 0, 'left', SECOND, 'stand'));
-rkey(4, M(1.4, 0, 'left', SECOND, 'stand'));
-rkey(5.4, M(0.5, 9, 'left', SECOND, 'stand'));
+key(16.4, M(0.5, -8, 'right', RAISED.right, 'derriere', { eyes: 'happy' }));
+key(17, M(0.5, -8, 'front', FIFTH, 'stand', { air: 6, eyes: 'happy' }));
+key(18.2, M(0.5, -8, 'front', FIFTH, 'stand', { air: 6, eyes: 'happy' }));
+key(18.6, M(0.5, -8, 'right', RAISED.right, 'derriere', { eyes: 'happy' }));
+pirouettesOn(key, 18.8, 1.4, 0.5, -8, 2);
+key(20.6, M(0.5, -8, 'right', RAISED.right, 'derriere', { eyes: 'happy' }));
+key(21.2, M(0.5, -8, 'right', BAS, 'derriere', { eyes: 'closed' }));
+key(24, M(0.5, -8, 'right', BAS, 'derriere', { eyes: 'closed' }));
+// The prince: running in, on his knees, forgiven; he fights Rothbart off
+// with double tours, and lifts her.
+rkey(0, M(1.4, 9, 'left', SECOND, 'stand'));
+steps(rkey, 4, 1.4, 0.5, 9, 3, SECOND, 0.45);
 rkey(5.8, M(0.5, 9, 'left', FIFTH, 'kneel'));
 rkey(8, M(0.5, 9, 'left', FIFTH, 'kneel'));
 rkey(8.6, M(0.5, 7, 'left', SECOND, 'plie'));
@@ -1542,16 +1599,22 @@ tourOn(rkey, 13.4, 0.5, 9, 1);
 rkey(14.4, M(0.5, 9, 'right', ['out', 'up'], 'plie'));
 tourOn(rkey, 14.8, 0.5, 9, 2);
 rkey(16, M(0.5, 9, 'left', ['out', 'high'], 'stand', { eyes: 'happy' }));
-rkey(20.8, M(0.5, 9, 'left', ['out', 'high'], 'stand', { eyes: 'happy' }));
-rkey(21.2, M(0.5, 9, 'left', BAS, 'plie', { eyes: 'closed' }));
-rkey(24, M(0.5, 9, 'left', BAS, 'plie', { eyes: 'closed' }));
+rkey(16.6, M(0.5, 8, 'left', SECOND, 'plie'));
+rkey(17, M(0.5, 8, 'left', FIFTH, 'stand'));
+rkey(18.2, M(0.5, 8, 'left', FIFTH, 'stand'));
+rkey(18.6, M(0.5, 8, 'left', SECOND, 'stand'));
+rkey(20.4, M(0.5, 8, 'left', SECOND, 'stand'));
+rkey(20.6, M(0.5, 8, 'left', ['out', 'high'], 'stand', { eyes: 'happy' }));
+rkey(21.2, M(0.5, 8, 'left', BAS, 'plie', { eyes: 'closed' }));
+rkey(24, M(0.5, 8, 'left', BAS, 'plie', { eyes: 'closed' }));
 line(0.3, 1.8, ['swan lake, act four.', 'the lake, before dawn.', 'betrayed...']);
-line(2, 4, ['he broke his vow...', 'sob.', 'how could he?']);
-line(5.8, 7.8, ['forgive me, odette!', 'she tricked me!', 'i am so sorry!']);
-line(8.2, 9.6, ['...i forgive you.', 'oh, all right.', 'come here.']);
-line(12.6, 15.4, ['begone, rothbart!', 'leave her alone!', 'take that, owl!']);
-line(16.6, 18.6, ['the spell is broken!', 'it worked!', 'love wins!']);
-line(18.8, 21, ['sunrise!', 'happily ever after.', 'no more swan, ever.']);
+line(5.8, 7.4, ['forgive me, odette!', 'she tricked me!', 'i am so sorry!']);
+line(8.2, 9.4, ['...i forgive you.', 'oh, all right.', 'come here.']);
+line(20.6, 22, ['happily ever after.', 'love wins!', 'no more swan, ever.']);
+// The swans' phrase, a count each: mourning (arabesques toward Odette,
+// the wings lowered and lifted), then glad (jumps).
+const MOURN = [['front', BAS, 'plie'], ['front', SECOND, 'stand'], ['side', 0, 'derriere'], ['front', FIFTH, 'stand']];
+const GLAD = [['front', SECOND, 'plie'], ['front', FIFTH, 'stand', 3], ['side', 0, 'derriere'], ['front', SECOND, 'stand']];
 
 // Rothbart's swoop in the storm, then a puff as the spell breaks.
 function storm(t, u, cx) {
@@ -1583,15 +1646,21 @@ function frame(t, dt) {
   const at = p => Math.round(12 + (w - 24) * p.x + (p.dx || 0));
   dawn(u, floor);
   lake(t, floor, u < 16);
-  // The swans at the sides: mourning, fluttering in the storm, then glad.
+  // The swans at the sides, in unison: mourning, fluttering in the
+  // storm, then glad; each faces Odette.
   const places = w >= 110 ? [0.06, 0.2, 0.8, 0.94] : w >= 80 ? [0.08, 0.92] : [];
   for (let i = 0; i < places.length; i++) {
-    let q = P(places[i], 'front', BAS, Math.floor(t + i) % 2 ? 'stand' : 'plie', { eyes: 'closed' });
+    const side = places[i] < 0.5 ? 'right' : 'left';
+    const st = u < 16 ? MOURN[Math.floor(u * 1.25) % 4] : GLAD[Math.floor(u * 2.5) % 4];
+    let q = P(places[i], st[0] === 'side' ? side : st[0], st[1] || RAISED[side], st[2], { eyes: u < 16 ? 'closed' : 'happy', air: st[3] || 0 });
     if (u > 12 && u < 16) q = bourree(P(places[i], 'front', BEAT[Math.floor(t * 6 + i) % 4], 'stand'), t);
-    if (u >= 16) q = P(places[i], 'front', SECOND, Math.floor(t * 3 + i) % 2 ? 'stand' : 'plie', { eyes: 'happy' });
     dancer(blinking(q, t + i), at(q), ground, ODETTE);
   }
-  const o = blinking(track(KEYS, u), t);
+  let o = blinking(track(KEYS, u), t);
+  if ((u > 3 && u < 6.2) || (u > 12 && u < 15.8)) {
+    o = bourree(o, t);
+    o.arms = BEAT[Math.floor(t * (u < 12 ? 2.5 : 6)) % 4];
+  }
   const r = blinking(track(RK, u), t + 0.3);
   const dr = dancer(r, at(r), ground, PRINCE);
   const d = dancer(o, at(o), ground, ODETTE);
@@ -1613,6 +1682,7 @@ const ROUTINE = 24;
 const CLARA = { tutu: '#e87090', frill: '#ffd0dc', crown: '.p.p.\n.ppp.', crownColors: { p: '#ff5a8a' } };
 const DROSS = { bare: true, breeches: '#2a2a3a', shoes: '#101010', crown: '.kkk.\nkkkkk', crownColors: { k: '#16161c' } };
 const NPRINCE = { bare: true, breeches: '#c02828', shoes: '#101010', crown: '.y.y.\nyyyyy', crownColors: { y: '#ffd84a' } };
+// The party: Clara waltzes, is given the nutcracker, and turns with it.
 balances(0.4, 0.4, 4, SECOND, 0.6, { eyes: 'happy' });
 key(3, P(0.4, 'right', SECOND, 'stand'));
 key(3.6, P(0.4, 'right', SECOND, 'stand'));
@@ -1620,43 +1690,60 @@ key(4.4, P(0.4, 'right', FIFTH, 'stand', { eyes: 'happy' }));
 key(4.8, P(0.4, 'front', FIFTH, 'passe', { spinning: true, spin: 0 }));
 key(6, P(0.4, 'front', FIFTH, 'passe', { spinning: true, spin: 720 }));
 key(6.3, P(0.4, 'front', BAS, 'stand', { spin: 720 }));
-key(7, P(0.4, 'front', BAS, 'kneel', { eyes: 'closed' }));
-key(9.2, P(0.4, 'front', BAS, 'kneel', { eyes: 'closed' }));
-key(9.4, P(0.4, 'right', SECOND, 'stand'));
-key(14.4, P(0.4, 'right', SECOND, 'stand'));
-key(14.6, P(0.4, 'right', ['out', 'up'], 'stand'));
+// Asleep by the tree; midnight; she wakes to it growing, and bourrées
+// back in wonder.
+key(6.8, P(0.4, 'front', BAS, 'kneel', { eyes: 'closed' }));
+key(8.2, P(0.4, 'front', BAS, 'kneel', { eyes: 'closed' }));
+key(8.6, P(0.4, 'front', FIFTH, 'stand', { eyes: 'happy' }));
+key(9.8, P(0.32, 'right', FIFTH, 'stand'));
+// The mice: she shrinks back from them, then rallies, little jumps at
+// them, and throws her slipper.
+key(10.4, P(0.32, 'right', FIFTH, 'stand'));
+key(11.6, P(0.28, 'right', FIFTH, 'stand'));
+for (let j = 0; j < 3; j++) {
+  key(11.9 + j * 0.6, P(0.3 + j * 0.03, 'right', SECOND, 'plie'));
+  key(12.2 + j * 0.6, P(0.315 + j * 0.03, 'right', FIFTH, 'passe', { air: 3 }));
+}
+key(13.7, P(0.39, 'right', SECOND, 'plie'));
+key(14.2, P(0.4, 'right', ['out', 'up'], 'stand'));
 key(15.4, P(0.4, 'right', ['out', 'up'], 'stand'));
 key(16.2, P(0.4, 'right', FIFTH, 'stand', { eyes: 'happy' }));
-key(17.6, M(0.45, -7, 'right', ['down', 'out'], 'derriere'));
-key(19.6, M(0.45, -7, 'right', ['down', 'out'], 'derriere'));
-key(19.8, M(0.45, -9, 'front', FIFTH, 'passe', { spinning: true, spin: 0 }));
-key(21.2, M(0.45, -9, 'front', FIFTH, 'passe', { spinning: true, spin: 720 }));
-key(21.5, M(0.45, -9, 'right', SECOND, 'stand', { spin: 720 }));
-key(24, M(1.3, -9, 'right', SECOND, 'stand'));
-rkey(0, M(-0.4, 0, 'right', BAS, 'stand'));
-rkey(2.2, M(-0.4, 0, 'right', BAS, 'stand'));
-rkey(3.4, M(0.4, -20, 'right', BAS, 'stand'));
+// The snow pas de deux: arabesque, a supported double, a lift, a waltz,
+// and away through the snow.
+key(16.6, M(0.45, -8, 'right', ['down', 'out'], 'derriere'));
+key(17.4, M(0.45, -8, 'right', ['down', 'out'], 'derriere'));
+pirouettesOn(key, 17.6, 1.2, 0.45, -8, 2);
+key(19.1, M(0.45, -8, 'front', FIFTH, 'stand', { air: 6, eyes: 'happy' }));
+key(19.9, M(0.45, -8, 'front', FIFTH, 'stand', { air: 6, eyes: 'happy' }));
+key(20.3, M(0.45, -8, 'right', SECOND, 'stand'));
+balances(20.5, 0.45, 2, SECOND, 0.6, { dx: -8, eyes: 'happy' });
+key(21.8, M(0.45, -8, 'right', SECOND, 'stand'));
+key(24, M(1.3, -8, 'right', SECOND, 'stand'));
+// Drosselmeyer steps in with the gift, and out.
+rkey(0, M(-0.4, -20, 'right', BAS, 'stand'));
+steps(rkey, 2, -0.4, 0.4, -20, 3, BAS, 0.45);
 rkey(3.6, M(0.4, -20, 'right', ['out', 'high'], 'stand'));
 rkey(4.6, M(0.4, -20, 'right', ['out', 'high'], 'stand'));
 rkey(5, M(0.4, -20, 'left', BAS, 'stand'));
-rkey(6.4, M(-0.4, 0, 'left', BAS, 'stand'));
-ckey(0, M(0.4, 13, 'left', SECOND, 'stand'));
-ckey(16.4, M(0.4, 13, 'left', SECOND, 'stand'));
-ckey(17.6, M(0.45, 7, 'left', SECOND, 'plie'));
-ckey(19.6, M(0.45, 7, 'left', ['out', 'high'], 'stand'));
-ckey(21.4, M(0.45, 7, 'left', SECOND, 'stand'));
-ckey(24, M(1.3, 7, 'right', SECOND, 'stand'));
-line(0.3, 2.2, ['the nutcracker, act one.', 'christmas eve!', 'the stahlbaum party.']);
-line(2.4, 3.4, ['merry christmas!', 'uncle drosselmeyer!', 'presents!']);
-line(3.6, 4.6, ['a gift, my dear.', 'for you, clara.', 'ho ho.']);
-line(4.8, 6.2, ['a nutcracker! for me?', 'i love him!', 'my little soldier!']);
+steps(rkey, 5.1, 0.4, -0.4, -20, 3, BAS, 0.45);
+// The prince, in the snow, partnering her.
+ckey(16.4, M(0.45, 8, 'left', SECOND, 'stand'));
+ckey(17.4, M(0.45, 8, 'left', SECOND, 'plie'));
+ckey(17.6, M(0.45, 8, 'left', SECOND, 'stand'));
+ckey(18.8, M(0.45, 8, 'left', SECOND, 'plie'));
+ckey(19.1, M(0.45, 8, 'left', FIFTH, 'stand'));
+ckey(19.9, M(0.45, 8, 'left', FIFTH, 'stand'));
+ckey(20.3, M(0.45, 8, 'left', SECOND, 'stand'));
+for (let i = 0; i < 2; i++) {
+  ckey(20.5 + i * 0.6, M(0.45, 8, i % 2 ? 'left' : 'right', SECOND, 'plie'));
+  ckey(20.8 + i * 0.6, M(0.45, 8, i % 2 ? 'left' : 'right', SECOND, 'stand'));
+}
+steps(ckey, 21.8, 0.45, 1.3, 8, 4, SECOND, 0.5);
+line(0.3, 2, ['the nutcracker, act one.', 'christmas eve!', 'the stahlbaum party.']);
+line(4.8, 6, ['a nutcracker! for me?', 'i love him!', 'my little soldier!']);
 line(6.4, 7.8, ['bong... bong... bong...', 'midnight...', 'tick tock... bong!']);
-line(8.4, 10, ['the tree is growing!', 'whoa...', 'how tall!']);
-line(10.4, 14.4, ['mice!!', 'eek! the mouse king!', 'shoo! shoo!']);
-line(14.6, 15.6, ['take that!', 'my slipper!', 'bonk!']);
-line(16.2, 17.6, ['a prince!', 'my nutcracker?!', 'you are real!']);
-line(18, 21, ['the land of snow...', 'snowflakes!', 'so cold, so lovely.']);
-line(21.6, 23.4, ['to the kingdom of sweets!', 'onward!', 'act two!']);
+line(10.4, 11.6, ['mice!!', 'eek! the mouse king!', 'shoo! shoo!']);
+line(16.6, 17.6, ['a prince!', 'my nutcracker?!', 'you are real!']);
 
 const NUTCRACKER = 'kkk\nkkk\nsss\nrrr\nrrr\nk.k';
 const TOY = { k: '#16161c', s: '#f0c8a0', r: '#c02828' };
@@ -1714,7 +1801,8 @@ function frame(t, dt) {
   if (u < 16.4) parlour(t, u, floor);
   else snow(t, floor);
   boards(floor, at(P(0.4, 'front', BAS, 'stand')), u < 16.4 ? '#a07848' : '#c8d8f0', u < 16.4 ? '#7a5a34' : '#a8b8d8', '#ffe8c0');
-  const cl = blinking(track(KEYS, u), t);
+  let cl = blinking(track(KEYS, u), t);
+  if ((u > 8.8 && u < 9.8) || (u > 10.4 && u < 11.6) || u > 21.8) cl = bourree(cl, t);
   const dr = blinking(track(RK, u), t + 0.4);
   const pr = blinking(track(CK, u), t + 0.7);
   const tx = at(P(0.4, 'front', BAS, 'stand')) + 13;
@@ -1735,56 +1823,105 @@ function frame(t, dt) {
   if (u > 18 && u < 21) sparkles(t, d, floor, '#e8f4ff');
   const said = saying(u, n);
   if (said && u < 2.2) say(said, Math.round(w / 2), 0);
-  else if (said && u > 3.6 && u < 4.6) speak(said, { x: at(dr), row: d.row });
   else if (said && u > 6.4 && u < 7.8) say(said, 14, 1);
   else if (said) speak(said, d);
 }
 `
 
-// Don Quixote, act III: Kitri in a square in Barcelona at sunset, a fan
-// in her raised hand. In on leaps, the fan variation in little hops, the
-// long balance, fouettés (the windmill on the hill turns faster to keep
-// up), leaps to the corner, a manège back, and ole.
+// Don Quixote, act III: Kitri and Basilio's wedding, the grand pas de
+// deux, in a square in Barcelona at sunset, her fan in her raised hand.
+// The entrée (she leaps in, he jumps in); the adagio (a supported double,
+// his one-armed lift, and her famous balance once he lets go); his
+// variation (tours, a manège of jumps, beats); hers (hops on pointe with
+// the fan); the coda (his tours, her fouettés while the windmill on the
+// hill spins to keep up); a last lift, the bows, and off.
 const DONQ = String.raw`
-const ROUTINE = 23;
+const ROUTINE = 26;
 const LOOK = { tutu: '#d42a2a', frill: '#ffcc40', shoes: '#f0c0c8', crown: 'rr....\nrr....', crownColors: { r: '#ff3a5a' } };
+const BASILIO = { bare: true, breeches: '#1a1a22', shoes: '#16120e' };
+const OLE = ['up', 'out'];
+// The entrée.
 key(0, P(-0.3, 'right', SECOND, 'stand'));
-leaps(0.1, -0.3, 0.45, 3);
-key(2.6, P(0.45, 'right', RAISED.right, 'derriere', { eyes: 'happy' }));
-key(3.6, P(0.45, 'right', RAISED.right, 'derriere', { eyes: 'happy' }));
-// The fan variation: little hops, the fan fluttering overhead.
-for (let i = 0; i < 6; i++) {
-  key(3.9 + i * 0.4, P(0.45 - i * 0.04, 'left', RAISED.left, 'plie'));
-  key(4.1 + i * 0.4, P(0.43 - i * 0.04, 'left', RAISED.left, 'stand', { air: 2 }));
+leaps(0.1, -0.3, 0.32, 3);
+key(2.4, P(0.32, 'right', RAISED.right, 'derriere', { eyes: 'happy' }));
+key(3.4, P(0.32, 'right', RAISED.right, 'derriere', { eyes: 'happy' }));
+rkey(0, M(1.3, 0, 'left', FIFTH, 'stand'));
+steps(rkey, 0.2, 1.3, 0.68, 0, 4, FIFTH, 0.5);
+rkey(2.4, M(0.68, 0, 'left', OLE, 'stand', { eyes: 'happy' }));
+rkey(3.4, M(0.68, 0, 'left', OLE, 'stand', { eyes: 'happy' }));
+// The adagio: a supported double, up into his one-armed lift, down into
+// arabesque; he steps away and she balances, and balances.
+key(3.8, M(0.5, -8, 'front', SECOND, 'plie'));
+pirouettesOn(key, 3.9, 1.3, 0.5, -8, 2);
+rkey(3.8, M(0.5, 8, 'left', SECOND, 'stand'));
+rkey(5.2, M(0.5, 8, 'left', SECOND, 'plie'));
+key(5.6, M(0.5, -8, 'front', FIFTH, 'stand', { air: 6, eyes: 'happy', spin: 720 }));
+key(6.6, M(0.5, -8, 'front', FIFTH, 'stand', { air: 6, eyes: 'happy' }));
+rkey(5.6, M(0.5, 8, 'left', ['high', 'down'], 'stand'));
+rkey(6.6, M(0.5, 8, 'left', ['high', 'down'], 'stand'));
+key(7, M(0.5, -8, 'right', RAISED.right, 'derriere'));
+key(7.4, M(0.5, -8, 'right', FIFTH, 'derriere'));
+key(8.4, M(0.5, -8, 'right', FIFTH, 'derriere'));
+key(8.8, M(0.5, -8, 'right', SECOND, 'derriere', { eyes: 'happy' }));
+rkey(7, M(0.5, 8, 'left', SECOND, 'plie'));
+steps(rkey, 7.2, 0.5, 0.66, 8, 1, SECOND, 0.4);
+rkey(7.8, M(0.66, 8, 'left', OLE, 'stand', { eyes: 'happy' }));
+rkey(8.8, M(0.66, 8, 'left', OLE, 'stand', { eyes: 'happy' }));
+// To the side, swaying with the fan while he dances.
+key(9.2, P(0.2, 'right', RAISED.right, 'stand'));
+balances(9.4, 0.2, 5, RAISED.right, 0.7);
+// His variation: double tours, a manège of jumps, beats, and down on one
+// knee.
+tourOn(rkey, 9.2, 0.66, 0, 2);
+steps(rkey, 10.1, 0.66, 0.84, 0, 2, FIFTH, 0.5);
+for (let i = 0; i < 2; i++) {
+  rkey(11.3 + i * 0.5, M(0.84, 0, 'front', BAS, 'plie'));
+  rkey(11.55 + i * 0.5, M(0.84, 0, 'front', BAS, 'stand', { air: 4 }));
 }
-// The balance: up on one leg, arms overhead, held and held.
-key(6.6, P(0.25, 'right', FIFTH, 'derriere'));
-key(8.4, P(0.25, 'right', FIFTH, 'derriere'));
-key(8.8, P(0.5, 'front', SECOND, 'plie'));
-key(9.2, P(0.5, 'front', SECOND, 'passe', { spinning: true, spin: 0 }));
-key(12.6, P(0.5, 'front', SECOND, 'passe', { spinning: true, spin: 4320 }));
-key(12.9, P(0.5, 'front', SECOND, 'plie', { spin: 4320 }));
-leaps(13.2, 0.5, 0.9, 3);
-tour(15.6, 0.9, 2);
-// A manège of turns back to the middle, carrying on from the tour's spin.
-key(16.6, P(0.9, 'front', FIFTH, 'passe', { spinning: true, spin: 720 }));
-key(18.6, P(0.5, 'front', FIFTH, 'passe', { spinning: true, spin: 2880 }));
-key(18.9, P(0.5, 'front', SECOND, 'plie', { spin: 2880 }));
-key(19.2, P(0.5, 'right', RAISED.right, 'derriere', { eyes: 'happy' }));
-key(20.4, P(0.5, 'right', RAISED.right, 'derriere', { eyes: 'happy' }));
-reverence(20.6, 0.5, 'right', 0.8);
-leaps(21.5, 0.5, -0.3, 2);
-line(0.2, 2.2, ['ole!', 'make way, barcelona!', 'kitri is here!']);
-line(2.7, 3.7, ['ta-da!', '*flick*', 'and... fan!']);
-line(4, 6.2, ['flutter, flutter!', 'hop, hop, hop!', 'fan, fan, fan!']);
-line(6.7, 7.5, ['hold...', 'balance...', 'steady...']);
-line(7.5, 8.5, ['...still holding.', 'look, no hands!', 'basilio, watching?']);
-line(9.3, 12.5, ['fouettes! with doubles!', 'faster than the windmill!', 'double! single! double!']);
-line(13.3, 15.3, ['to the corner!', 'wheee!', 'kitri jete!']);
-line(16.7, 18.6, ['and around!', 'manege!', 'round and round!']);
-line(19.3, 20.5, ['OLE!', 'brava, me!', 'viva barcelona!']);
-line(20.7, 21.4, ['gracias!', 'muchas gracias!', 'thank you!']);
-line(21.6, 22.8, ['adios!', 'off to the wedding!', 'bye, don quixote!']);
+rkey(12.3, M(0.84, 0, 'front', SECOND, 'plie'));
+rkey(12.6, M(0.84, 0, 'left', OLE, 'kneel', { eyes: 'happy' }));
+rkey(13.4, M(0.84, 0, 'left', OLE, 'kneel', { eyes: 'happy' }));
+rkey(13.8, M(0.84, 0, 'left', SECOND, 'stand'));
+// Her variation: hops on pointe in arabesque on the diagonal, the fan
+// fluttering, and a flick of it.
+for (let i = 0; i < 6; i++) {
+  key(12.8 + i * 0.45, P(0.2 + i * 0.05, 'right', RAISED.right, 'derriere'));
+  key(13.02 + i * 0.45, P(0.225 + i * 0.05, 'right', RAISED.right, 'derriere', { air: 2 }));
+}
+key(15.6, P(0.5, 'front', FIFTH, 'stand'));
+key(16, P(0.5, 'right', RAISED.right, 'derriere', { eyes: 'happy' }));
+key(16.6, P(0.5, 'right', RAISED.right, 'derriere', { eyes: 'happy' }));
+// The coda: his double tours, then her fouettés, while he cheers.
+tourOn(rkey, 16.6, 0.84, 0, 2);
+tourOn(rkey, 17.5, 0.84, 0, 2);
+rkey(18.6, M(0.84, 0, 'left', OLE, 'stand', { eyes: 'happy' }));
+rkey(21.6, M(0.84, 0, 'left', OLE, 'stand', { eyes: 'happy' }));
+key(18.4, P(0.5, 'front', SECOND, 'plie'));
+key(18.6, P(0.5, 'front', SECOND, 'passe', { spinning: true, spin: 0 }));
+key(21.6, P(0.5, 'front', SECOND, 'passe', { spinning: true, spin: 3960 }));
+key(21.9, P(0.5, 'front', SECOND, 'plie', { spin: 3960 }));
+// Into his arms and up, one last time; the bows, and off.
+steps(rkey, 21.7, 0.84, 0.5, 8, 1, SECOND, 0.5);
+rkey(22.4, M(0.5, 8, 'left', ['high', 'down'], 'stand'));
+rkey(23.4, M(0.5, 8, 'left', ['high', 'down'], 'stand'));
+key(22.4, M(0.5, -8, 'right', RAISED.right, 'derriere', { air: 6, eyes: 'happy' }));
+key(23.4, M(0.5, -8, 'right', RAISED.right, 'derriere', { air: 6, eyes: 'happy' }));
+key(23.8, M(0.5, -8, 'right', SECOND, 'derriere'));
+key(24.2, M(0.5, -8, 'right', BAS, 'derriere', { eyes: 'closed' }));
+key(24.8, M(0.5, -8, 'right', BAS, 'derriere', { eyes: 'closed' }));
+rkey(23.8, M(0.5, 8, 'left', SECOND, 'stand'));
+rkey(24.2, M(0.5, 8, 'left', BAS, 'plie', { eyes: 'closed' }));
+rkey(24.8, M(0.5, 8, 'left', BAS, 'plie', { eyes: 'closed' }));
+leaps(25, 0.5, 0.05, 1);
+key(26, P(-0.3, 'left', SECOND, 'stand'));
+steps(rkey, 25, 0.5, 1.3, 8, 2, SECOND, 0.5);
+line(0.4, 1.6, ['ole!', 'make way, barcelona!', 'kitri is here!']);
+line(2.5, 3.4, ['the wedding!', 'we did it, kitri!', 'married at last!']);
+line(5.6, 6.6, ['one hand!', 'ta-da!', 'light as a fan!']);
+line(7.6, 8.8, ['...still holding.', 'who needs a partner?', 'no hands!']);
+line(22.5, 23.4, ['OLE!', 'viva barcelona!', 'viva los novios!']);
+// Basilio's lines.
+const HIS = [[2.5, 3.4], [5.6, 6.6]];
 
 // Terracotta tiles, warm where Clawd dances; bunting along the top.
 function square(floor, cx) {
@@ -1793,25 +1930,33 @@ function square(floor, cx) {
     put(x, floor, '▀', mix(x % 4 < 2 ? '#b85a34' : '#a04a2a', '#ffd8a0', pool * 0.4), mix('#7a3a20', '#ffd8a0', pool * 0.2));
   }
   const flags = ['#e02838', '#ffcc40', '#e8e0d0'];
-  for (let x = 1; x < w - (w >= 60 ? 18 : 0); x += 3) put(x, 0, '▼', flags[(x - 1) / 3 % 3]);
+  for (let x = 1; x < w - (w >= 80 ? 18 : 0); x += 3) put(x, 0, '▼', flags[(x - 1) / 3 % 3]);
 }
-// Don Quixote's windmill on the right, its sails turning; faster in the
-// fouettés.
+// Don Quixote's windmill on the right: a whitewashed tower widening to the
+// ground, a dark cap, a door, and four lattice sails turning; faster in
+// the fouettés.
 let sail = 0;
 function windmill(u, dt, floor) {
-  sail += dt * (u > 9.2 && u < 12.6 ? 6 : 0.8);
+  sail += dt * (u > 18.6 && u < 21.6 ? 5 : 0.7);
   const x0 = w - 9;
-  for (let y = 3; y < floor; y++) for (let x = -2; x <= 2; x++) put(x0 + x, y, '█', x === 0 && y >= floor - 2 ? '#4a2e1c' : y === 3 ? '#8a4a2a' : '#d8c8a0');
-  // Each sail a line out from the hub, a cell twice as tall as wide.
+  for (let y = 3; y < floor; y++) {
+    const half = y < 5 ? 2 : 3;
+    for (let x = -half; x <= half; x++) put(x0 + x, y, '█', x === half ? '#b0a080' : '#e0d4b4');
+  }
+  for (let x = -2; x <= 2; x++) put(x0 + x, 2, '▄', '#5a3a28');
+  put(x0, floor - 1, '█', '#4a2e1c');
+  put(x0, 4, '▪', '#4a2e1c');
+  // Each sail a spar out from the hub, its lattice of cloth beside it; a
+  // cell twice as tall as wide.
   for (let k = 0; k < 4; k++) {
     const a = sail + k * Math.PI / 2;
-    for (let r = 1; r <= 6; r++) {
+    for (let r = 1; r <= 7; r++) {
       const col = x0 + Math.round(Math.cos(a) * r);
       const row = 2 + Math.round(Math.sin(a) * r / 2);
-      if (row >= 0 && row < floor) put(col, row, '█', r > 3 ? '#f0e4c4' : '#a07850');
+      if (row >= 0 && row < floor) put(col, row, r > 2 ? '▓' : '█', r > 2 ? '#f0e4c4' : '#6a4a30');
     }
   }
-  put(x0, 2, '█', '#4a2e1c');
+  put(x0, 2, '●', '#3a2418');
 }
 // The fan over whichever hand is raised, opening and closing.
 function fan(t, p, d) {
@@ -1825,85 +1970,112 @@ function frame(t, dt) {
   const u = mod(t, ROUTINE);
   const n = Math.floor(t / ROUTINE);
   const floor = h - 1;
-  const R = w - (w >= 60 ? 26 : 12);
-  let p = blinking(track(KEYS, u), t);
-  if (u > 9.2 && u < 12.6) p.arms = mod(p.spin, 360) < 180 ? FIFTH : SECOND;
-  const cx = Math.round(12 + (R - 12) * p.x);
-  square(floor, cx);
-  if (w >= 60) windmill(u, dt, floor);
-  const d = dancer(p, cx, floor * 2 - 1, LOOK);
-  fan(t, p, d);
-  if ((u > 9.2 && u < 12.6) || p.air > 3.5) sparkles(t, d, floor, '#ffcc40');
-  if (u > 19.2 && u < 20.6) sparkles(t, d, floor, '#ff5a6a');
+  const ground = floor * 2 - 1;
+  // The stage stops short of the windmill, where there is one.
+  const hasMill = w >= 80;
+  const R = hasMill ? w - 18 : w;
+  const at = p => Math.round(12 + (R - 24) * p.x + (p.dx || 0));
+  let k = blinking(track(KEYS, u), t);
+  if (u > 18.6 && u < 21.6) k.arms = mod(k.spin, 360) < 180 ? FIFTH : SECOND;
+  if (u > 3.4 && u < 3.8) k = bourree(k, t);
+  const b = beating(blinking(track(RK, u), t + 0.4), t);
+  const kcx = at(k);
+  square(floor, kcx);
+  if (hasMill) windmill(u, dt, floor);
+  const db = dancer(b, at(b), ground, BASILIO);
+  const d = dancer(k, kcx, ground, LOOK);
+  fan(t, k, d);
+  if ((u > 18.6 && u < 21.6) || k.air > 3.5) sparkles(t, d, floor, '#ffcc40');
+  if (u > 22.4 && u < 23.4) sparkles(t, d, floor, '#ff5a6a');
   const said = saying(u, n);
-  if (said) speak(said, d);
+  if (!said) return;
+  if (HIS.some(r => u >= r[0] && u < r[1])) speak(said, db);
+  else speak(said, d);
 }
 `
 
 // Giselle, act II: midnight in the forest by Giselle's grave, mist on the
-// ground, the Wilis drifting in the dark. She rises, spins at Myrtha's
-// command, hops in arabesque; Albrecht comes with lilies, and the Wilis
-// make him dance (entrechats) until she leads them off; dawn breaks, he
-// is saved, and she waves goodnight and sinks back into the mist.
+// ground, the Wilis drifting in the dark. She rises out of the grave and
+// wakes, whirls at Myrtha's command, hops in arabesque; Albrecht walks in
+// with lilies, and they dance (she floats up in his arms, a supported
+// double); the Wilis make him beat entrechats while she dances beside him
+// to keep him going, until he falls and she leads them off; dawn breaks,
+// one last lift, and she bourrées back to her grave and sinks into it.
 const GISELLE = String.raw`
 const ROUTINE = 24;
 const LOOK = { tutu: '#e8eef8', frill: '#ffffff', crown: '.g.g.\nwgwgw', crownColors: { w: '#ffffff', g: '#7ab08a' } };
 const ALBRECHT = { bare: true, breeches: '#2a2a40', shoes: '#16120e' };
-key(0, M(0.12, 6, 'front', BAS, 'plie', { eyes: 'closed' }));
-key(1.6, M(0.12, 6, 'front', BAS, 'plie', { eyes: 'closed' }));
-key(2.4, M(0.12, 6, 'front', FIFTH, 'stand', { eyes: 'closed' }));
-key(2.6, M(0.12, 6, 'front', FIFTH, 'passe', { spinning: true, spin: 0 }));
-key(4.2, M(0.12, 6, 'front', FIFTH, 'passe', { spinning: true, spin: 1440 }));
-key(4.4, M(0.12, 6, 'front', SECOND, 'plie', { spin: 1440 }));
-// Hops in arabesque across, barely touching the ground.
-for (let i = 0; i < 6; i++) {
-  key(4.6 + i * 0.6, P(0.15 + i * 0.06, 'right', RAISED.right, 'derriere'));
-  key(4.9 + i * 0.6, P(0.18 + i * 0.06, 'right', RAISED.right, 'derriere', { air: 2 }));
+// Up out of the ground, under the mist, and the arms opening.
+key(0, M(0.12, 6, 'front', BAS, 'plie', { eyes: 'closed', air: -12 }));
+key(1.4, M(0.12, 6, 'front', BAS, 'plie', { eyes: 'closed' }));
+key(1.8, M(0.12, 6, 'front', SECOND, 'stand', { eyes: 'closed' }));
+key(2.3, M(0.12, 6, 'front', FIFTH, 'stand'));
+// Myrtha's command: whirling across in passé.
+key(2.5, M(0.12, 6, 'front', FIFTH, 'passe', { spinning: true, spin: 0 }));
+key(4.1, M(0.28, 0, 'front', FIFTH, 'passe', { spinning: true, spin: 1800 }));
+key(4.3, M(0.28, 0, 'right', SECOND, 'plie', { spin: 1800 }));
+// Hops in arabesque, barely touching the ground.
+for (let i = 0; i < 5; i++) {
+  key(4.6 + i * 0.6, P(0.28 + i * 0.02, 'right', RAISED.right, 'derriere'));
+  key(4.9 + i * 0.6, P(0.29 + i * 0.02, 'right', RAISED.right, 'derriere', { air: 2 }));
 }
-key(8.4, M(0.5, -10, 'front', SECOND, 'stand'));
-key(9.2, M(0.5, -10, 'right', FIFTH, 'derriere'));
-key(11, M(0.5, -10, 'right', FIFTH, 'derriere'));
-key(11.4, M(0.5, -11, 'front', SECOND, 'stand'));
-key(15, M(0.5, -11, 'front', SECOND, 'stand'));
-leaps(15.4, 0.38, 0.2, 2);
-key(17.2, P(0.2, 'right', FIFTH, 'stand', { eyes: 'happy' }));
-key(19.6, P(0.2, 'left', RAISED.left, 'stand', { eyes: 'happy' }));
+key(7.6, P(0.36, 'right', RAISED.right, 'derriere'));
+key(8.6, P(0.36, 'right', FIFTH, 'derriere'));
+// Albrecht, walking slowly in with his lilies.
+rkey(0, M(1.3, 8, 'left', ['out', 'down'], 'stand'));
+for (let i = 0; i < 6; i++) rkey(6 + i * 0.45, M(1.3 - 0.8 * (i + 1) / 6, 8, 'left', ['out', 'down'], i % 2 ? 'stand' : 'plie'));
+// The pas de deux: she floats up in his arms, down into arabesque, and a
+// supported double.
+key(9.2, M(0.5, -8, 'right', SECOND, 'stand'));
+key(9.6, M(0.5, -8, 'right', RAISED.right, 'derriere', { air: 6 }));
+key(10.8, M(0.5, -8, 'right', RAISED.right, 'derriere', { air: 6 }));
+key(11.1, M(0.5, -8, 'right', RAISED.right, 'derriere'));
+pirouettesOn(key, 11.3, 1.1, 0.5, -8, 2);
+rkey(9.2, M(0.5, 8, 'left', SECOND, 'plie'));
+rkey(9.6, M(0.5, 8, 'left', FIFTH, 'stand'));
+rkey(10.8, M(0.5, 8, 'left', FIFTH, 'stand'));
+rkey(11.2, M(0.5, 8, 'left', SECOND, 'stand'));
+rkey(12.4, M(0.5, 8, 'left', SECOND, 'stand'));
+// Made to dance by the Wilis: entrechats, over and over; beside him she
+// dances arabesques, one side and the other, to keep him going.
+for (let i = 0; i < 6; i++) {
+  rkey(12.6 + i * 0.5, M(0.5, 10, 'front', BAS, 'plie'));
+  rkey(12.85 + i * 0.5, M(0.5, 10, 'front', BAS, 'stand', { air: 4 }));
+}
+phrase(key, 12.6, 0.5, 0.5, -10, [
+  ['right', RAISED.right, 'derriere'], ['front', FIFTH, 'stand'], ['left', RAISED.left, 'derriere'],
+  ['front', FIFTH, 'stand'], ['right', RAISED.right, 'derriere'], ['front', SECOND, 'plie'],
+]);
+rkey(15.6, M(0.5, 10, 'front', SECOND, 'plie', { eyes: 'closed' }));
+rkey(16, M(0.5, 10, 'left', BAS, 'kneel', { eyes: 'closed' }));
+rkey(17.6, M(0.5, 10, 'left', BAS, 'kneel', { eyes: 'closed' }));
+leaps(15.8, 0.4, 0.15, 2);
+// Dawn: back to him, one last lift, and away to the grave, waving.
+key(17.4, P(0.15, 'right', FIFTH, 'stand', { eyes: 'happy' }));
+key(18.4, M(0.5, -8, 'right', SECOND, 'stand', { eyes: 'happy' }));
+key(18.8, M(0.5, -8, 'front', FIFTH, 'stand', { air: 6, eyes: 'happy' }));
+key(19.4, M(0.5, -8, 'front', FIFTH, 'stand', { air: 6, eyes: 'happy' }));
+key(19.8, M(0.5, -8, 'left', RAISED.left, 'stand', { eyes: 'happy' }));
 key(21.6, M(0.12, 6, 'left', RAISED.left, 'stand', { eyes: 'happy' }));
 key(22.2, M(0.12, 6, 'front', BAS, 'plie', { eyes: 'closed' }));
-// Back into the ground, under the mist.
 key(23.4, M(0.12, 6, 'front', BAS, 'plie', { eyes: 'closed', air: -12 }));
-rkey(0, M(1.4, 0, 'left', BAS, 'stand'));
-rkey(6.8, M(1.4, 0, 'left', BAS, 'stand'));
-rkey(9, M(0.5, 10, 'left', BAS, 'stand'));
-rkey(9.4, M(0.5, 10, 'left', ['out', 'high'], 'kneel'));
-rkey(11, M(0.5, 10, 'left', ['out', 'high'], 'kneel'));
-// Made to dance by the Wilis: entrechats, over and over.
-for (let i = 0; i < 6; i++) {
-  rkey(11.6 + i * 0.55, M(0.5, 10, 'front', BAS, 'plie'));
-  rkey(11.87 + i * 0.55, M(0.5, 10, 'front', BAS, 'stand', { air: 4 }));
-}
-rkey(15, M(0.5, 10, 'front', SECOND, 'plie', { eyes: 'closed' }));
-rkey(15.6, M(0.5, 10, 'left', BAS, 'kneel', { eyes: 'closed' }));
-rkey(17.4, M(0.5, 10, 'left', BAS, 'kneel', { eyes: 'closed' }));
-rkey(17.8, M(0.5, 10, 'left', SECOND, 'stand', { eyes: 'happy' }));
-rkey(22.4, M(0.5, 10, 'left', ['out', 'high'], 'stand'));
-rkey(24, M(0.5, 10, 'left', ['out', 'high'], 'stand'));
-line(0.3, 2.4, ['giselle, act two.', 'midnight. the wilis rise.', 'oh! i am a ghost now.']);
-line(2.8, 4.3, ['myrtha says: spin!', 'wheee... spooky!', 'round and round!']);
-line(4.8, 7, ['hop... hop... hop...', 'light as mist.', 'no feet on the ground!']);
-line(7.2, 8.8, ['giselle...?', 'lilies, for you...', 'is that you?']);
-line(9.4, 11, ['i forgive you.', 'hold on to me.', 'albrecht!']);
-line(11.6, 14.8, ['dance! dance! dance!', 'entrechat six! again?!', 'my legs! my legs!']);
-line(15.4, 16.8, ['this way, wilis!', 'leave him alone!', 'catch me if you can!']);
-line(17.3, 19.4, ['the dawn!', 'sunrise! you are saved!', 'the wilis must go!']);
-line(19.8, 22, ['see you tomorrow night!', 'same time next week?', 'bye, albrecht!']);
-line(22.4, 23.6, ['sweet dreams...', 'back to bed.', 'zzz...']);
-const HIS = [[7.2, 8.8], [11.6, 14.8]];
+rkey(18, M(0.5, 8, 'left', SECOND, 'stand', { eyes: 'happy' }));
+rkey(18.6, M(0.5, 8, 'left', SECOND, 'plie'));
+rkey(18.8, M(0.5, 8, 'left', FIFTH, 'stand'));
+rkey(19.4, M(0.5, 8, 'left', FIFTH, 'stand'));
+rkey(19.8, M(0.5, 8, 'left', ['out', 'high'], 'stand'));
+rkey(21.6, M(0.5, 8, 'left', ['out', 'high'], 'stand'));
+rkey(22.2, M(0.5, 8, 'left', ['out', 'high'], 'kneel'));
+line(0.3, 2.3, ['giselle, act two.', 'midnight. the wilis rise.', 'oh! i am a ghost now.']);
+line(6.6, 8.2, ['giselle...?', 'lilies, for you...', 'is that you?']);
+line(9.7, 10.8, ['i forgive you.', 'look, i float!', 'albrecht!']);
+line(12.9, 14.6, ['dance! dance! dance!', 'entrechat six! again?!', 'my legs! my legs!']);
+line(20.2, 21.8, ['see you tomorrow night!', 'same time next week?', 'bye, albrecht!']);
+const HIS = [[6.4, 8.6], [12.7, 15.5]];
 
-// The grave: a stone cross on the left, with lilies once Albrecht comes.
-function grave(u, gx, floor) {
+// The grave: a stone cross on the left.
+function grave(gx, floor) {
   pixels(gx - 1, floor * 2 - 6, '.s.\nsss\n.s.\n.s.\n.s.\n.s.', { s: '#8a9aa0' });
-  if (u > 9.2) for (const i of [2, 3]) put(gx + i, floor - 1, '*', '#ffffff');
 }
 // Mist rolling over the grass; thinner as dawn comes.
 function mist(t, floor, fade) {
@@ -1943,25 +2115,25 @@ function frame(t, dt) {
   const dawn = clamp((u - 17) / 2.5);
   sky(u, floor);
   let g = blinking(track(KEYS, u), t);
-  if (u > 11.4 && u < 15) {
-    g = bourree(g, t);
-    g.arms = Math.floor(t * 3) % 2 ? FIFTH : SECOND;
-  }
-  if (u > 19.6 && u < 21.6) g = bourree(g, t);
+  // Bourrées, to him and back to the grave.
+  if ((u > 8.6 && u < 9.2) || (u > 17.6 && u < 18.4) || (u > 19.8 && u < 21.6)) g = bourree(g, t);
   const a = beating(blinking(track(RK, u), t + 0.4), t);
   const gcx = at(g);
   const acx = at(a);
   wilis(t, { x: (gcx + acx) / 2 }, (u > 4 ? 1 : u / 4) * (1 - dawn));
-  grave(u, gx, floor);
+  grave(gx, floor);
   mist(t, floor, 1 - dawn * 0.6);
   const da = dancer(a, acx, ground, ALBRECHT);
+  // His lilies: in his hand, then dropped where the Wilis catch him.
+  if (u > 5 && u < 12.6) put(da.x - 7, da.row + 1, '*', '#ffffff');
+  if (u >= 12.6) for (const i of [17, 18]) put(Math.round(12 + (w - 24) * 0.5) + i, floor - 1, '*', '#ffffff');
   const d = dancer(g, gcx, ground, LOOK);
-  // Sinking, she goes under the ground: the grass drawn over her.
-  if (u > 22.2) mist(t, floor, 1 - dawn * 0.6);
-  if (u > 2.6 && u < 4.2) sparkles(t, d, floor, '#c0d0ff');
+  // Rising and sinking, she is under the ground: the grass drawn over her.
+  if (u < 1.4 || u > 22.2) mist(t, floor, 1 - dawn * 0.6);
+  if (u > 2.6 && u < 4.1) sparkles(t, d, floor, '#c0d0ff');
   const said = saying(u, n);
   if (!said) return;
-  if (u < 2.4 && u > 1.6) say(said, Math.round(w / 2), 0);
+  if (u < 2.3) say(said, Math.round(w / 2), 0);
   else if (HIS.some(r => u >= r[0] && u < r[1])) speak(said, da);
   else speak(said, d);
 }
@@ -1990,30 +2162,32 @@ for (let i = 0; i < 4; i++) {
   const c = (3 - i) * 0.15;
   add(0, M(-0.4, 0, 'right', SECOND, 'stand'));
   add(0.6 + c, M(-0.4, 0, 'right', SECOND, 'stand'));
-  add(2.6, M(0.25, 0, 'right', SECOND, 'stand'));
-  add(2.8, M(0.25, 0, 'front', BAS, 'stand', { eyes: 'happy' }));
-  add(4.2, M(0.25, 0, 'front', BAS, 'stand', { eyes: 'happy' }));
+  add(2.6, M(0.38, 0, 'right', SECOND, 'stand'));
+  // Pecking in canon: a pas de chat, and a peck (an arabesque, tipped
+  // forward, the wings back), twice.
+  phrase(add, 2.7 + c, 0.33, 0.38, 0, [
+    ['front', SECOND, 'plie'], ['front', BAS, 'passe', 0, { air: 3 }], ['front', SECOND, 'plie'], ['right', SECOND, 'derriere'],
+  ]);
   for (let j = 0; j < 2; j++) {
-    add(4.3 + j * 0.6 + c, M(0.25, 0, 'front', SECOND, 'plie'));
-    add(4.6 + j * 0.6 + c, M(0.25, 0, 'front', FIFTH, 'stand', { air: 4 }));
+    add(4.3 + j * 0.6 + c, M(0.38, 0, 'front', SECOND, 'plie'));
+    add(4.6 + j * 0.6 + c, M(0.38, 0, 'front', FIFTH, 'stand', { air: 4 }));
   }
-  add(5.6 + c, M(0.25, 0, 'front', SECOND, 'plie'));
-  add(6 + c, M(0.25, 0, 'right', SECOND, 'stand'));
+  add(5.6 + c, M(0.38, 0, 'front', SECOND, 'plie'));
+  add(6 + c, M(0.38, 0, 'right', SECOND, 'stand'));
   add(7.8 + c, M(1.5, 0, 'right', SECOND, 'stand'));
 }
-// The Cockerel: a strut in, a crow (a jump), tours, another crow, and off.
+// The Cockerel: a strut in, a crow (a jump), looking about while the Hens
+// peck, tours, another crow, and a strut off.
 ckey(0, M(1.4, 0, 'left', SECOND, 'stand'));
-for (let j = 0; j < 4; j++) ckey(0.4 + j * 0.4, M(1.4 - (j + 1) * 0.1375, 0, 'left', j % 2 ? SECOND : BAS, j % 2 ? 'stand' : 'plie'));
-ckey(1.8, M(0.85, 0, 'front', SECOND, 'plie'));
-ckey(2.1, M(0.85, 0, 'front', FIFTH, 'stand', { air: 4 }));
-ckey(2.5, M(0.85, 0, 'front', SECOND, 'plie'));
-ckey(2.8, M(0.85, 0, 'left', SECOND, 'stand'));
-ckey(4.2, M(0.85, 0, 'left', SECOND, 'stand'));
-tourOn(ckey, 4.4, 0.85, 0, 2);
-ckey(5.4, M(0.85, 0, 'front', FIFTH, 'stand', { eyes: 'closed', spin: 720 }));
-ckey(5.8, M(0.85, 0, 'front', FIFTH, 'stand', { eyes: 'closed' }));
-ckey(6, M(0.85, 0, 'right', SECOND, 'stand'));
-ckey(7.2, M(1.5, 0, 'right', SECOND, 'stand'));
+for (let j = 0; j < 4; j++) ckey(0.4 + j * 0.4, M(1.4 - (j + 1) * 0.13, 0, 'left', j % 2 ? SECOND : BAS, j % 2 ? 'stand' : 'plie'));
+ckey(1.8, M(0.88, 0, 'front', SECOND, 'plie'));
+ckey(2.1, M(0.88, 0, 'front', FIFTH, 'stand', { air: 4 }));
+ckey(2.5, M(0.88, 0, 'front', SECOND, 'plie'));
+for (let j = 0; j < 4; j++) ckey(2.8 + j * 0.35, M(0.88, 0, j % 2 ? 'right' : 'left', j % 2 ? FIFTH : SECOND, j % 2 ? 'stand' : 'plie'));
+tourOn(ckey, 4.4, 0.88, 0, 2);
+ckey(5.4, M(0.88, 0, 'front', FIFTH, 'stand', { eyes: 'closed', spin: 720 }));
+ckey(5.8, M(0.88, 0, 'front', FIFTH, 'stand', { eyes: 'closed' }));
+steps(ckey, 6, 0.88, 1.5, 0, 4, SECOND, 0.3);
 // Lise: in on grand jetés, a double pirouette, hops in arabesque.
 key(0, P(-0.4, 'right', SECOND, 'stand'));
 key(7, P(-0.4, 'right', SECOND, 'stand'));
@@ -2023,62 +2197,56 @@ for (let j = 0; j < 3; j++) {
   key(10.8 + j * 0.5, P(0.35 + j * 0.03, 'right', RAISED.right, 'derriere'));
   key(11.05 + j * 0.5, P(0.365 + j * 0.03, 'right', RAISED.right, 'derriere', { air: 3 }));
 }
-// The ribbon: she turns in it, jumps on it like reins, and they skip.
-key(12.4, M(0.5, -13, 'right', ['down', 'out'], 'stand'));
+// Colas runs in, and takes the ribbon.
+rkey(0, M(1.4, 13, 'left', SECOND, 'stand'));
+steps(rkey, 10.6, 1.4, 0.5, 13, 3, SECOND, 0.5);
+rkey(12.4, M(0.5, 13, 'left', ['out', 'down'], 'stand'));
+rkey(14, M(0.5, 13, 'left', ['out', 'high'], 'plie'));
+// The ribbon: she turns in it; holding it like reins, she hops in
+// arabesque and drives him back across the yard; they skip, hand in hand.
+const REINS = ['down', 'out'];
+key(12.4, M(0.5, -13, 'right', REINS, 'stand'));
 key(12.6, M(0.5, -13, 'front', SECOND, 'plie'));
 key(12.8, M(0.5, -13, 'front', FIFTH, 'passe', { spinning: true, spin: 0 }));
 key(14, M(0.5, -13, 'front', FIFTH, 'passe', { spinning: true, spin: 1080 }));
-key(14.2, M(0.5, -13, 'right', ['down', 'out'], 'plie', { spin: 1080 }));
+key(14.2, M(0.5, -13, 'right', REINS, 'plie', { spin: 1080 }));
 for (let j = 0; j < 3; j++) {
-  key(14.6 + j * 0.5, M(0.5, -13, 'right', ['down', 'out'], 'derriere'));
-  key(14.85 + j * 0.5, M(0.5, -13, 'right', ['down', 'out'], 'derriere', { air: 3 }));
+  key(14.6 + j * 0.5, M(0.5 + j * 0.05, -13, 'right', REINS, 'derriere'));
+  key(14.85 + j * 0.5, M(0.525 + j * 0.05, -13, 'right', REINS, 'derriere', { air: 3 }));
+  rkey(14.6 + j * 0.5, M(0.5 + j * 0.05, 13, 'left', ['out', 'high'], 'plie'));
+  rkey(14.85 + j * 0.5, M(0.525 + j * 0.05, 13, 'left', ['out', 'high'], 'stand'));
 }
-for (let i = 0; i < 6; i++) key(16.2 + i * 0.4, M(0.5 + 0.12 * Math.sin(i * 0.9), -13, 'right', ['down', 'out'], i % 2 ? 'stand' : 'plie', { eyes: 'happy' }));
-key(18.8, M(0.45, -13, 'right', SECOND, 'stand'));
-leaps(19, 0.45, 0.15, 2);
-// A manège of piqué turns back across the yard, then entrechats.
+for (let i = 0; i < 6; i++) {
+  const x = 0.62 - 0.17 * i / 5;
+  const more = i % 2 ? { eyes: 'happy', air: 2 } : { eyes: 'happy' };
+  key(16.2 + i * 0.4, M(x, -13, 'front', REINS, i % 2 ? 'stand' : 'plie', more));
+  rkey(16.2 + i * 0.4, M(x, 13, 'front', ['out', 'down'], i % 2 ? 'stand' : 'plie', more));
+}
+leaps(19, 0.4, 0.15, 2);
+// A manège of piqué turns back across the yard, entrechats, and she hears
+// her mother.
 key(20.6, P(0.15, 'front', FIFTH, 'passe', { spinning: true, spin: 0 }));
 key(22.2, P(0.4, 'front', FIFTH, 'passe', { spinning: true, spin: 1440 }));
 key(22.4, P(0.4, 'front', SECOND, 'plie', { spin: 1440 }));
 entrechats(22.6, 0.4, 2);
 key(24, P(0.4, 'left', BAS, 'stand', { eyes: 'closed' }));
-key(24.8, P(0.4, 'right', RAISED.right, 'stand', { eyes: 'happy' }));
-key(25.4, P(0.4, 'right', RAISED.right, 'stand', { eyes: 'happy' }));
+balances(24.2, 0.4, 2, RAISED.right, 0.6);
 leaps(25.6, 0.4, -0.4, 2);
-// Colas: in, the ribbon, double tours, and off at the sound of clogs.
-rkey(0, M(1.4, 0, 'left', BAS, 'stand'));
-rkey(11, M(1.4, 0, 'left', BAS, 'stand'));
-rkey(12.2, M(0.5, 13, 'left', ['out', 'down'], 'stand'));
-rkey(14.4, M(0.5, 13, 'left', ['out', 'high'], 'plie'));
-rkey(16, M(0.5, 13, 'left', ['out', 'high'], 'plie'));
-for (let i = 0; i < 6; i++) rkey(16.2 + i * 0.4, M(0.5 + 0.12 * Math.sin(i * 0.9), 13, 'left', ['out', 'down'], i % 2 ? 'stand' : 'plie', { eyes: 'happy' }));
-rkey(18.8, M(0.8, 0, 'left', SECOND, 'stand'));
-tourOn(rkey, 19.2, 0.8, 0, 2);
-rkey(20.4, M(0.8, 0, 'left', FIFTH, 'stand', { air: 4 }));
-rkey(20.8, M(0.8, 0, 'left', SECOND, 'plie'));
-tourOn(rkey, 21.2, 0.8, 0, 2);
-rkey(23, M(0.8, 0, 'left', SECOND, 'stand', { eyes: 'closed' }));
-rkey(23.4, M(0.8, 0, 'right', SECOND, 'stand'));
-rkey(24.6, M(1.4, 0, 'right', SECOND, 'stand'));
-line(0.3, 1.6, ['strut, strut, strut.', 'make way, ladies!', 'the farmyard king!']);
+// Colas: double tours, and off at the sound of clogs.
+steps(rkey, 18.7, 0.45, 0.6, 13, 2, SECOND, 0.4);
+tourOn(rkey, 19.6, 0.6, 13, 2);
+rkey(20.6, M(0.6, 13, 'left', FIFTH, 'stand', { air: 4 }));
+rkey(21, M(0.6, 13, 'left', SECOND, 'plie'));
+tourOn(rkey, 21.2, 0.6, 13, 2);
+rkey(22.4, M(0.6, 13, 'left', SECOND, 'stand', { eyes: 'happy' }));
+rkey(23, M(0.6, 13, 'left', SECOND, 'stand', { eyes: 'closed' }));
+steps(rkey, 23.4, 0.6, 1.4, 13, 4, SECOND, 0.3);
 line(1.8, 2.6, ['cock-a-doodle-doo!', 'cock-a-doodle-DOO!', 'doodle-doo!']);
-line(2.8, 4.2, ['peck! peck! peck!', 'bawk bawk!', 'cluck cluck cluck!']);
-line(4.4, 6, ['and flap!', 'up, girls!', 'everybody up!']);
-line(6.2, 7.2, ['this way, girls!', 'cluck cluck!', 'breakfast!']);
-line(7.3, 9.2, ['what a morning!', 'good morning, hens!', 'la la la!']);
-line(9.5, 10.6, ['and turn!', 'twirl!', 'wheee!']);
-line(10.9, 11.8, ['a ribbon, for colas.', 'a love knot!', 'tied with a bow.']);
-line(11.9, 12.7, ['lise!', 'good morning, lise!', 'is that for me?']);
-line(12.9, 14.2, ['round i go!', 'all wrapped up!', 'twirl!']);
 line(14.6, 16, ['giddy-up!', 'hold the reins, colas!', 'hop! hop!']);
-line(16.3, 18.6, ['skip, skip!', 'tra la la!', 'hand in hand!']);
-line(19.1, 20.4, ['wheee!', 'hop!', 'look, colas!']);
-line(20.7, 22.8, ['and turn, turn, turn!', 'pique, pique!', 'round we go!']);
 line(23, 24.4, ['LISE! the butter!!', 'clack clack clack!', 'mother is coming!']);
-line(24.6, 25.6, ['bye, colas!', 'see you at harvest!', 'coming, mother!']);
 line(25.7, 26.8, ['tee hee.', 'she never knows.', 'la la la.']);
-// Who says each line: the Cockerel, a Hen, Colas, the Widow (offstage).
-const BY = [[0.3, 2.6, 'cock'], [4.4, 6, 'cock'], [2.8, 4.2, 'hen'], [6.2, 7.2, 'hen'], [11.9, 12.7, 'colas'], [23, 24.4, 'widow']];
+// Who says each line, if not Lise: the Cockerel, the Widow (offstage).
+const BY = [[0.3, 2.6, 'cock'], [23, 24.4, 'widow']];
 
 // The farmhouse on the left, a fence along the back.
 function farm(floor) {
@@ -2124,20 +2292,17 @@ function frame(t, dt) {
   if (u > 7.6) hens(t, floor);
   // The chicken dance: as many Hens as the strip has room for, 20 columns
   // apart so their tutus don't run together.
-  const count = w >= 130 ? 4 : w >= 100 ? 3 : w >= 72 ? 2 : 0;
-  let dh;
+  const count = w >= 130 ? 4 : w >= 100 ? 3 : w >= 76 ? 2 : 0;
   for (let i = 0; i < count && u < 8.4; i++) {
     let q = blinking(track(HK[i], u), t + i);
     if (u < 2.6 || u > 6) q = flapping(bourree(q, t + i * 0.1), t + i * 0.15);
-    // Pecking: bobbing down and up, out of step with each other.
-    if (u > 2.8 && u < 4.2) q.legs = Math.floor(t * 4 + i * 0.5) % 2 ? 'plie' : 'stand';
-    const hd = dancer(q, at(q) + Math.round((i - (count - 1) / 2) * 20), ground, HEN);
-    if (i === 0) dh = hd;
+      dancer(q, at(q) + Math.round((i - (count - 1) / 2) * 20), ground, HEN);
   }
   let k = blinking(track(CK, u), t + 0.7);
   if (u < 1.6 || u > 6) k = flapping(k, t);
   const dk = u < 7.4 ? dancer(k, at(k), ground, COCK) : undefined;
   let l = beating(blinking(track(KEYS, u), t), t);
+  if (u > 12.05 && u < 12.4) l = bourree(l, t);
   const c = blinking(track(RK, u), t + 0.3);
   const dc = dancer(c, at(c), ground, COLAS);
   const d = dancer(l, at(l), ground, LISE);
@@ -2150,11 +2315,8 @@ function frame(t, dt) {
   const by = BY.find(b => u >= b[0] && u < b[1]);
   const who = by ? by[2] : 'lise';
   if (who === 'cock' && dk) speak(said, dk);
-  else if (who === 'hen' && dh) speak(said, dh);
-  else if (who === 'colas') speak(said, dc);
   else if (who === 'widow') say(said, 16, 0);
-  else if (who === 'lise') speak(said, d);
-  else say(said, Math.round(w / 2), 0);
+  else speak(said, d);
 }
 `
 
@@ -2167,68 +2329,78 @@ const MANON = String.raw`
 const ROUTINE = 23;
 const LOOK = { tutu: '#c8d8f0', frill: '#f4f0ff', shoes: '#f4e0e8' };
 const DG = { bare: true, breeches: '#6a5a4a', shoes: '#16120e' };
+// Off the coach, an arabesque for the yard.
 key(0, M(0.78, 0, 'left', BAS, 'stand'));
 key(2.2, M(0.78, 0, 'left', BAS, 'stand'));
-key(2.8, M(0.62, 0, 'left', SECOND, 'stand'));
-key(3.2, M(0.62, 0, 'left', BAS, 'stand', { eyes: 'happy' }));
-key(8.2, M(0.62, 0, 'left', BAS, 'stand'));
+key(2.8, M(0.64, 0, 'left', SECOND, 'stand'));
+key(3.1, M(0.64, 0, 'left', RAISED.left, 'derriere', { eyes: 'happy' }));
+key(3.8, M(0.64, 0, 'left', RAISED.left, 'derriere', { eyes: 'happy' }));
+// While he dances for her, she sways, coy, and answers in arabesque.
+balances(4, 0.64, 5, ['down', 'out'], 0.75, { eyes: 'happy' });
+key(7.8, M(0.64, 0, 'left', RAISED.left, 'derriere', { eyes: 'happy' }));
+key(8.2, M(0.64, 0, 'left', RAISED.left, 'derriere'));
+// The meeting pas de deux: she turns into his arms, is swept up in
+// arabesque, and they waltz.
 key(8.4, M(0.6, 0, 'front', SECOND, 'plie'));
 key(8.6, M(0.6, 0, 'front', FIFTH, 'passe', { spinning: true, spin: 0 }));
-key(9.4, M(0.5, 7, 'front', FIFTH, 'passe', { spinning: true, spin: 720 }));
-key(9.6, M(0.5, 7, 'left', ['out', 'down'], 'stand', { spin: 720 }));
-// Lifted high in arabesque.
-key(10, M(0.5, 7, 'left', RAISED.left, 'derriere', { air: 6 }));
-key(11.2, M(0.5, 7, 'left', RAISED.left, 'derriere', { air: 6 }));
-key(11.6, M(0.5, 7, 'left', SECOND, 'stand'));
-balances(11.9, 0.5, 2, SECOND, 0.7, { dx: 7, eyes: 'happy' });
-key(13.6, M(0.62, 0, 'left', SECOND, 'stand'));
-key(15.2, M(0.5, 0, 'left', FIFTH, 'stand', { eyes: 'happy' }));
-pirouettes(16.6, 1.6, 0.5, 3);
-key(18.4, M(0.5, 7, 'left', FIFTH, 'stand', { air: 6, eyes: 'happy' }));
-key(19.2, M(0.5, 7, 'left', FIFTH, 'stand', { air: 6, eyes: 'happy' }));
-key(19.6, M(0.5, 7, 'right', SECOND, 'stand'));
+key(9.4, M(0.5, 8, 'front', FIFTH, 'passe', { spinning: true, spin: 720 }));
+key(9.6, M(0.5, 8, 'left', ['out', 'down'], 'stand', { spin: 720 }));
+key(10, M(0.5, 8, 'left', RAISED.left, 'derriere', { air: 6 }));
+key(11.2, M(0.5, 8, 'left', RAISED.left, 'derriere', { air: 6 }));
+key(11.6, M(0.5, 8, 'left', SECOND, 'stand'));
+balances(11.9, 0.5, 2, SECOND, 0.7, { dx: 8, eyes: 'happy' });
+// The letter: while he writes, she teases, little jumps and an
+// arabesque, and creeps up on him.
+key(13.4, M(0.62, 0, 'left', SECOND, 'stand'));
+for (let i = 0; i < 2; i++) {
+  key(13.7 + i * 0.5, M(0.62, 0, 'front', SECOND, 'plie'));
+  key(13.95 + i * 0.5, M(0.62, 0, 'front', FIFTH, 'passe', { air: 3 }));
+}
+key(14.7, M(0.62, 0, 'left', RAISED.left, 'derriere'));
+key(15, M(0.56, 4, 'left', FIFTH, 'stand', { eyes: 'happy' }));
+key(15.4, M(0.5, 4, 'left', FIFTH, 'stand', { eyes: 'happy' }));
+// Dizzy in love: pirouettes, a lift, and off to the coach.
+pirouettesOn(key, 16.6, 1.6, 0.5, 8, 3);
+key(18.4, M(0.5, 8, 'left', FIFTH, 'stand', { air: 6, eyes: 'happy' }));
+key(19.2, M(0.5, 8, 'left', FIFTH, 'stand', { air: 6, eyes: 'happy' }));
+key(19.6, M(0.5, 8, 'right', SECOND, 'stand'));
 key(20.8, M(0.8, 0, 'right', SECOND, 'stand'));
+// Des Grieux: reading; he looks up, and his solo: a double tour, a
+// reach, a double pirouette, and down on one knee, his heart in his hand.
 rkey(0, M(0.2, 0, 'right', BAS, 'kneel', { eyes: 'closed' }));
 rkey(3.4, M(0.2, 0, 'right', BAS, 'kneel', { eyes: 'happy' }));
 rkey(4, M(0.2, 0, 'right', SECOND, 'stand'));
-tourOn(rkey, 4.4, 0.25, 0, 1);
-rkey(5.4, M(0.3, 0, 'right', ['out', 'high'], 'plie'));
-rkey(6.2, M(0.35, 0, 'right', ['out', 'high'], 'stand'));
-tourOn(rkey, 6.6, 0.38, 0, 2);
-rkey(7.6, M(0.4, 0, 'right', ['down', 'out'], 'kneel'));
-rkey(8.4, M(0.4, 0, 'right', ['down', 'out'], 'kneel'));
-rkey(8.8, M(0.5, -7, 'right', ['down', 'out'], 'stand'));
-rkey(9.8, M(0.5, -7, 'right', ['high', 'high'], 'plie'));
-rkey(11.4, M(0.5, -7, 'right', ['high', 'high'], 'plie'));
-rkey(11.8, M(0.5, -7, 'right', SECOND, 'stand'));
+tourOn(rkey, 4.4, 0.24, 0, 2);
+rkey(5.4, M(0.28, 0, 'right', ['out', 'high'], 'plie'));
+rkey(5.8, M(0.3, 0, 'right', ['out', 'high'], 'stand'));
+pirouettesOn(rkey, 6.1, 1.2, 0.32, 0, 2);
+rkey(7.6, M(0.36, 0, 'right', ['down', 'out'], 'kneel'));
+rkey(8.4, M(0.36, 0, 'right', ['down', 'out'], 'kneel'));
+rkey(8.8, M(0.5, -8, 'right', ['down', 'out'], 'stand'));
+rkey(9.8, M(0.5, -8, 'right', FIFTH, 'plie'));
+rkey(11.4, M(0.5, -8, 'right', FIFTH, 'plie'));
+rkey(11.8, M(0.5, -8, 'right', SECOND, 'stand'));
 for (let i = 0; i < 2; i++) {
-  rkey(11.9 + i * 0.7, M(0.5, -7, i % 2 ? 'left' : 'right', SECOND, 'plie'));
-  rkey(12.25 + i * 0.7, M(0.5, -7, i % 2 ? 'left' : 'right', SECOND, 'stand'));
+  rkey(11.9 + i * 0.7, M(0.5, -8, i % 2 ? 'left' : 'right', SECOND, 'plie'));
+  rkey(12.25 + i * 0.7, M(0.5, -8, i % 2 ? 'left' : 'right', SECOND, 'stand'));
 }
 // Writing to his father, kneeling; Manon won't have it.
-rkey(13.8, M(0.3, 0, 'right', BAS, 'kneel'));
+rkey(13.6, M(0.3, 0, 'right', BAS, 'kneel'));
 rkey(15.2, M(0.3, 0, 'right', BAS, 'kneel'));
-rkey(15.4, M(0.3, 0, 'right', SECOND, 'stand', { eyes: 'happy' }));
-rkey(16.4, M(0.5, -17, 'right', ['down', 'out'], 'stand'));
-rkey(18.2, M(0.5, -17, 'right', ['down', 'out'], 'stand'));
-rkey(18.4, M(0.5, -7, 'right', ['high', 'high'], 'plie'));
-rkey(19.2, M(0.5, -7, 'right', ['high', 'high'], 'plie'));
-rkey(19.6, M(0.5, -7, 'right', SECOND, 'stand'));
-rkey(20.9, M(0.8, 0, 'right', SECOND, 'stand'));
+rkey(15.5, M(0.3, 0, 'right', SECOND, 'stand', { eyes: 'happy' }));
+tourOn(rkey, 15.8, 0.3, 0, 2);
+rkey(16.8, M(0.4, -8, 'right', ['down', 'out'], 'stand'));
+steps(rkey, 17.2, 0.4, 0.5, -8, 2, ['down', 'out'], 0.4);
+rkey(18.4, M(0.5, -8, 'right', FIFTH, 'plie'));
+rkey(19.2, M(0.5, -8, 'right', FIFTH, 'plie'));
+rkey(19.6, M(0.5, -8, 'right', SECOND, 'stand'));
+steps(rkey, 19.9, 0.5, 0.8, -6, 3, SECOND, 0.3);
 line(0.2, 2.2, ['manon, act one.', 'amiens. the inn yard.', 'the coach from arras!']);
-line(2.4, 3.4, ['what a long ride.', 'so this is amiens.', 'hello, everyone!']);
 line(3.5, 4.3, ['...oh.', 'who is she?', '*drops book*']);
-line(4.6, 7.4, ['look at me, manon!', 'for you, my dance.', 'a student... of love.']);
-line(7.7, 8.6, ['my heart is yours!', 'run away with me!', 'be mine?']);
-line(9.4, 11.2, ['wheee!', 'higher!', 'oh, des grieux!']);
-line(12, 13.4, ['to paris!', 'together!', 'one, two, three...']);
 line(13.9, 15.2, ['dear father...', 'writing home...', 'how do you spell...']);
-line(15.3, 16.4, ['boo!', 'come and play!', 'forget the letter!']);
-line(16.8, 18.2, ['spin me!', 'and again!', 'dizzy in love.']);
-line(18.5, 19.4, ['ta-da!', 'up!', 'bliss.']);
-line(19.6, 21, ['the coach! hurry!', 'quick, before lescaut!', 'paris, here we come!']);
+line(15.3, 16.2, ['boo!', 'come and play!', 'forget the letter!']);
 line(21.4, 22.8, ['off to paris!', 'happily ever... for now.', 'giddy-up!']);
-const HIS = [[3.5, 4.3], [4.6, 8.6], [13.9, 15.2]];
+const HIS = [[3.5, 4.3]];
 
 // The inn yard: cobbles, the inn's sign hanging on the left.
 function yard(floor, cx) {
@@ -2269,7 +2441,7 @@ function frame(t, dt) {
   const ground = floor * 2 - 1;
   const at = p => Math.round(12 + (w - 24) * p.x + (p.dx || 0));
   let m = blinking(track(KEYS, u), t);
-  if (u > 13.6 && u < 15.2) m = bourree(m, t);
+  if ((u > 2.2 && u < 2.8) || (u > 15 && u < 15.4) || (u > 19.6 && u < 20.8)) m = bourree(m, t);
   const r = blinking(track(RK, u), t + 0.3);
   yard(floor, at(m));
   const isAboard = u < 2.2 || u > 21;
@@ -2288,6 +2460,8 @@ function frame(t, dt) {
   const said = saying(u, n);
   if (!said) return;
   if (u < 2.2 || u > 21.2) say(said, Math.round(w / 2), 0);
+  // The letter, said over his shoulder, clear of her.
+  else if (u > 13.9 && u < 15.2) say(said, dr.x + 4, 0);
   else if (HIS.some(q => u >= q[0] && u < q[1])) speak(said, dr);
   else speak(said, d);
 }
@@ -2328,7 +2502,7 @@ export const PIECES: Piece[] = [
   piece('chroma', 'Wayne McGregor: a sharp duet in a white room', 22, { effect: 'pulse', palette: ['#e4e2dc', '#e4e2dc', '#e4e2dc'], speed: 0.1, intensity: 0 }, [], DUETS + CHROMA),
   piece('infra', 'Wayne McGregor: under an LED screen of walking figures', 24, { effect: 'pulse', palette: ['#08090c', '#0c0d10', '#101216'], speed: 0.2, intensity: 0 }, [], DUETS + INFRA),
   piece('untitled 2023', 'Wayne McGregor: a white canvas cut with green', 22, { effect: 'pulse', palette: ['#eeede8', '#eeede8', '#eeede8'], speed: 0.1, intensity: 0 }, [], DUETS + UNTITLED),
-  piece('don quixote', 'Kitri with her fan in a square in Barcelona', 23, { effect: 'aurora', palette: ['#3a1a14', '#5a2a18', '#7a3a1c'], speed: 0.3, intensity: 0 }, [], DONQ),
+  piece('don quixote', 'Kitri and Basilio dance their wedding pas de deux in Barcelona', 26, { effect: 'aurora', palette: ['#3a1a14', '#5a2a18', '#7a3a1c'], speed: 0.3, intensity: 0 }, [], DUETS + DONQ),
   piece('giselle', 'Giselle among the Wilis in the moonlit forest', 24, { effect: 'starfield', palette: ['#101c24', '#2a3c50', '#c0d0e0'], speed: 0.2, intensity: 0 }, [], DUETS + GISELLE),
   piece('la fille mal gardee', 'The chicken dance, then Lise and Colas with a ribbon in the farmyard', 27, { effect: 'aurora', palette: ['#3a4a6a', '#5a6a8a', '#8a90a8'], speed: 0.2, intensity: 0 }, [], DUETS + FILLE),
   piece('manon', 'Manon meets Des Grieux in the inn yard at Amiens', 23, { effect: 'pulse', palette: ['#1a1614', '#221c18', '#2a221c'], speed: 0.2, intensity: 0 }, [], DUETS + MANON),

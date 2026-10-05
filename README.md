@@ -20,17 +20,20 @@ Claude works long enough:
   développé, grand jetés across the stage, an arabesque, and a révérence as
   roses land at Clawd's feet, and the curtains close.
 - **Swan Lake**, in four acts. I: the palace garden at dusk, the
-  prince's birthday, a pas de trois, a crossbow, swans flying over. II:
-  the lake at midnight (below). III: the ball; Odile, the black swan, her
-  32 fouettés (counted on screen), the prince swears to the wrong swan.
-  IV: the lake before dawn; forgiveness, Rothbart's owl in a storm, and
-  the sun coming up on a happy ending. Act II: The swan glides in with its arms
+  prince's birthday, a pas de trois, a crossbow, his slow solo, and swans
+  flying over for him to chase. II: the lake at midnight (below). III: the
+  ball; Odile, the black swan, in an adagio her father works like a
+  puppet, her 32 fouettés (counted on screen), the prince swears to the
+  wrong swan. IV: the lake before dawn; the swans mourn in unison,
+  forgiveness, Rothbart's owl in a storm, and a lift into the sunrise for
+  a happy ending. Act II: The swan glides in with its arms
   beating like wings, holds an arabesque, turns, and the little swans dance
   in a line, arms linked (on a wide enough strip). Then the dying swan, as
   von Rothbart's owl crosses the moon... who feels better.
-- **Nutcracker**, in two acts. I: Christmas Eve; Drosselmeyer's gift,
-  midnight, the tree growing, the mice and their king, Clara's slipper,
-  the prince, the land of snow. II: snow falling by a lit tree. The Sugar Plum Fairy turns
+- **Nutcracker**, in two acts. I: Christmas Eve; Clara waltzes,
+  Drosselmeyer's gift, midnight, the tree growing, the mice and their
+  king, Clara's little jumps at them and her slipper, the prince, and a
+  pas de deux in the snow. II: snow falling by a lit tree. The Sugar Plum Fairy turns
   across the stage, jumps, développés, leaps and does fouettés.
 - **Firebird**: the enchanted garden at night, by the tree of golden
   apples. The Firebird flies in trailing embers, steals an apple, is caught,
@@ -45,7 +48,8 @@ Claude works long enough:
   green velvet and candlelight; Mary Vetsera (in ivory) and Rudolf: the
   pull, her turns in his arms, her flight and return, and the enveloping
   kiss, Mary held upside down above Rudolf on his knees. The lights close
-  in, go to black, and... pop! Champagne. Just kidding, they're fine.
+  in and go to black; they come up on the two of them grinning, a bottle
+  and a glass raised, and... pop! Champagne. Just kidding, they're fine.
 - **Wayne McGregor**, a triple bill. Chroma: John Pawson's white room,
   sharp snapping phrases, a duet pulling off balance, canon. Infra: Julian
   Opie's LED walkers along the top, couples in boxes of light, a crowd
@@ -53,35 +57,44 @@ Claude works long enough:
   Herrera's white canvas cut with green, a trio in green and cream,
   frozen, slow, a burst, one long slow turn. (McGregor's extreme lines
   are beyond Clawd's block of a body, so it's in the staging.)
-- **Don Quixote**, act III: a square in Barcelona at sunset, bunting
-  overhead and Don Quixote's windmill on the hill. Kitri leaps in, her fan
-  fluttering, holds the long balance, whips through fouettés (the windmill
-  spins to keep up), leaps to the corner, turns back round, and ole.
+- **Don Quixote**, act III: Kitri and Basilio's wedding pas de deux in a
+  square in Barcelona at sunset, bunting overhead and Don Quixote's
+  windmill on the hill. The entrée; the adagio (a supported double, his
+  one-armed lift, her long balance once he lets go); his variation of
+  tours and jumps; hers, hopping on pointe with her fan; the coda (his
+  tours, her fouettés while the windmill spins to keep up); a last lift,
+  and ole.
 - **Giselle**, act II: midnight by Giselle's grave, mist on the ground and
-  the Wilis drifting in the dark. She rises, spins at Myrtha's command,
-  hops in arabesque; Albrecht brings lilies, and the Wilis make him dance
-  until she leads them off. Dawn saves him, and she waves goodnight and
-  sinks back under the mist.
+  the Wilis drifting in the dark. She rises out of her grave, whirls at
+  Myrtha's command, hops in arabesque; Albrecht walks in with lilies and
+  they dance, she floating up in his arms; the Wilis make him beat
+  entrechats while she dances beside him to keep him going, until she
+  leads them off. Dawn saves him: one last lift, and she bourrées back to
+  her grave and sinks under the mist.
 - **La Fille mal gardée**: a farmyard at first light, opening with the
   chicken dance: the Cockerel struts in and crows, the Hens (white tutus,
-  red combs, orange pointe shoes) follow him flapping, peck in unison and
-  hop in canon while he turns in the air. Then Lise leaps in, turns, hops
-  in arabesque and ties a pink ribbon for Colas; they dance with it between
-  them (she turns in it, jumps on it like reins, they skip), she whirls
+  red combs, orange pointe shoes) follow him flapping, peck in canon (a
+  pas de chat, an arabesque tipped forward) and jump while he turns in the
+  air. Then Lise leaps in, turns, hops in arabesque and ties a pink ribbon
+  for Colas; they dance with it between them (she turns in it, drives him
+  across the yard with it like reins, they skip), she whirls
   round the yard in piqué turns, and Widow Simone's clogs send Colas
   running.
 - **Manon** (Kenneth MacMillan), act I: the inn yard at Amiens. The coach
-  brings Manon; Des Grieux looks up from his book, dances for her and
-  kneels with his heart; lifts; he tries to write to his father and she
-  won't let him; the coach comes back and takes them both to Paris.
+  brings Manon; Des Grieux looks up from his book and dances his solo for
+  her (tours, pirouettes, down on one knee) while she sways and answers in
+  arabesque; their first pas de deux, lifts and a waltz; he tries to write
+  to his father and she teases him off it; pirouettes, a last lift, and
+  the coach takes them both to Paris.
 - **Class**: the studio barre, with the teacher counting from the piano,
   its metronome ticking. Pliés, kicks, a
   balance, then pirouettes, sautés and a bow in the center.
 
 Clawd is drawn as on the official stickers (the ballet one above all):
 the same block, two arm stubs and four little legs, a pink checked tutu,
-and three-quarter views with the far side in shade when it turns. It talks
-through the dance in speech bubbles, a little differently each time round. A frame takes about
+and three-quarter views with the far side in shade when it turns. Now and
+then it says something in a speech bubble (a title, a story beat, a
+joke), a little differently each time round. A frame takes about
 a millisecond to draw.
 
 An independent project, not affiliated with or endorsed by Anthropic.
