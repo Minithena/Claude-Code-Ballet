@@ -232,3 +232,19 @@ test('shell commands have moves of their own, read past a cd', () => {
   expect(of('curl -s https://x.y')).toBe('web/web')
   expect(of('cd repo && npm test')).toBe('testing/test')
 })
+
+test('git is read by its own words, and a VAR=value is never shown', () => {
+  const of = (command: string) => {
+    const { act, move } = actOf('Bash', { command })
+
+    return `${act}/${move}`
+  }
+  // Tests or a build named in a message, a branch or a file are no test run.
+  expect(of('git commit -m "Add tests for live"')).toBe('git/commit')
+  expect(of('git add hooks/register.test.tsx')).toBe('git/git')
+  expect(of('git checkout -b fix-build')).toBe('git/git')
+  expect(of('gh pr create --title "fix tests"')).toBe('git/commit')
+  expect(of('ls && git push')).toBe('searching/ls')
+  expect(actOf('Bash', { command: 'API_KEY=sk-123 curl https://x.y' })).toEqual({ act: 'web', move: 'web', label: 'curl' })
+  expect(actOf('Bash', { command: 'CI=1 FOO="a b" npm test' })).toEqual({ act: 'testing', move: 'test', label: 'npm test' })
+})

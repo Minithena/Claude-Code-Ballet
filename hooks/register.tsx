@@ -35,9 +35,11 @@ type Watch = {
   // When each subagent last called a tool: a background agent's call
   // returns at once, so its own tools show it still at work.
   agentsSeen: Map<string, number>
-  // The MCP server partnering Clawd, until a few moments after its call.
+  // The MCP server partnering Clawd, until a few moments after the last of
+  // the MCP calls running (they can overlap) is done.
   guest: string
   guestUntil: number
+  mcpCalls: number
   // The subagents' tool calls: how many, whose was the last (by the order
   // the subagents started) and its move, for that dancer of the corps.
   crewN: number
@@ -260,7 +262,7 @@ export const register: Register = on => {
     previousAt: 0,
     next: 0,
     liveAt: 0,
-    watch: { act: 'idle', move: '', label: '', news: '', newsN: 0, toolN: 0, tools: 0, agentCalls: 0, agentsSeen: new Map(), guest: '', guestUntil: 0, crewN: 0, crewWho: 0, crewMove: '' },
+    watch: { act: 'idle', move: '', label: '', news: '', newsN: 0, toolN: 0, tools: 0, agentCalls: 0, agentsSeen: new Map(), guest: '', guestUntil: 0, mcpCalls: 0, crewN: 0, crewWho: 0, crewMove: '' },
     now: 0,
   }
 
@@ -373,6 +375,7 @@ export const register: Register = on => {
     if (mcp) {
       w.guest = mcp.server
       w.guestUntil = Infinity
+      w.mcpCalls++
     }
     try {
       const result = await next_(e)
@@ -383,7 +386,7 @@ export const register: Register = on => {
     } finally {
       w.tools--
       if (isAgent) w.agentCalls--
-      if (mcp) w.guestUntil = (await $.clock.now().catch(() => at)) + GUEST_MS
+      if (mcp && --w.mcpCalls === 0) w.guestUntil = (await $.clock.now().catch(() => at)) + GUEST_MS
     }
   })
 

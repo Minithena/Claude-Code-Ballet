@@ -101,18 +101,21 @@ export function mcpOf(tool: string): { server: string; name: string } | undefine
   return { server: plain(m[1]!.replace(/_/g, ' '), 30), name: plain(m[2]!.replace(/_/g, ' '), 30) }
 }
 
-// A shell command: the command it starts with, past a `cd ... &&`, if it
-// has a move of its own; else tests, a build or git, read from anywhere in
-// it, as toons reads them. Labelled by its first word or two.
+// A shell command: the command it starts with, past a `cd ... &&` and any
+// `VAR=value`s (never shown: they can hold keys), if it has a move of its
+// own; git by its own words (a commit message or a file named for tests is
+// no test run); else tests or a build, read from anywhere in it, as toons
+// reads them. Labelled by its first word or two.
 function bashOf(command: string): { act: Act; move: Move; label: string } {
   const words = command.trim()
   const after = /^cd\s+(?:"[^"]*"|'[^']*'|\S+)\s*(?:&&|;)\s*(.*)$/s.exec(words)
-  const rest = after ? after[1]! : words
+  const rest = (after ? after[1]! : words).replace(/^(?:[A-Za-z_]\w*=(?:"[^"]*"|'[^']*'|\S*)\s+)+/, '')
   const first = (/^(\S+)/.exec(rest)?.[1] ?? '').replace(/^.*\//, '')
   const second = /^\S+\s+([a-z][\w-]*)/.exec(rest)?.[1] ?? ''
   const label = plain(/^(git|gh|npm|npx|pnpm|yarn|bun|cargo|go|make|docker|node|python3?)$/.test(first) && second ? `${first} ${second}` : first, 20)
   const known = COMMANDS[first]
   if (known) return { act: known[1], move: known[0], label }
+  if (first === 'git' || first === 'gh') return { act: 'git', move: /^(git (commit|push|merge|tag|rebase)|gh pr create)\b/.test(rest) ? 'commit' : 'git', label }
   if (/\b(test|tests|jest|vitest|pytest|mocha|spec|rspec|check|go test|cargo test)\b/.test(command)) return { act: 'testing', move: 'test', label }
   if (/\b(build|tsc|make|cargo (build|check)|compile|webpack|vite|bundle|install|npm ci|yarn|pnpm|pip|poetry|gradle|mvn|xcodebuild)\b/.test(command)) return { act: 'building', move: 'build', label }
   if (/\b(git (commit|push|merge|tag|rebase)|gh pr create)\b/.test(command)) return { act: 'git', move: 'commit', label }
