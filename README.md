@@ -1,12 +1,12 @@
 # Claude Code Ballet
 
-A plugin for Claude Code CLI that shows Clawd doing ballet when a model is working.
+A [mod](https://code.claude.com/docs/en/plugins/mods/overview) for Claude Code CLI that shows Clawd doing ballet when a model is working.
 In live mode each performance is dynamic & unique, Clawd does moves in response to what Claude is
 doing, responding to each tool call and action.
 There is also a programme of ballets it can perform instead.
 
 Built on [claude-toons](https://github.com/achimala/claude-toons) by Anshu
-Chimala: using it's toons' renderer, scene language and
+Chimala, using toons' renderer, scene language and
 pixel-art Clawd.
 
 ![Live mode: Clawd dancing a move for each tool call, labelled with what set it off](docs/live.gif)
@@ -74,8 +74,8 @@ Everything is remembered across sessions.
 ## Install
 We both know you're not installing this manually, give the following information to your agent.
 
-You need Claude Code in a terminal with plugin hook modules, an
-early-access feature (built against 2.1.288). In Claude Code, run:
+It's a mod, installed as a plugin. You need Claude Code v2.1.287 or later
+(`claude --version`). In Claude Code, run:
 
 ```
 /plugin marketplace add Minithena/Claude-Code-Ballet
@@ -92,17 +92,19 @@ git clone https://github.com/Minithena/Claude-Code-Ballet
 claude --plugin-dir Claude-Code-Ballet
 ```
 
-**Nothing shows up?** Run `claude --debug` and look for a `clawd-ballet`
-line. It draws in the terminal only (not the desktop app or an IDE panel)
-and wants 24-bit colour.
+**What it can reach.** A mod runs inside Claude Code with your permissions,
+so check one before you install it: `claude plugin validate
+./Claude-Code-Ballet` on a clone lists every event it hooks and every call
+it makes. This one reads the name of each tool Claude calls (and a shell
+command's first word, a file's name, a web address's host) to pick a move;
+it keeps whether Clawd is shown, the mode and the next piece in Claude
+Code's plugin store on your machine. It makes no network requests and calls
+no model.
 
-| Setting | What it does |
-|---|---|
-| Order | "in turn" follows the programme; "shuffled" picks the next ballet at random, its acts still in order. |
-| Speech bubbles | Off, every piece is danced in silence. |
-| Live label | Off, live mode shows no label naming what set off each move. |
-
-Everything is remembered across sessions.
+**Nothing shows up?** Run `/plugin`: a dim line under the tabs names the
+mods loaded, such as `1 mod active · clawd-ballet`. The stage is drawn in
+a terminal, with 24-bit colour; the Desktop app and IDE panels load the mod
+but don't show the stage.
 
 ## Preview without Claude Code
 
