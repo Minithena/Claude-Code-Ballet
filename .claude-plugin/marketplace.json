@@ -1,5 +1,5 @@
 {
-  "name": "ballet-clawd",
+  "name": "clawd-ballet",
   "owner": {
     "name": "Athena"
   },
@@ -8,7 +8,7 @@
   },
   "plugins": [
     {
-      "name": "ballet-clawd",
+      "name": "clawd-ballet",
       "source": "./",
       "description": "Clawd in a pink tutu, dancing ballet on a little stage above the prompt while Claude works"
     }

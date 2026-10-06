@@ -17,7 +17,7 @@ const GROW_MS = 700
 // This load's mark on the session (types/index.d.ts). A hot reload starts
 // the module afresh, and the old one's animation loop can outlive it: both
 // would paint the band, a frame each, two stages flickering in turn.
-const LOAD = { plugin: 'ballet-clawd', key: 'load' } as const
+const LOAD = { plugin: 'clawd-ballet', key: 'load' } as const
 
 // The pieces in turn (standard), or the live dancer, whose steps follow
 // what Claude does (hooks/live.ts).
@@ -280,7 +280,7 @@ async function setOption($: EngineInterface, field: string, value: string) {
     const { deny } = await $.config.set({ key: row.key, value })
     if (deny) throw new Error(deny)
   } catch (e) {
-    $.ui.toast(`ballet-clawd: could not change ${field}: ${e instanceof Error ? e.message : String(e)}`)
+    $.ui.toast(`clawd-ballet: could not change ${field}: ${e instanceof Error ? e.message : String(e)}`)
   }
 }
 

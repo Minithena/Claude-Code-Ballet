@@ -1,4 +1,4 @@
-# ballet-clawd: notes for agents
+# clawd-ballet: notes for agents
 
 The ballet is a claude-toons scene, drawn by claude-toons' own renderer. Look
 at how toons does a thing before doing it differently here.
@@ -235,7 +235,9 @@ at how toons does a thing before doing it differently here.
   added. `claude plugin test .` runs the engine tests.
 - **`scripts/`**: `play.ts` plays it in a terminal (`--live` the live
   dancer, `terminal.sh piece live` to photograph it) and `frames.ts` (`--live` too) prints
-  frames for `gif.py` (which draws `docs/demo.gif` under a spinner line).
+  frames for `gif.py`, which draws the README's GIFs under a spinner line
+  (the commands are in the README). For the live GIFs, `--solo` keeps the
+  corps out and `--agents` keeps four on, each dancing its agent's calls.
   toons runs its scripts with bun; here they run under Node 24 with
   `--experimental-transform-types` (toons' interpreter uses parameter
   properties), and `resolve.ts` lets the extensionless imports resolve.

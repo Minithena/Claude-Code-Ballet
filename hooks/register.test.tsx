@@ -6,7 +6,7 @@ import { completions, following, modeOf, split } from './choose'
 import { actOf } from './live'
 
 const band = (isWorking: boolean) => ({
-  plugin: 'ballet-clawd',
+  plugin: 'clawd-ballet',
   surface: 'terminal' as const,
   component: 'AbovePrompt' as const,
   props: { hasSurvey: false, isWorking, maxRows: 20, bodyColumns: 100, scroll: { offset: 0, bodyRows: 19 }, view: {} },
@@ -237,7 +237,7 @@ test('with the live label off, the moves carry no chip', { options: { label: 'of
 
 // The programme's pane, as the terminal seats it above the prompt.
 const PROGRAMME_PANE = {
-  plugin: 'ballet-clawd',
+  plugin: 'clawd-ballet',
   surface: 'terminal' as const,
   component: 'Pane' as const,
   requestId: 'ballet-programme',

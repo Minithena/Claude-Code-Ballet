@@ -1,7 +1,7 @@
 // Prints the routine's frames as JSON, for scripts/gif.py to draw, rendered
 // by toons' renderer the way the plugin draws them:
 //
-//   node --experimental-transform-types scripts/frames.ts [--piece N | --live] [--seconds N] [--fps N] [--cols N] [--raw]
+//   node --experimental-transform-types scripts/frames.ts [--piece N | --live [--solo | --agents]] [--seconds N] [--fps N] [--cols N] [--raw]
 //
 // --raw skips the plugin's last pass over the cells (hooks/cells.ts).
 
@@ -30,7 +30,19 @@ const rows = 9
 const GROW_MS = 700
 const clean = cleanScript(isLive ? LIVE_SCENE : piece.scene)
 if (!clean) process.exit(1)
-const script = isLive ? wire(clean, () => demoAt(now)) : clean
+// --solo leaves the corps out of the made-up session; --agents keeps four
+// on throughout (subagents at work), each dancing its own agent's calls.
+const isSolo = args.includes('--solo')
+const isAgents = args.includes('--agents')
+const momentAt = (t: number) => {
+  const m = demoAt(t)
+  const k = Math.floor(t / 0.7)
+  if (isSolo) return { ...m, corps: 0, crewN: 0 }
+  if (isAgents) return { ...m, corps: 4, guest: '', crewN: k, crewWho: k % 4 }
+
+  return m
+}
+const script = isLive ? wire(clean, () => momentAt(now)) : clean
 const frames: string[] = []
 const moves: string[] = []
 for (let n = 0; n < seconds * fps; n++) {
@@ -39,6 +51,6 @@ for (let n = 0; n < seconds * fps; n++) {
   // Drawn at full height, its top rows empty until the band has risen.
   const cells = stage({ cols, rows, t: since / 1000, script, since, reveal: Math.min(1, since / (GROW_MS * 1.6)) })
   frames.push(args.includes('--raw') ? cells : solidify(cells))
-  moves.push(isLive ? `live · ${demoAt(now).move || demoAt(now).act}` : moveAt(piece, since / 1000))
+  moves.push(isLive ? `live · ${momentAt(now).move || momentAt(now).act}` : moveAt(piece, since / 1000))
 }
 console.log(JSON.stringify({ cols, rows, fps, frames, moves, error: script.code?.error }))
