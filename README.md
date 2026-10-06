@@ -34,6 +34,27 @@ dissolving into the next if Claude works long enough.
 
 ![Wayne McGregor's Untitled, 2023: a trio on Carmen Herrera's white canvas cut with green](docs/untitled-2023.gif)
 
+## Using it
+
+- **`/ballet`** shows or hides Clawd, even mid-task (`on` and `off` too).
+- **`/ballet live`** and **`/ballet standard`** switch mode.
+- **`/ballet <piece>`** picks what plays next: `swan`, `mayerling 3`,
+  `swan lake act ii`. Typos and starts of names are fine, and Tab
+  completes.
+- **`/ballet programme`** opens the programme, a row a letter: **n** lists
+  every piece to pick from, **m** switches mode, **h** shows or hides
+  Clawd, and **o**, **s** and **l** change the settings. Escape closes it.
+
+The settings are also in `/config`, under "Ballet":
+
+| Setting | What it does |
+|---|---|
+| Order | "in turn" follows the programme; "shuffled" picks the next ballet at random, its acts still in order. |
+| Speech bubbles | Off, every piece is danced in silence. |
+| Live label | Off, live mode shows no label naming what set off each move. |
+
+Everything is remembered across sessions.
+
 | Piece | Acts | Year | Choreography |
 |---|---|---|---|
 | Gala | | | original |
@@ -51,6 +72,7 @@ dissolving into the next if Claude works long enough.
 | Class | barre and centre | | original |
 
 ## Install
+We both know you're not installing this manually, give the following information to your agent.
 
 You need Claude Code in a terminal with plugin hook modules, an
 early-access feature (built against 2.1.288). In Claude Code, run:
@@ -73,19 +95,6 @@ claude --plugin-dir Claude-Code-Ballet
 **Nothing shows up?** Run `claude --debug` and look for a `clawd-ballet`
 line. It draws in the terminal only (not the desktop app or an IDE panel)
 and wants 24-bit colour.
-
-## Using it
-
-- **`/ballet`** shows or hides Clawd, even mid-task (`on` and `off` too).
-- **`/ballet live`** and **`/ballet standard`** switch mode.
-- **`/ballet <piece>`** picks what plays next: `swan`, `mayerling 3`,
-  `swan lake act ii`. Typos and starts of names are fine, and Tab
-  completes.
-- **`/ballet programme`** opens the programme, a row a letter: **n** lists
-  every piece to pick from, **m** switches mode, **h** shows or hides
-  Clawd, and **o**, **s** and **l** change the settings. Escape closes it.
-
-The settings are also in `/config`, under "Ballet":
 
 | Setting | What it does |
 |---|---|
