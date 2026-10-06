@@ -181,7 +181,7 @@ desktop app or an IDE panel, and wants a terminal with 24-bit colour.
   (`/ballet mayerlinf`, `/ballet nut 2`); words that name no piece get a
   list of what there is and leave the ballet as it was.
 - **`/ballet live`** switches to the live dancer, and **`/ballet
-  repertoire`** (or naming a piece) back to the pieces. The mode is
+  standard`** (or naming a piece) back to the ballets in turn. The mode is
   remembered across sessions.
 - While you type `/ballet ...`, a dim row above the prompt shows what it
   can complete to, and **Tab** (or → at the end) completes it; Tab again

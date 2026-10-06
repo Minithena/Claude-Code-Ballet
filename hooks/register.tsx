@@ -2,9 +2,10 @@ import type { EngineInterface, Register } from 'claude-code'
 
 import { PIECES } from './ballet'
 import { solidify } from './cells'
-import { choose, completions, summary, title } from './choose'
+import { choose, completions, MODES, modeOf, summary, title } from './choose'
 import { actOf, LIVE_SCENE, mcpOf, wire, type Act, type Moment, type Move, type News } from './live'
 import { cleanScript, stage, type Script } from './script'
+import type { BalletLoad } from '../types'
 
 const COMMAND = 'ballet'
 // The Raster's key, which each blitted frame names.
@@ -13,10 +14,14 @@ const ROWS = 9
 // How long the band takes to rise to its full height when the spinner shows,
 // as in claude-toons.
 const GROW_MS = 700
+// This load's mark on the session (types/index.d.ts). A hot reload starts
+// the module afresh, and the old one's animation loop can outlive it: both
+// would paint the band, a frame each, two stages flickering in turn.
+const LOAD = { plugin: 'ballet-clawd', key: 'load' } as const
 
-// The pieces in turn (the repertoire), or the live dancer, whose steps
-// follow what Claude does (hooks/live.ts).
-type Mode = 'repertoire' | 'live'
+// The pieces in turn (standard), or the live dancer, whose steps follow
+// what Claude does (hooks/live.ts).
+type Mode = 'standard' | 'live'
 
 // What Claude is doing, for the live dancer, as the hooks below see it.
 type Watch = {
@@ -48,6 +53,8 @@ type Watch = {
 }
 
 type Stage = {
+  // The mark this load wrote on the session, once session.start has run.
+  load?: BalletLoad
   isShown: boolean
   isAnimating: boolean
   mode: Mode
@@ -154,7 +161,7 @@ function beginLive(s: Stage, at: number) {
 function frameAt(s: Stage, at: number, rows: number) {
   s.now = at
   // A piece plays through once, then dissolves into the next.
-  if (s.mode === 'repertoire' && s.scene && at - s.sceneAt > PIECES[s.piece]!.routine * 1000) {
+  if (s.mode === 'standard' && s.scene && at - s.sceneAt > PIECES[s.piece]!.routine * 1000) {
     s.previous = s.scene
     s.previousAt = s.sceneAt
     begin(s, s.piece + 1, at)
@@ -183,6 +190,7 @@ function animate($: EngineInterface, s: Stage) {
   s.isAnimating = true
   void (async () => {
     while (s.spinner && s.isShown && s.scene) {
+      if (await isSuperseded($, s)) break
       const at = await $.clock.now()
       // While it grows, each new height is a redraw; frames keep painting at
       // the height drawn until it lands.
@@ -196,6 +204,15 @@ function animate($: EngineInterface, s: Stage) {
     // The module unloaded mid-wait (a reload): the next load starts afresh.
     s.isAnimating = false
   })
+}
+
+// Whether a later load of the plugin has taken the session over: its mark
+// stands in place of this load's.
+async function isSuperseded($: EngineInterface, s: Stage) {
+  if (!s.load) return false
+  const { value } = await $.state.get(LOAD).catch(() => ({ value: undefined }))
+
+  return value !== undefined && value !== s.load
 }
 
 async function toggle($: EngineInterface, s: Stage, show: boolean) {
@@ -234,7 +251,7 @@ const DRAFT = /^\/ballet (.*)$/s
 
 // What the hint row above the prompt says for a draft of `/ballet <words>`.
 function hintFor(arg: string): string {
-  if (!arg.trim()) return `${summary(NAMES)}, live, repertoire, on, off`
+  if (!arg.trim()) return `${summary(NAMES)}, live, standard, on, off`
   const fits = completions(NAMES, arg)
 
   return fits.length ? `${fits.join(' · ')}   (tab completes)` : 'no piece by that name'
@@ -253,7 +270,7 @@ export const register: Register = on => {
   const s: Stage = {
     isShown: true,
     isAnimating: false,
-    mode: 'repertoire',
+    mode: 'standard',
     shownAt: 0,
     cols: 60,
     drawnRows: 1,
@@ -266,7 +283,14 @@ export const register: Register = on => {
     now: 0,
   }
 
+  // session.start fires again for each reload: the new load marks the
+  // session, and the loop of the load before stops.
   on('session.start', async ($, e, next_) => {
+    const load = `${await $.clock.now().catch(() => 0)}-${Math.random()}`
+    await $.state.set(LOAD, load).then(
+      () => (s.load = load),
+      () => {},
+    )
     s.isShown = (await $.store.get('isShown')) !== false
     const saved = await $.store.get('next').catch(() => undefined)
     if (typeof saved === 'number') s.next = saved
@@ -274,7 +298,7 @@ export const register: Register = on => {
     await $.command.register({
       name: COMMAND,
       description: `Show or hide Clawd dancing ballet above the prompt, pick the piece (${summary(NAMES)}), or dance live to what Claude does`,
-      argumentHint: '[on|off|live|repertoire|<ballet> [act]]',
+      argumentHint: '[on|off|live|standard|<ballet> [act]]',
       immediate: true,
     })
 
@@ -288,26 +312,29 @@ export const register: Register = on => {
     if (!arg || arg === 'on' || arg === 'off') {
       await toggle($, s, arg === 'on' ? true : arg === 'off' ? false : !s.isShown)
 
-      return { text: s.isShown ? `Ballet on: Clawd dances ${s.mode === 'live' ? 'live, to what Claude does' : 'the repertoire'} while Claude works.` : 'Ballet off. /ballet brings Clawd back.' }
+      return { text: s.isShown ? `Ballet on: Clawd dances ${s.mode === 'live' ? 'live, to what Claude does' : 'the ballets in turn'} while Claude works.` : 'Ballet off. /ballet brings Clawd back.' }
     }
-    if (arg === 'live') {
+    // A piece by its name first; else words near a mode switch to it,
+    // typos and all ("standrd").
+    const picked = choose(NAMES, arg)
+    const mode = MODES.find(m => m === arg) ?? (arg === 'repertoire' || 'error' in picked ? modeOf(arg) : undefined)
+    if (mode === 'live') {
       await switchTo($, s, 'live')
 
-      return { text: 'Live: Clawd dances on while Claude works, its steps following what Claude does. /ballet repertoire for the pieces.' }
+      return { text: 'Live: Clawd dances on while Claude works, its steps following what Claude does. /ballet standard for the ballets in turn.' }
     }
-    if (arg === 'repertoire') {
+    if (mode === 'standard') {
       const saved = await $.store.get('next').catch(() => undefined)
       if (typeof saved === 'number') s.next = saved
-      await switchTo($, s, 'repertoire')
+      await switchTo($, s, 'standard')
 
-      return { text: `The repertoire: next up, ${title(PIECES[s.next]!.name)}.` }
+      return { text: `Standard: the ballets in turn. Next up, ${title(PIECES[s.next]!.name)}.` }
     }
     // Words that name no piece say so, and leave the ballet as it was.
-    const picked = choose(NAMES, arg)
     if ('error' in picked) return { text: picked.error }
     s.next = picked.index
     await $.store.set('next', s.next).catch(() => {})
-    await switchTo($, s, 'repertoire')
+    await switchTo($, s, 'standard')
 
     return { text: `Next up: ${title(PIECES[picked.index]!.name)}.` }
   })
@@ -436,7 +463,7 @@ export const register: Register = on => {
     // or the live dancer where it left off.
     if (!s.scene) {
       // The store has the last word: a reload starts this module afresh.
-      s.mode = (await $.store.get('mode').catch(() => undefined)) === 'live' ? 'live' : 'repertoire'
+      s.mode = (await $.store.get('mode').catch(() => undefined)) === 'live' ? 'live' : 'standard'
       const paused = s.paused
       s.paused = undefined
       s.shownAt = now

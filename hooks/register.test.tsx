@@ -2,7 +2,7 @@ import { test, expect, mock, type TestBody } from 'claude-code/testing'
 
 import { PIECES } from './ballet'
 import { decode } from './cells'
-import { completions } from './choose'
+import { completions, modeOf } from './choose'
 import { actOf } from './live'
 
 const band = (isWorking: boolean) => ({
@@ -120,7 +120,7 @@ test('Tab offers what the words typed start, else the piece they loosely name', 
   expect(completions(names, 'li')).toEqual(['live'])
 })
 
-test('/ballet live and /ballet repertoire switch modes, and naming a piece goes back', async ($, on) => {
+test('/ballet live and /ballet standard switch modes, and naming a piece goes back', async ($, on) => {
   const store: Record<string, unknown> = { next: 2 }
   storeOn(on, store)
   const run = async (args: string) => (await $.command.run({ ...TYPED, args })).text
@@ -128,11 +128,61 @@ test('/ballet live and /ballet repertoire switch modes, and naming a piece goes 
   expect(store.mode).toBe('live')
   expect(await run('')).toMatch(/^Ballet off/)
   expect(await run('on')).toMatch(/dances live/)
-  expect(await run('repertoire')).toBe('The repertoire: next up, Swan Lake II.')
-  expect(store.mode).toBe('repertoire')
+  expect(await run('standard')).toBe('Standard: the ballets in turn. Next up, Swan Lake II.')
+  expect(store.mode).toBe('standard')
   await run('live')
   expect(await run('giselle')).toBe('Next up: Giselle.')
-  expect(store.mode).toBe('repertoire')
+  expect(store.mode).toBe('standard')
+})
+
+test('words that name no piece but come near a mode switch to it', async ($, on) => {
+  expect(modeOf('standrd')).toBe('standard')
+  expect(modeOf('repertoire')).toBe('standard')
+  expect(modeOf('liev')).toBe('live')
+  expect(modeOf('zzzz')).toBeUndefined()
+  const store: Record<string, unknown> = { next: 2 }
+  storeOn(on, store)
+  const run = async (args: string) => (await $.command.run({ ...TYPED, args })).text
+  expect(await run('liev')).toMatch(/^Live: Clawd dances on/)
+  expect(store.mode).toBe('live')
+  expect(await run('standrd')).toBe('Standard: the ballets in turn. Next up, Swan Lake II.')
+  await run('live')
+  // The old word still works.
+  expect(await run('repertoire')).toMatch(/^Standard:/)
+  expect(store.mode).toBe('standard')
+  // A piece still wins: "gisele" is Giselle, not a mode.
+  expect(await run('gisele')).toBe('Next up: Giselle.')
+})
+
+test('a reloaded plugin takes the band over: the old load stops painting it', async ($, on) => {
+  const clock = mock.clock(on, { now: 1_000_000 })
+  storeOn(on, {})
+  // The session's state, held here: this load's mark, until a later load
+  // (a hot reload) writes its own.
+  const marks: unknown[] = []
+  on('state.set', (_$, e) => {
+    marks.push(e.value)
+
+    return { value: { isSet: true, version: marks.length } }
+  })
+  on('state.get', () => ({ value: { value: marks[marks.length - 1], version: marks.length } }))
+  on('command.register', (_$, e) => ({ value: { command: e.name } }))
+  let blits = 0
+  on('ui.blit', (_$, e, next_) => {
+    blits++
+
+    return next_(e)
+  })
+  await $.session.start({ cwd: '/repo' } as never).catch(() => {})
+  const ui = await $.ui.mount(band(true))
+  await clock.advance(1000)
+  expect(blits).toBeGreaterThan(0)
+  marks.push('a later load')
+  await clock.advance(100)
+  const before = blits
+  await clock.advance(1000)
+  expect(blits).toBe(before)
+  await ui.unmount()
 })
 
 // Row 0 of the band as text: where the live dancer's caption is.

@@ -6,5 +6,6 @@
   "homepage": "https://github.com/Minithena/ballet-clawd",
   "repository": "https://github.com/Minithena/ballet-clawd",
   "license": "MIT",
+  "types": "./types/index.d.ts",
   "keywords": ["ballet", "clawd", "animation", "claude-toons"]
 }

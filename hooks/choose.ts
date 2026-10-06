@@ -78,7 +78,23 @@ export function choose(names: readonly string[], arg: string): Choice {
 }
 
 // The modes: the live dancer, or the pieces in turn.
-export const MODES = ['live', 'repertoire'] as const
+export const MODES = ['live', 'standard'] as const
+
+// Words for the modes: their names, and standard's old one, still taken.
+const MODE_WORDS: [string, (typeof MODES)[number]][] = [['live', 'live'], ['standard', 'standard'], ['repertoire', 'standard']]
+
+// The mode the words name, typos and all ("standrd", "liev"), if any.
+export function modeOf(arg: string): (typeof MODES)[number] | undefined {
+  const typed = normal(arg)
+  let best: (typeof MODES)[number] | undefined
+  let bestAt = Infinity
+  for (const [word, mode] of MODE_WORDS) {
+    const d = typed ? near(typed, word) : Infinity
+    if (d < bestAt) [best, bestAt] = [mode, d]
+  }
+
+  return best
+}
 
 // What Tab offers for the words typed so far: every name (the modes and
 // on/off too) that starts with them, else the one piece they name loosely.

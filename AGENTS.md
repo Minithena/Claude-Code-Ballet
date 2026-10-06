@@ -173,9 +173,13 @@ at how toons does a thing before doing it differently here.
   it at work), the `Spinner`'s mode (thinking, writing the reply; drawn by
   the engine as ever), `prompt.submit` and `turn.complete`. The mode is
   stored (`mode`) and read again as each turn's dancing starts, as `next`
-  is, since a reload starts the module afresh.
-  `/ballet` toggles it; `/ballet live` and `/ballet repertoire` switch
-  mode; `/ballet <piece>` picks what plays next, loosely
+  is, since a reload starts the module afresh. Each load marks the session in
+  `$.state` (`load`, declared in `types/index.d.ts`) at `session.start`, and
+  the animation loop stops once a later load's mark stands: a hot reload
+  left the old loop painting, two stages flickering in turn.
+  `/ballet` toggles it; `/ballet live` and `/ballet standard` switch
+  mode (`repertoire`, standard's old name, still works, typos too);
+  `/ballet <piece>` picks what plays next, loosely
   (`hooks/choose.ts`: typos, starts of names, acts as `mayerling 3`), and
   words naming no piece reply without toggling. Claude Code has no argument
   completion for commands, so a `prompt.edit` hook completes `/ballet ...`
