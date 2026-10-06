@@ -34,6 +34,22 @@ dissolving into the next if Claude works long enough.
 
 ![Wayne McGregor's Untitled, 2023: a trio on Carmen Herrera's white canvas cut with green](docs/untitled-2023.gif)
 
+| Piece | Acts | Year | Choreography |
+|---|---|---|---|
+| Gala | | | original |
+| Swan Lake | I to IV | 1895 | Marius Petipa, Lev Ivanov |
+| The Nutcracker | I and II | 1892 | Lev Ivanov |
+| The Firebird | one act | 1910 | Michel Fokine |
+| Mayerling | I to III | 1978 | Kenneth MacMillan |
+| Chroma | one act | 2006 | Wayne McGregor |
+| Infra | one act | 2008 | Wayne McGregor |
+| Untitled, 2023 | one act | 2023 | Wayne McGregor |
+| Don Quixote | III, the grand pas de deux | 1869 | Marius Petipa |
+| Giselle | II | 1841 | Jean Coralli, Jules Perrot |
+| La Fille mal gardée | the farmyard | 1960 | Frederick Ashton |
+| Manon | I | 1974 | Kenneth MacMillan |
+| Class | barre and centre | | original |
+
 ## Using it
 
 - **`/ballet`** shows or hides Clawd, even mid-task (`on` and `off` too).
@@ -54,22 +70,6 @@ The settings are also in `/config`, under "Ballet":
 | Live label | Off, live mode shows no label naming what set off each move. |
 
 Everything is remembered across sessions.
-
-| Piece | Acts | Year | Choreography |
-|---|---|---|---|
-| Gala | | | original |
-| Swan Lake | I to IV | 1895 | Marius Petipa, Lev Ivanov |
-| The Nutcracker | I and II | 1892 | Lev Ivanov |
-| The Firebird | one act | 1910 | Michel Fokine |
-| Mayerling | I to III | 1978 | Kenneth MacMillan |
-| Chroma | one act | 2006 | Wayne McGregor |
-| Infra | one act | 2008 | Wayne McGregor |
-| Untitled, 2023 | one act | 2023 | Wayne McGregor |
-| Don Quixote | III, the grand pas de deux | 1869 | Marius Petipa |
-| Giselle | II | 1841 | Jean Coralli, Jules Perrot |
-| La Fille mal gardée | the farmyard | 1960 | Frederick Ashton |
-| Manon | I | 1974 | Kenneth MacMillan |
-| Class | barre and centre | | original |
 
 ## Install
 We both know you're not installing this manually, give the following information to your agent.
