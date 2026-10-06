@@ -1,4 +1,4 @@
-# ballet-clawd
+# Claude Code Ballet
 
 Clawd, the Claude Code mascot, in a pink tutu as on its ballet sticker,
 dancing a little ballet on a little stage just above the prompt while Claude works. It is a
