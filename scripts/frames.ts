@@ -1,14 +1,14 @@
 // Prints the routine's frames as JSON, for scripts/gif.py to draw, rendered
 // by toons' renderer the way the plugin draws them:
 //
-//   node --experimental-transform-types scripts/frames.ts [--piece N | --live [--solo | --agents]] [--seconds N] [--fps N] [--cols N] [--raw]
+//   node --experimental-transform-types scripts/frames.ts [--piece N | --live [--story | --agents]] [--seconds N] [--fps N] [--cols N] [--raw]
 //
 // --raw skips the plugin's last pass over the cells (hooks/cells.ts).
 
 import './resolve.ts'
 
 const { PIECES, moveAt } = await import('../hooks/ballet.ts')
-const { LIVE_SCENE, demoAt, wire } = await import('../hooks/live.ts')
+const { LIVE_SCENE, demoAt, storyAt, wire } = await import('../hooks/live.ts')
 const { cleanScript, stage } = await import('../hooks/script.ts')
 const { solidify } = await import('../hooks/cells.ts')
 
@@ -30,14 +30,16 @@ const rows = 9
 const GROW_MS = 700
 const clean = cleanScript(isLive ? LIVE_SCENE : piece.scene)
 if (!clean) process.exit(1)
-// --solo leaves the corps out of the made-up session; --agents keeps four
-// on throughout (subagents at work), each dancing its own agent's calls.
-const isSolo = args.includes('--solo')
+// --story plays a session told as real tool calls (git status, read
+// README.md, npm test) in place of the made-up one; --agents keeps four
+// of the corps on throughout (subagents at work), each dancing its own
+// agent's calls.
+const isStory = args.includes('--story')
 const isAgents = args.includes('--agents')
 const momentAt = (t: number) => {
+  if (isStory) return storyAt(t)
   const m = demoAt(t)
   const k = Math.floor(t / 0.7)
-  if (isSolo) return { ...m, corps: 0, crewN: 0 }
   if (isAgents) return { ...m, corps: 4, guest: '', crewN: k, crewWho: k % 4 }
 
   return m

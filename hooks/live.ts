@@ -929,6 +929,56 @@ const ACT_OF: Partial<Record<Move, Act>> = { read: 'reading', cat: 'reading', he
 // check-frames): a tool call every 1.5 seconds, every move in turn, some
 // still running a while (tests, builds, sleep), a pause to think every so
 // often, news now and then, a guest and a corps coming and going.
+// A made-up session told as real tool calls, for the README's live GIF
+// (frames.ts --story): each call read by actOf as live mode reads one,
+// with thinking between, a test that fails and then passes, a commit, and
+// the reply written at the end. [seconds in, tool, input, seconds it runs]
+const STORY: [number, string, Record<string, unknown>, number][] = [
+  [1.6, 'Read', { file_path: '/repo/README.md' }, 0],
+  [3.2, 'Bash', { command: 'git status' }, 0],
+  [4.8, 'Bash', { command: 'git log --oneline -5' }, 0],
+  [6.4, 'Grep', { pattern: 'tool.call' }, 0],
+  [9.2, 'Read', { file_path: '/repo/hooks/live.ts' }, 0],
+  [10.8, 'Edit', { file_path: '/repo/hooks/live.ts' }, 0],
+  [12.4, 'Bash', { command: 'npm test' }, 2.4],
+  [16.4, 'Edit', { file_path: '/repo/hooks/live.ts' }, 0],
+  [18, 'Bash', { command: 'npm test' }, 2.4],
+  [21.6, 'Bash', { command: 'git diff' }, 0],
+  [23.2, 'Bash', { command: 'git commit -m "Fix the label"' }, 0],
+  [24.8, 'Bash', { command: 'git push' }, 0],
+]
+// What came of it: the task, the first test run failing, the second passing.
+const STORY_NEWS: [number, News][] = [[0.3, 'task'], [14.8, 'fail'], [20.4, 'pass']]
+// When Claude turns to writing the reply.
+const STORY_REPLY = 26.6
+
+export function storyAt(t: number): Moment {
+  let n = -1
+  for (let k = 0; k < STORY.length; k++) if (STORY[k]![0] <= t) n = k
+  const call = STORY[n]
+  const cue = call ? actOf(call[1], call[2]) : undefined
+  const isBusy = !!call && t < call[0] + call[3]
+  // A call's act holds a moment, or while it runs; then Claude thinks.
+  const isOn = !!call && t < call[0] + Math.max(1.2, call[3])
+  let news = -1
+  for (let k = 0; k < STORY_NEWS.length; k++) if (STORY_NEWS[k]![0] <= t) news = k
+
+  return {
+    act: t >= STORY_REPLY ? 'writing' : isOn && cue ? cue.act : 'thinking',
+    move: cue?.move ?? '',
+    label: cue?.label ?? '',
+    toolN: n + 1,
+    busy: isBusy,
+    news: news >= 0 ? STORY_NEWS[news]![1] : '',
+    newsN: news + 1,
+    corps: 0,
+    guest: '',
+    crewN: 0,
+    crewWho: 0,
+    crewMove: '',
+  }
+}
+
 export function demoAt(t: number): Moment {
   const i = Math.floor(t / 1.5)
   const pause = i % 9 === 8

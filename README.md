@@ -23,14 +23,16 @@ slow port de bras while it writes the reply, balances while tests run.
 fits. They follow Clawd's lead a beat behind, and each dancer also dances
 a move of its own for every tool call its agent makes.
 
-![Swan Lake, act IV: forgiveness, the storm, and a lift into the sunrise](docs/swan-lake.gif)
-
-![Don Quixote: Kitri and Basilio's wedding pas de deux, with fireworks over Barcelona](docs/don-quixote.gif)
-
 ## The programme
 
 In standard mode a piece plays each turn, the acts of a ballet in order,
 dissolving into the next if Claude works long enough.
+
+![Swan Lake, act IV: forgiveness, the storm, and a lift into the sunrise](docs/swan-lake.gif)
+
+![Don Quixote: Kitri and Basilio's wedding pas de deux, with fireworks over Barcelona](docs/don-quixote.gif)
+
+![Wayne McGregor's Untitled, 2023: a trio on Carmen Herrera's white canvas cut with green](docs/untitled-2023.gif)
 
 | Piece | Acts | Year | Choreography |
 |---|---|---|---|
@@ -103,10 +105,11 @@ node --experimental-transform-types scripts/play.ts --live      # live mode, thr
 The GIFs (needs Pillow):
 
 ```sh
-node --experimental-transform-types scripts/frames.ts --live --solo --seconds 30 --fps 15 | python3 scripts/gif.py docs/live.gif
+node --experimental-transform-types scripts/frames.ts --live --story --seconds 30 --fps 15 | python3 scripts/gif.py docs/live.gif
 node --experimental-transform-types scripts/frames.ts --live --agents --seconds 20 --fps 15 --cols 110 | python3 scripts/gif.py docs/subagents.gif
 node --experimental-transform-types scripts/frames.ts --piece 4 --fps 15 | python3 scripts/gif.py docs/swan-lake.gif
 node --experimental-transform-types scripts/frames.ts --piece 14 --fps 15 | python3 scripts/gif.py docs/don-quixote.gif
+node --experimental-transform-types scripts/frames.ts --piece 13 --fps 15 | python3 scripts/gif.py docs/untitled-2023.gif
 ```
 
 ## Credits and license

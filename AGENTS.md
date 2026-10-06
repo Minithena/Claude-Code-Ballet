@@ -236,8 +236,12 @@ at how toons does a thing before doing it differently here.
 - **`scripts/`**: `play.ts` plays it in a terminal (`--live` the live
   dancer, `terminal.sh piece live` to photograph it) and `frames.ts` (`--live` too) prints
   frames for `gif.py`, which draws the README's GIFs under a spinner line
-  (the commands are in the README). For the live GIFs, `--solo` keeps the
-  corps out and `--agents` keeps four on, each dancing its agent's calls.
+  (the commands are in the README). For the live GIFs, `--story` plays
+  `storyAt` (live.ts), a session told as real tool calls read by `actOf`,
+  so the labels are the real ones (`git status`, `read README.md`, a test
+  that fails and then passes; the person wanted the GIF to show Claude
+  reading and using git), and `--agents` keeps four of the corps on, each
+  dancing its agent's calls.
   toons runs its scripts with bun; here they run under Node 24 with
   `--experimental-transform-types` (toons' interpreter uses parameter
   properties), and `resolve.ts` lets the extensionless imports resolve.
