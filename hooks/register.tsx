@@ -366,12 +366,16 @@ export const register: Register = on => {
     return box
   })
 
-  // A new task: the live dancer begins it with a preparation.
+  // A new task: the live dancer begins it with a preparation. These two
+  // hooks stand in front of the prompt and every tool call, so the
+  // dancer's part in them gives up quietly: it never stops the work.
   on('prompt.submit', async ($, e, next_) => {
-    showHint($, s, '')
-    s.tab = undefined
-    tell(s.watch, 'thinking')
-    announce(s.watch, 'task')
+    try {
+      showHint($, s, '')
+      s.tab = undefined
+      tell(s.watch, 'thinking')
+      announce(s.watch, 'task')
+    } catch {}
 
     return next_(e)
   })
@@ -381,29 +385,40 @@ export const register: Register = on => {
   // call itself goes on untouched.
   on('tool.call', async ($, e, next_) => {
     const w = s.watch
-    const at = await $.clock.now().catch(() => s.now)
-    if (e.agentId) {
-      w.agentsSeen.set(e.agentId, at)
-      w.crewWho = [...w.agentsSeen.keys()].indexOf(e.agentId)
-      w.crewMove = actOf(e.tool, e as unknown as Record<string, unknown>).move
-      w.crewN++
-
-      return next_(e)
-    }
-    const { act, move, label } = actOf(e.tool, e as unknown as Record<string, unknown>)
-    const mcp = mcpOf(e.tool)
-    const isAgent = act === 'agents'
-    tell(w, act)
-    w.move = move
-    w.label = label
-    w.toolN++
-    w.tools++
-    if (isAgent) w.agentCalls++
-    if (mcp) {
-      w.guest = mcp.server
-      w.guestUntil = Infinity
-      w.mcpCalls++
-    }
+    let at = s.now
+    let act: Act | undefined
+    let isAgent = false
+    let mcp: ReturnType<typeof mcpOf>
+    try {
+      at = await $.clock.now().catch(() => s.now)
+      if (e.agentId) {
+        w.agentsSeen.set(e.agentId, at)
+        w.crewWho = [...w.agentsSeen.keys()].indexOf(e.agentId)
+        w.crewMove = actOf(e.tool, e as unknown as Record<string, unknown>).move
+        w.crewN++
+      } else {
+        const cue = actOf(e.tool, e as unknown as Record<string, unknown>)
+        const thisMcp = mcpOf(e.tool)
+        tell(w, cue.act)
+        w.move = cue.move
+        w.label = cue.label
+        w.toolN++
+        w.tools++
+        if (cue.act === 'agents') w.agentCalls++
+        if (thisMcp) {
+          w.guest = thisMcp.server
+          w.guestUntil = Infinity
+          w.mcpCalls++
+        }
+        // Set once the counters are up, so the finally below undoes
+        // exactly what was done.
+        act = cue.act
+        isAgent = act === 'agents'
+        mcp = thisMcp
+      }
+    } catch {}
+    // A subagent's call, or one the dancer couldn't read: nothing to undo.
+    if (!act) return next_(e)
     try {
       const result = await next_(e)
       if (('deny' in result && result.deny) || result.isError) announce(w, 'fail')
