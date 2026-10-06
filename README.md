@@ -1,12 +1,12 @@
 # Claude Code Ballet
 
-Clawd, the Claude Code mascot, in a pink tutu, dancing on a little stage
-above the prompt while Claude works. In live mode it dances what Claude is
-doing, a move for each tool call; otherwise it performs from a programme of
-ballets. No model is asked, so it costs nothing.
+A plugin for Claude Code CLI that shows Clawd doing ballet when a model is working.
+In live mode each performance is unique, it does moves in response to what Claude is
+doing, a move for each tool call and action.
+There is also a programme of ballets it can perform instead.
 
 Built on [claude-toons](https://github.com/achimala/claude-toons) by Anshu
-Chimala: every frame is drawn by toons' renderer, scene language and
+Chimala: using it's toons' renderer, scene language and
 pixel-art Clawd.
 
 ![Live mode: Clawd dancing a move for each tool call, labelled with what set it off](docs/live.gif)
