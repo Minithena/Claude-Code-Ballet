@@ -76,8 +76,20 @@ at how toons does a thing before doing it differently here.
   variations, coda; lifts, supported pirouettes) rather than in props.
   A corps dances in unison or canon, never stands. Speech is sparse
   (the person found every piece over-explained, more play than ballet):
-  a title card, a story beat, a joke; never a line naming the step
-  being danced ("pirouette!", "hop, hop!").
+  a title card, a story beat, a joke, three lines at most a piece (the
+  person found it too wordy again at four to six); never a line naming the
+  step being danced ("pirouette!", "hop, hop!"), and no counters or other
+  text drawn on stage (Odile's "1 / 32" went). Nothing drawn into a
+  dancer's body either: Infra's tear, a `·` put mid-body, read as a rogue
+  dot. Backdrops are toons' particle swarms (`particles` in `PIECES`:
+  `stars`, `rain`, `fireworks`, `confetti`, `fireflies`, `EMBERS`,
+  `BIRDS`), text glyphs behind the set and dancers that show in any
+  terminal; toons' backdrop effects are kept faint by its renderer
+  (`stage()` paints them at 0.4, dithered) and can't be raised here.
+  A swarm's expressions read the piece's clock, so `during` shows one
+  only for its moment in the routine. A set that paints its sky (Swan
+  Lake I's dusk) hides them; tiny static specks read as bugs, so leave
+  those out.
   Keep endings light (the
   person found Mayerling's faithful one too dark), and partners at least
   14 columns apart, or two orange bodies read as one. A track's keyframes
@@ -181,7 +193,20 @@ at how toons does a thing before doing it differently here.
   mode (`repertoire`, standard's old name, still works, typos too);
   `/ballet <piece>` picks what plays next, loosely
   (`hooks/choose.ts`: typos, starts of names, acts as `mayerling 3`), and
-  words naming no piece reply without toggling. Claude Code has no argument
+  words naming no piece reply without toggling. `/ballet programme` (or
+  `program`, `settings`) opens a pane, a row each for the next piece, the
+  mode (m), shown or hidden (h) and the settings (o, s, l), each a plain
+  Button changed in place by its letter: a Select list trapped the arrow
+  keys, which wrapped round it. n swaps the rows for every piece in
+  columns (`isPicking`), a letter each, 0 back; a pick sets what plays
+  next and leaves the mode alone (stepping through them one by one was too
+  slow for the person). The settings are `userConfig` in
+  plugin.json (in /config as "Ballet: ..."; the pane changes them with
+  `$.config.set`, which reloads the plugin): `order` (shuffled keeps a
+  ballet's acts in order, `following` in choose.ts), `speech` and the live
+  `label`, both turned off by code added after the scene's own whose
+  definitions replace its (`function say() {}`, `function tag() {}`;
+  `wire`'s `extra` for the live scene). Claude Code has no argument
   completion for commands, so a `prompt.edit` hook completes `/ballet ...`
   on Tab and the idle band shows a dim hint row of the matches. Helpers
   given `$` must be top-level functions (the engine refuses the module

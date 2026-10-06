@@ -908,9 +908,11 @@ export const LIVE_SCENE: Record<string, unknown> = {
 // wrote); the live scene is the plugin's own and longer, so it is parsed
 // whole here. Its program runs with the renderer's own globals (t, dt, w,
 // h) and the moment's added on every call, so the renderer stays toons'.
-export function wire(script: Script, moment: () => Moment): Script {
+// `extra` is code added after it: definitions there replace the scene's own
+// (the settings' `function tag() {}` and `function say() {}`).
+export function wire(script: Script, moment: () => Moment, extra = ''): Script {
   if (!script.code) return script
-  const program = parseProgram(LIVE_CODE)
+  const program = parseProgram(LIVE_CODE + extra)
   script.code.error = undefined
   script.code.program = {
     start: (globals, budget, ms) => program.start({ ...globals, ...globalsOf(moment()) }, budget, ms),

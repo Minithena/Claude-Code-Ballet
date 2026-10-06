@@ -2,7 +2,7 @@ import type { EngineInterface, Register } from 'claude-code'
 
 import { PIECES } from './ballet'
 import { solidify } from './cells'
-import { choose, completions, MODES, modeOf, summary, title } from './choose'
+import { choose, completions, following, isProgramme, MODES, modeOf, PROGRAMME, summary, title } from './choose'
 import { actOf, LIVE_SCENE, mcpOf, wire, type Act, type Moment, type Move, type News } from './live'
 import { cleanScript, stage, type Script } from './script'
 import type { BalletLoad } from '../types'
@@ -22,6 +22,21 @@ const LOAD = { plugin: 'ballet-clawd', key: 'load' } as const
 // The pieces in turn (standard), or the live dancer, whose steps follow
 // what Claude does (hooks/live.ts).
 type Mode = 'standard' | 'live'
+
+// The settings in /config (plugin.json's userConfig), also in the
+// programme: the order the ballets play in, speech bubbles, and the live
+// dancer's label. Changing one reloads the plugin with it.
+type Settings = { isShuffled: boolean; isSpoken: boolean; isLabelled: boolean }
+const settingsOf = (o: Record<string, unknown>): Settings => ({ isShuffled: o.order === 'shuffled', isSpoken: o.speech !== 'off', isLabelled: o.label !== 'off' })
+// Code added after a scene's own, whose definitions replace its: a `say`
+// that says nothing, a label chip that isn't drawn.
+const QUIET = '\nfunction say() {}'
+const UNLABELLED = '\nfunction tag() {}'
+// The programme's pane, opened by `/ballet programme`; its list of pieces,
+// a letter each (a hotkey is one letter or digit) in columns this wide.
+const PANE = 'ballet-programme'
+const PICK_KEYS = 'abcdefghijklmnopqrstuvwxyz'
+const PICK_WIDTH = 24
 
 // What Claude is doing, for the live dancer, as the hooks below see it.
 type Watch = {
@@ -58,6 +73,7 @@ type Stage = {
   isShown: boolean
   isAnimating: boolean
   mode: Mode
+  settings: Settings
   // The band being drawn on while Claude works (its request), when the turn's
   // dancing began (the band grows in there), the strip's size and the height
   // drawn so far.
@@ -88,6 +104,8 @@ type Stage = {
   // stepping through: the matches and the one it last put in.
   hint?: string
   tab?: { list: string[]; at: number }
+  // The programme showing its list of pieces rather than its rows.
+  isPicking?: boolean
 }
 
 // A piece shown only a moment (a quick turn, or the instant the band counts
@@ -113,7 +131,7 @@ function finish($: EngineInterface, s: Stage, at: number) {
 
     return
   }
-  s.next = at - s.sceneAt > SEEN_MS ? (s.piece + 1) % PIECES.length : s.piece
+  s.next = at - s.sceneAt > SEEN_MS ? following(NAMES, s.piece, s.settings.isShuffled) : s.piece
   s.scene = undefined
   void $.store.set('next', s.next).catch(() => {})
 }
@@ -129,7 +147,8 @@ const rowsAt = (s: Stage, at: number) => {
 // Starts a piece: a fresh scene, so its clock and its speech start over.
 function begin(s: Stage, index: number, at: number) {
   s.piece = ((index % PIECES.length) + PIECES.length) % PIECES.length
-  s.scene = cleanScript(PIECES[s.piece]!.scene)
+  const scene = PIECES[s.piece]!.scene
+  s.scene = cleanScript(s.settings.isSpoken ? scene : { ...scene, code: scene.code + QUIET })
   s.sceneAt = at
 }
 
@@ -151,7 +170,7 @@ function beginLive(s: Stage, at: number) {
   if (!s.live || s.live.code?.error) {
     const script = cleanScript(LIVE_SCENE)
     if (!script) return
-    s.live = wire(script, () => momentOf(s))
+    s.live = wire(script, () => momentOf(s), (s.settings.isSpoken ? '' : QUIET) + (s.settings.isLabelled ? '' : UNLABELLED))
     s.liveAt = at
   }
   s.scene = s.live
@@ -164,7 +183,7 @@ function frameAt(s: Stage, at: number, rows: number) {
   if (s.mode === 'standard' && s.scene && at - s.sceneAt > PIECES[s.piece]!.routine * 1000) {
     s.previous = s.scene
     s.previousAt = s.sceneAt
-    begin(s, s.piece + 1, at)
+    begin(s, following(NAMES, s.piece, s.settings.isShuffled), at)
   }
   if (s.mode === 'live' && s.scene?.code?.error) beginLive(s, at)
   if (!s.scene) return undefined
@@ -232,6 +251,39 @@ async function switchTo($: EngineInterface, s: Stage, mode: Mode) {
   else $.ui.invalidate('ui.render')
 }
 
+// The programme's list of pieces: shown (n), then closed by a pick, which
+// sets what plays next without changing the mode, or by 0.
+async function picking($: EngineInterface, s: Stage, isPicking: boolean, index?: number) {
+  s.isPicking = isPicking
+  if (index !== undefined) {
+    s.next = index
+    await $.store.set('next', s.next).catch(() => {})
+  }
+  $.ui.invalidate('ui.render')
+}
+
+// The piece the next turn starts with, picked by name.
+async function pick($: EngineInterface, s: Stage, index: number) {
+  s.next = index
+  await $.store.set('next', s.next).catch(() => {})
+  await switchTo($, s, 'standard')
+}
+
+// Changes one of the settings as /config would; the engine then reloads
+// the plugin with it. The row is found by its label, which stays put while
+// its key carries the plugin's name (`<name>@inline` loaded from a folder).
+async function setOption($: EngineInterface, field: string, value: string) {
+  try {
+    const rows = await $.config.list()
+    const row = rows.find(r => r.key.endsWith(`.${field}`) && r.label.startsWith('Ballet:'))
+    if (!row) throw new Error('no such setting; restart Claude Code to load it')
+    const { deny } = await $.config.set({ key: row.key, value })
+    if (deny) throw new Error(deny)
+  } catch (e) {
+    $.ui.toast(`ballet-clawd: could not change ${field}: ${e instanceof Error ? e.message : String(e)}`)
+  }
+}
+
 // What the live dancer is told: the work, and news.
 function tell(w: Watch, act: Act) {
   w.act = act
@@ -251,7 +303,7 @@ const DRAFT = /^\/ballet (.*)$/s
 
 // What the hint row above the prompt says for a draft of `/ballet <words>`.
 function hintFor(arg: string): string {
-  if (!arg.trim()) return `${summary(NAMES)}, live, standard, on, off`
+  if (!arg.trim()) return `${summary(NAMES)}, live, standard, programme, on, off`
   const fits = completions(NAMES, arg)
 
   return fits.length ? `${fits.join(' · ')}   (tab completes)` : 'no piece by that name'
@@ -266,11 +318,12 @@ function showHint($: EngineInterface, s: Stage, text: string) {
   $.ui.invalidate('ui.render')
 }
 
-export const register: Register = on => {
+export const register: Register = (on, options) => {
   const s: Stage = {
     isShown: true,
     isAnimating: false,
     mode: 'standard',
+    settings: settingsOf(options as Record<string, unknown>),
     shownAt: 0,
     cols: 60,
     drawnRows: 1,
@@ -297,8 +350,8 @@ export const register: Register = on => {
     if ((await $.store.get('mode').catch(() => undefined)) === 'live') s.mode = 'live'
     await $.command.register({
       name: COMMAND,
-      description: `Show or hide Clawd dancing ballet above the prompt, pick the piece (${summary(NAMES)}), or dance live to what Claude does`,
-      argumentHint: '[on|off|live|standard|<ballet> [act]]',
+      description: `Show or hide Clawd dancing ballet above the prompt, pick the piece (${summary(NAMES)}), dance live to what Claude does, or open the programme`,
+      argumentHint: '[on|off|live|standard|programme|<ballet> [act]]',
       immediate: true,
     })
 
@@ -314,9 +367,15 @@ export const register: Register = on => {
 
       return { text: s.isShown ? `Ballet on: Clawd dances ${s.mode === 'live' ? 'live, to what Claude does' : 'the ballets in turn'} while Claude works.` : 'Ballet off. /ballet brings Clawd back.' }
     }
-    // A piece by its name first; else words near a mode switch to it,
-    // typos and all ("standrd").
+    // A piece by its name first; else words near the programme open it, and
+    // words near a mode switch to it, typos and all ("progamme", "standrd").
     const picked = choose(NAMES, arg)
+    if (PROGRAMME.includes(arg) || ('error' in picked && isProgramme(arg))) {
+      s.isPicking = false
+      await $.ui.open({ id: PANE, title: 'Ballet programme', focus: true, closeOnEscape: true, rows: 12 })
+
+      return { text: 'The programme is open. Escape closes it.' }
+    }
     const mode = MODES.find(m => m === arg) ?? (arg === 'repertoire' || 'error' in picked ? modeOf(arg) : undefined)
     if (mode === 'live') {
       await switchTo($, s, 'live')
@@ -332,9 +391,7 @@ export const register: Register = on => {
     }
     // Words that name no piece say so, and leave the ballet as it was.
     if ('error' in picked) return { text: picked.error }
-    s.next = picked.index
-    await $.store.set('next', s.next).catch(() => {})
-    await switchTo($, s, 'standard')
+    await pick($, s, picked.index)
 
     return { text: `Next up: ${title(PIECES[picked.index]!.name)}.` }
   })
@@ -451,6 +508,74 @@ export const register: Register = on => {
     $.ui.invalidate('ui.render')
 
     return next_(e)
+  })
+
+  // The programme: what plays next, the mode, and the settings, a row
+  // each, changed in place by its letter (or Tab to it and Enter): a Select
+  // trapped the arrow keys, which wrapped round its list. n shows the
+  // pieces instead, in columns, a letter each.
+  on('ui.render', { component: 'Pane', requestId: PANE }, async ($, e) => {
+    if (e.surface === 'mobile') {
+      const { Text } = $.ui.resolve(e)
+
+      return <Text>The ballet dances in the terminal; open the programme there.</Text>
+    }
+    const { Box, Text, Button } = $.ui.resolve(e)
+    if (s.isPicking) {
+      const columns = Math.max(1, Math.min(3, Math.floor((e.props.bodyColumns - 2) / PICK_WIDTH)))
+      const perColumn = Math.ceil(PIECES.length / columns)
+
+      return (
+        <Box flexDirection="column" paddingX={1}>
+          <Text bold>What plays next</Text>
+          <Box flexDirection="row" marginTop={1}>
+            {Array.from({ length: columns }, (_, c) => (
+              <Box key={`column-${c}`} flexDirection="column" width={PICK_WIDTH}>
+                {PIECES.slice(c * perColumn, (c + 1) * perColumn).map((p, k) => {
+                  const i = c * perColumn + k
+
+                  return (
+                    <Button key={`piece-${i}`} hotkey={PICK_KEYS[i]} plain dimColor={i !== s.next} onPress={() => void picking($, s, false, i)}>
+                      {i === s.next ? `${title(p.name)} <` : title(p.name)}
+                    </Button>
+                  )
+                })}
+              </Box>
+            ))}
+          </Box>
+          <Box marginTop={1}>
+            <Button key="unpick" hotkey="0" plain dimColor onPress={() => void picking($, s, false)}>
+              back
+            </Button>
+          </Box>
+        </Box>
+      )
+    }
+    const row = (label: string, keyed: string, hotkey: string, value: string, onPress: () => void) => (
+      <Box flexDirection="row">
+        <Box width={16}>
+          <Text dimColor>{label}</Text>
+        </Box>
+        <Button key={keyed} hotkey={hotkey} plain onPress={onPress}>
+          {value}
+        </Button>
+      </Box>
+    )
+    const settings = s.settings
+
+    return (
+      <Box flexDirection="column" paddingX={1}>
+        {row('Next up', 'next', 'n', `${title(PIECES[s.next]!.name)}  (all the pieces)`, () => void picking($, s, true))}
+        {row('Mode', 'mode', 'm', s.mode === 'live' ? 'live, dancing to what Claude does' : 'standard, the ballets in turn', () => void switchTo($, s, s.mode === 'live' ? 'standard' : 'live'))}
+        {row('Clawd', 'shown', 'h', s.isShown ? 'shown' : 'hidden', () => void toggle($, s, !s.isShown))}
+        {row('Order', 'order', 'o', settings.isShuffled ? 'shuffled, acts still in order' : 'in turn', () => void setOption($, 'order', settings.isShuffled ? 'in turn' : 'shuffled'))}
+        {row('Speech bubbles', 'speech', 's', settings.isSpoken ? 'on' : 'off', () => void setOption($, 'speech', settings.isSpoken ? 'off' : 'on'))}
+        {row('Live label', 'label', 'l', settings.isLabelled ? 'on' : 'off', () => void setOption($, 'label', settings.isLabelled ? 'off' : 'on'))}
+        <Box marginTop={1}>
+          <Text dimColor>Press a letter to change its row (or Tab to it and Enter); Escape closes. The settings are also in /config.</Text>
+        </Box>
+      </Box>
+    )
   })
 
   // The stage sits in the band directly above the prompt, flush against it,

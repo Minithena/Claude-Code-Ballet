@@ -2,7 +2,7 @@ import { test, expect, mock, type TestBody } from 'claude-code/testing'
 
 import { PIECES } from './ballet'
 import { decode } from './cells'
-import { completions, modeOf } from './choose'
+import { completions, following, modeOf, split } from './choose'
 import { actOf } from './live'
 
 const band = (isWorking: boolean) => ({
@@ -116,7 +116,8 @@ test('Tab offers what the words typed start, else the piece they loosely name', 
   expect(completions(names, 'o')).toEqual(['on', 'off'])
   expect(completions(names, 'mmayer')).toEqual(['mayerling i'])
   expect(completions(names, 'xyz')).toEqual([])
-  expect(completions(names, '')).toHaveLength(names.length + 4)
+  expect(completions(names, '')).toHaveLength(names.length + 5)
+  expect(completions(names, 'prog')).toEqual(['programme'])
   expect(completions(names, 'li')).toEqual(['live'])
 })
 
@@ -217,6 +218,83 @@ test('live, each tool call fires a move labelled over Clawd, and passes through 
   const failed = await $.tool.call({ tool: 'Bash', command: 'npm test' })
   expect(failed).toMatchObject({ isError: true, result: { stdout: '1 failed' } })
   await ui.unmount()
+})
+
+test('with the live label off, the moves carry no chip', { options: { label: 'off' } }, async ($, on) => {
+  const clock = mock.clock(on, { now: 1_000_000 })
+  storeOn(on, { mode: 'live' })
+  on('tool.call', () => ({ result: { file: 'ok' } }))
+  let ui = await $.ui.mount(band(true))
+  await clock.advance(2000)
+  await $.tool.call({ tool: 'Read', file_path: '/repo/hooks/live.ts' })
+  await clock.advance(500)
+  await ui.unmount()
+  ui = await $.ui.mount(band(true))
+  const raster = await ui.find({ key: 'ballet' })
+  expect(topRow(String(raster?.props.cells), Number(raster?.props.columns))).not.toContain('read live.ts')
+  await ui.unmount()
+})
+
+// The programme's pane, as the terminal seats it above the prompt.
+const PROGRAMME_PANE = {
+  plugin: 'ballet-clawd',
+  surface: 'terminal' as const,
+  component: 'Pane' as const,
+  requestId: 'ballet-programme',
+  props: { title: 'Ballet programme', isFocused: true, bodyColumns: 80, placement: 'inline' as const, scroll: { offset: 0, bodyRows: 12 }, view: {} },
+}
+
+test('/ballet programme opens the programme, a row a key: n lists the pieces to pick from', async ($, on) => {
+  const store: Record<string, unknown> = { next: 0 }
+  storeOn(on, store)
+  const opened: string[] = []
+  on('ui.open', (_$, e) => {
+    opened.push(e.id)
+
+    return { value: { isPlaced: true as const } }
+  })
+  const run = async (args: string) => (await $.command.run({ ...TYPED, args })).text
+  expect(await run('programme')).toBe('The programme is open. Escape closes it.')
+  expect(opened).toEqual(['ballet-programme'])
+  expect(await run('settings')).toBe('The programme is open. Escape closes it.')
+  // Typos too, as everywhere in /ballet; a piece's name still wins.
+  expect(await run('progamme')).toBe('The programme is open. Escape closes it.')
+  expect(await run('setings')).toBe('The programme is open. Escape closes it.')
+  expect(await run('p')).toMatch(/^No piece called "p"/)
+  expect(await run('manon')).toBe('Next up: Manon.')
+  store.next = 0
+  delete store.mode
+  const ui = await $.ui.mount(PROGRAMME_PANE)
+  expect((await ui.find({ key: 'order' }))?.props.hotkey).toBe('o')
+  // n lists every piece, a letter each; a pick goes back to the rows.
+  await ui.press({ key: 'next' })
+  expect((await ui.find({ key: 'piece-15' }))?.props.hotkey).toBe('p')
+  expect(await ui.find({ key: 'order' })).toBeUndefined()
+  await ui.press({ key: 'piece-15' })
+  expect(store.next).toBe(15)
+  expect(await ui.find({ key: 'order' })).toBeDefined()
+  // 0 goes back without a pick.
+  await ui.press({ key: 'next' })
+  await ui.press({ key: 'unpick' })
+  expect(store.next).toBe(15)
+  // Picking leaves the mode alone; m switches it.
+  expect(store.mode).toBeUndefined()
+  await ui.press({ key: 'mode' })
+  expect(store.mode).toBe('live')
+  await ui.unmount()
+})
+
+test('in turn the pieces follow the programme; shuffled, a ballet\'s acts stay in order', () => {
+  const names = PIECES.map(p => p.name)
+  expect(following(names, 1, false)).toBe(2)
+  expect(following(names, names.length - 1, false)).toBe(0)
+  // Swan Lake I goes on to its act II, whatever the dice say.
+  expect(following(names, 1, true, () => 0.99)).toBe(2)
+  // After Swan Lake IV, only the start of another ballet.
+  for (let k = 0; k < 20; k++) {
+    const next = split(names[following(names, 4, true, () => k / 20)]!)
+    expect(next.act <= 1 && next.ballet !== 'swan lake').toBe(true)
+  }
 })
 
 test('a blink of the band mid-turn picks up where it was; a new turn grows in', async ($, on) => {

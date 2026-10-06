@@ -258,7 +258,6 @@ key(19.4, P(0.5, 'front', FIFTH, 'stand', { eyes: 'happy' }));
 key(19.8, P(0.5, 'left', SECOND, 'stand'));
 key(22, P(-0.3, 'left', SECOND, 'stand'));
 line(0.5, 2.4, ['by the lake, at midnight...', 'a swan glides in...', 'swan lake, act two.']);
-line(14.8, 16.4, ['the dying swan...', 'farewell...', 'so tragic.']);
 line(19.2, 21, ['...just kidding!', 'i feel better now.', 'encore!']);
 
 // Von Rothbart, the sorcerer as an owl, flying across the moon as the
@@ -405,8 +404,6 @@ key(18.2, P(0.6, 'front', BAS, 'plie', { eyes: 'closed' }));
 key(19.2, P(0.3, 'right', BAS, 'stand'));
 key(20, P(0.3, 'right', BAS, 'stand'));
 line(0.2, 2.2, ['and plie, 2, 3, 4...', 'at the barre, please.', 'class, begin!']);
-line(6.4, 8.4, ['passe... and balance.', 'pull up! pull up!', 'hold it... hold it...']);
-line(10.2, 11.4, ['center, double pirouette!', 'spot your head!', 'turn, turn!']);
 line(15, 16.6, ['lovely!', 'beautiful line!', 'very nice, clawd.']);
 line(17.4, 18.8, ['merci, madame.', 'thank you!', 'same time tomorrow?']);
 
@@ -490,7 +487,6 @@ balances(16.8, 0.6, 4, FIFTH, 0.7, { eyes: 'closed' });
 key(19.6, P(0.6, 'left', SECOND, 'stand'));
 leaps(19.8, 0.6, -0.4, 3);
 line(2.7, 3.6, ['the firebird!', 'ta-da!', 'hot hot hot!']);
-line(5.7, 6.5, ['mine!', 'yoink!', 'yum.']);
 line(6.7, 8.2, ['eek! let me go!', 'who grabbed me?!', 'unhand me, ivan!']);
 line(9.4, 10.8, ['take this feather.', 'call me if you need me.', 'a gift, for you.']);
 
@@ -693,7 +689,6 @@ key(20.4, M(0.5, -9, 'front', BAS, 'plie', { eyes: 'closed' }));
 key(21, M(0.5, -9, 'left', BAS, 'stand'));
 key(22, M(-0.2, 0, 'left', BAS, 'stand'));
 line(0.3, 2.2, ['vienna, 1881.', 'the royal wedding ball.', 'the hofburg, ablaze.']);
-line(2.5, 3.4, ['your highness.', 'charmed.', 'princess.']);
 line(10.6, 11.6, ['how dull.', 'excuse me.', 'i need air.']);
 line(17.6, 19.4, ['some wedding...', 'rudolf?', 'well then.']);
 
@@ -784,7 +779,6 @@ okey(19, M(0, 0, 'front', FIFTH, 'kneel', { eyes: 'happy' }));
 okey(22, M(0, 0, 'front', FIFTH, 'kneel', { eyes: 'happy' }));
 const STAMPING = [[0, 7.6], [10.6, 18.6]];
 line(0.3, 2.4, ['the tavern of mitzi caspar.', 'the hungarian officers!', 'vienna by night.']);
-line(2.7, 4.2, ['hej! hej!', 'mitzi! mitzi!', 'more wine!']);
 line(13.4, 14.6, ['die with me, mitzi.', 'a pact, mitzi?', 'together, forever...']);
 line(15.2, 16.8, ['die? i would rather dance!', 'ha! no thank you!', 'dance with me instead!']);
 
@@ -890,10 +884,7 @@ rkey(24, M(0.5, 7, 'front', FIFTH, 'stand', { eyes: 'happy' }));
 const KISS_AT = 12.2;
 line(0.3, 2.5, ['mayerling, 1889.', 'the hunting lodge...', 'a winter night.']);
 line(3.2, 5.5, ['never let me go.', 'rudolf...', 'hold on to me.']);
-line(6.2, 7.8, ['catch me...', 'spin me round.', 'like a dream.']);
-line(9.4, 11, ['wait for me!', 'here i come!', 'mary...']);
 line(19.4, 20.6, ['...just kidding!', 'champagne, anyone?', 'plot twist: we are fine!']);
-line(21, 22.6, ['thank you, vienna!', 'encore!', 'bravo, us!']);
 
 // The kiss: Rudolf kneeling, body on the floor, his near arm up round
 // her; Mary upside down above him, set four columns aside so the two
@@ -1232,8 +1223,6 @@ function frame(t, dt) {
   }
   dancer(r, at(r), ground, HIM);
   d = dancer(s, at(s), ground, HER);
-  // A tear, falling.
-  if (u > 9 && u < 15.2 && Math.floor(t * 2) % 3 !== 0) put(d.x - 3, d.row + 2, '·', '#8ab4ff');
   if (u > 7.6 && u < 8.2) fill(0, 0, w, h, ' ', '#050608', '#050608');
   // The light goes; the walkers walk on.
   if (u > 21) {
@@ -1376,7 +1365,6 @@ rkey(16.8, M(0.55, 0, 'right', ['out', 'up'], 'stand'));
 rkey(18.6, M(0.55, 0, 'right', ['out', 'up'], 'stand'));
 steps(rkey, 18.9, 0.55, 1.4, 0, 6, SECOND, 0.5);
 line(0.3, 2.2, ['swan lake, act one.', 'the palace garden.', 'a birthday!']);
-line(3.2, 4.6, ['happy birthday, prince!', 'many happy returns!', 'twenty-one today!']);
 line(9.6, 10.6, ['a crossbow? for me?', 'thank you, mother!', 'how... practical.']);
 
 // Dusk deepening over the garden, the palace's towers dark against it.
@@ -1426,14 +1414,13 @@ function frame(t, dt) {
   if (u > 9.6 && u < 10.8) pixels(d.x + 6, d.top - 4, 'bbbbb\n..b..\n..b..\n..b..', { b: '#8a5a2a' });
   const said = saying(u, n);
   if (said && u < 2.2) say(said, Math.round(w / 2), 0);
-  else if (said && u < 6.6) speak(said, { x: at(a), row: d.row });
   else if (said) speak(said, d);
 }
 `
 
 // Swan Lake, act III: the ball. Von Rothbart brings his daughter Odile,
 // the black swan, dressed as Odette; she dazzles the prince, pas de deux,
-// her thirty-two fouettés (counted), he swears to love her, Rothbart
+// her thirty-two fouettés, he swears to love her, Rothbart
 // gloats, lightning, and the prince runs for the lake.
 const SWAN3 = String.raw`
 const ROUTINE = 24;
@@ -1472,7 +1459,7 @@ phrase(ckey, 2.6, 0.8, 0.12, 0, [
   ['right', ['out', 'high'], 'stand'], ['right', FIFTH, 'plie'], ['right', ['out', 'high'], 'stand'], ['right', FIFTH, 'plie'],
   ['right', ['out', 'high'], 'stand'], ['right', FIFTH, 'plie'], ['right', ['out', 'high'], 'stand'],
 ], true);
-// Thirty-two fouettés (well, twelve turns; nobody's counting. The counter is.)
+// Thirty-two fouettés (well, twelve turns; nobody's counting).
 key(9.2, M(0.5, -4, 'front', SECOND, 'plie'));
 key(9.4, M(0.5, -4, 'front', FIFTH, 'passe', { spinning: true, spin: 0 }));
 key(14.2, M(0.5, -4, 'front', FIFTH, 'passe', { spinning: true, spin: 4320 }));
@@ -1500,10 +1487,8 @@ key(21.6, M(0.5, -6, 'right', BAS, 'derriere', { eyes: 'closed' }));
 key(22, M(0.5, -6, 'left', SECOND, 'stand'));
 key(24, M(-0.3, 0, 'left', SECOND, 'stand'));
 line(0.3, 2.4, ['swan lake, act three.', 'the palace ball.', 'a mysterious guest...']);
-line(3.3, 4.8, ['odette? is it you?', 'you came!', 'my swan...']);
 line(14.8, 16.4, ['i swear to love you forever!', 'i promise!', 'marry me!']);
 line(17.9, 19.2, ['ha! wrong swan!', 'fooled you!', 'she is my daughter!']);
-line(19.5, 20.5, ['oops.', 'oh no.', 'odette!!']);
 // Who says each line: up to each time, the prince (r), Odile (o), or
 // Rothbart (c).
 const WHO = [[5.6, 'r'], [14.6, 'o'], [17, 'r'], [19.4, 'c'], [21, 'r'], [24, 'o']];
@@ -1537,10 +1522,7 @@ function frame(t, dt) {
   const dc = dancer(c, at(c), ground, ROTHBART);
   const dr = dancer(r, at(r), ground, PRINCE);
   const d = dancer(o, at(o), ground, ODILE);
-  if (u > 9.4 && u < 14.4) {
-    sparkles(t, d, floor, '#e03040');
-    text(Math.round(w / 2) - 3, 0, Math.min(32, Math.floor((u - 9.4) / 4.8 * 32) + 1) + ' / 32', '#ffd84a');
-  }
+  if (u > 9.4 && u < 14.4) sparkles(t, d, floor, '#e03040');
   lightning(u, 17.2);
   lightning(u, 17.8);
   const said = saying(u, n);
@@ -1609,7 +1591,6 @@ rkey(21.2, M(0.5, 8, 'left', BAS, 'plie', { eyes: 'closed' }));
 rkey(24, M(0.5, 8, 'left', BAS, 'plie', { eyes: 'closed' }));
 line(0.3, 1.8, ['swan lake, act four.', 'the lake, before dawn.', 'betrayed...']);
 line(5.8, 7.4, ['forgive me, odette!', 'she tricked me!', 'i am so sorry!']);
-line(8.2, 9.4, ['...i forgive you.', 'oh, all right.', 'come here.']);
 line(20.6, 22, ['happily ever after.', 'love wins!', 'no more swan, ever.']);
 // The swans' phrase, a count each: mourning (arabesques toward Odette,
 // the wings lowered and lifted), then glad (jumps).
@@ -1740,8 +1721,6 @@ for (let i = 0; i < 2; i++) {
 }
 steps(ckey, 21.8, 0.45, 1.3, 8, 4, SECOND, 0.5);
 line(0.3, 2, ['the nutcracker, act one.', 'christmas eve!', 'the stahlbaum party.']);
-line(4.8, 6, ['a nutcracker! for me?', 'i love him!', 'my little soldier!']);
-line(6.4, 7.8, ['bong... bong... bong...', 'midnight...', 'tick tock... bong!']);
 line(10.4, 11.6, ['mice!!', 'eek! the mouse king!', 'shoo! shoo!']);
 line(16.6, 17.6, ['a prince!', 'my nutcracker?!', 'you are real!']);
 
@@ -1823,7 +1802,6 @@ function frame(t, dt) {
   if (u > 18 && u < 21) sparkles(t, d, floor, '#e8f4ff');
   const said = saying(u, n);
   if (said && u < 2.2) say(said, Math.round(w / 2), 0);
-  else if (said && u > 6.4 && u < 7.8) say(said, 14, 1);
   else if (said) speak(said, d);
 }
 `
@@ -1916,13 +1894,8 @@ leaps(25, 0.5, 0.05, 1);
 key(26, P(-0.3, 'left', SECOND, 'stand'));
 steps(rkey, 25, 0.5, 1.3, 8, 2, SECOND, 0.5);
 line(0.4, 1.6, ['ole!', 'make way, barcelona!', 'kitri is here!']);
-line(2.5, 3.4, ['the wedding!', 'we did it, kitri!', 'married at last!']);
-line(5.6, 6.6, ['one hand!', 'ta-da!', 'light as a fan!']);
 line(7.6, 8.8, ['...still holding.', 'who needs a partner?', 'no hands!']);
 line(22.5, 23.4, ['OLE!', 'viva barcelona!', 'viva los novios!']);
-// Basilio's lines.
-const HIS = [[2.5, 3.4], [5.6, 6.6]];
-
 // Terracotta tiles, warm where Clawd dances; bunting along the top.
 function square(floor, cx) {
   for (let x = 0; x < w; x++) {
@@ -1989,8 +1962,7 @@ function frame(t, dt) {
   if (u > 22.4 && u < 23.4) sparkles(t, d, floor, '#ff5a6a');
   const said = saying(u, n);
   if (!said) return;
-  if (HIS.some(r => u >= r[0] && u < r[1])) speak(said, db);
-  else speak(said, d);
+  speak(said, d);
 }
 `
 
@@ -2068,10 +2040,8 @@ rkey(21.6, M(0.5, 8, 'left', ['out', 'high'], 'stand'));
 rkey(22.2, M(0.5, 8, 'left', ['out', 'high'], 'kneel'));
 line(0.3, 2.3, ['giselle, act two.', 'midnight. the wilis rise.', 'oh! i am a ghost now.']);
 line(6.6, 8.2, ['giselle...?', 'lilies, for you...', 'is that you?']);
-line(9.7, 10.8, ['i forgive you.', 'look, i float!', 'albrecht!']);
-line(12.9, 14.6, ['dance! dance! dance!', 'entrechat six! again?!', 'my legs! my legs!']);
 line(20.2, 21.8, ['see you tomorrow night!', 'same time next week?', 'bye, albrecht!']);
-const HIS = [[6.4, 8.6], [12.7, 15.5]];
+const HIS = [[6.4, 8.6]];
 
 // The grave: a stone cross on the left.
 function grave(gx, floor) {
@@ -2242,7 +2212,6 @@ rkey(22.4, M(0.6, 13, 'left', SECOND, 'stand', { eyes: 'happy' }));
 rkey(23, M(0.6, 13, 'left', SECOND, 'stand', { eyes: 'closed' }));
 steps(rkey, 23.4, 0.6, 1.4, 13, 4, SECOND, 0.3);
 line(1.8, 2.6, ['cock-a-doodle-doo!', 'cock-a-doodle-DOO!', 'doodle-doo!']);
-line(14.6, 16, ['giddy-up!', 'hold the reins, colas!', 'hop! hop!']);
 line(23, 24.4, ['LISE! the butter!!', 'clack clack clack!', 'mother is coming!']);
 line(25.7, 26.8, ['tee hee.', 'she never knows.', 'la la la.']);
 // Who says each line, if not Lise: the Cockerel, the Widow (offstage).
@@ -2396,11 +2365,8 @@ rkey(19.2, M(0.5, -8, 'right', FIFTH, 'plie'));
 rkey(19.6, M(0.5, -8, 'right', SECOND, 'stand'));
 steps(rkey, 19.9, 0.5, 0.8, -6, 3, SECOND, 0.3);
 line(0.2, 2.2, ['manon, act one.', 'amiens. the inn yard.', 'the coach from arras!']);
-line(3.5, 4.3, ['...oh.', 'who is she?', '*drops book*']);
 line(13.9, 15.2, ['dear father...', 'writing home...', 'how do you spell...']);
-line(15.3, 16.2, ['boo!', 'come and play!', 'forget the letter!']);
 line(21.4, 22.8, ['off to paris!', 'happily ever... for now.', 'giddy-up!']);
-const HIS = [[3.5, 4.3]];
 
 // The inn yard: cobbles, the inn's sign hanging on the left.
 function yard(floor, cx) {
@@ -2462,7 +2428,6 @@ function frame(t, dt) {
   if (u < 2.2 || u > 21.2) say(said, Math.round(w / 2), 0);
   // The letter, said over his shoulder, clear of her.
   else if (u > 13.9 && u < 15.2) say(said, dr.x + 4, 0);
-  else if (HIS.some(q => u >= q[0] && u < q[1])) speak(said, dr);
   else speak(said, d);
 }
 `
@@ -2482,18 +2447,44 @@ const piece = (name: string, concept: string, routine: number, background: Recor
 
 const NOTES = { glyphs: '♪♫♪·', count: 6, x: 'rand(k)*w', y: 'mod(rand(k+3)*h - t*(0.5+rand(k+5)*0.5), h)', color: '#be96d2' }
 
+// Backdrops: toons' particle swarms, drawn as text behind the sets and the
+// dancers, so they show in any terminal (toons' own backdrop effects are
+// kept faint by its renderer). Each is a list of swarms; a swarm's
+// expressions read the piece's clock t, so `during` keeps one off the strip
+// outside its moment in the routine.
+const during = (routine: number, a: number, b: number) => ` - 99*(1-between(mod(t,${routine}),${a},${b}))`
+// Stars twinkling in the top rows of a night sky.
+const stars = (color: string, rows = 4, hide = '') => ({ glyphs: '··+', count: 18, x: 'floor(rand(k)*w)', y: `floor(rand(k+3)*${rows}) - 99*step(0.85, tri(t*0.3+rand(k+9)))${hide}`, color })
+// Rain driving down on a slant, for a storm.
+const rain = (routine: number, a: number, b: number) => ({ glyphs: '/', count: 60, x: 'mod(rand(k)*(w+12) - t*10, w+12) - 6', y: `mod(rand(k+5)*(h+2) + t*(14+rand(k+2)*6), h+2) - 1${during(routine, a, b)}`, color: '#7f8fb8' })
+// Fireflies (or will-o'-the-wisps) drifting and blinking.
+const fireflies = (color: string, hide = '') => ({ glyphs: '*', count: 12, x: 'mod(rand(k)*w + sin(t*0.6+k*2)*4, w)', y: `1 + rand(k+3)*(h-4) + sin(t*0.9+k)*0.8 - 99*step(0.6, tri(t*0.35+rand(k+9)))${hide}`, color })
+// A burst of fireworks every 1.4 seconds somewhere along the sky; `phase`
+// staggers a second colour.
+const fireworks = (routine: number, a: number, b: number, color: string, phase: number) => {
+  const c = `floor((t+${phase})/1.4)`
+  const r = `fract((t+${phase})/1.4)`
+  return { glyphs: '*·', count: 14, x: `10 + rand(${c})*(w-20) + cos(k*6.283/n)*${r}*11`, y: `2 + rand(${c}+5)*1.5 + sin(k*6.283/n)*${r}*3 - 99*step(0.85, ${r})${during(routine, a, b)}`, color }
+}
+// Confetti falling from the top over a bow.
+const confetti = (routine: number, a: number, b: number, color: string, seed: number) => ({ glyphs: '*·,', count: 16, x: `rand(k+${seed})*w + sin(t*3+k)`, y: `(mod(t,${routine})-${a})*(2+rand(k+${seed}+4)*2) - 1 - rand(k+${seed}+1)*4${during(routine, a, b)}`, color })
+// Embers rising on the warm air.
+const EMBERS = { glyphs: '·', count: 10, x: 'rand(k)*w + sin(t*1.3+k)*1.5', y: 'h - 1 - mod(rand(k+3)*h + t*(1+rand(k+4)), h)', color: '#ff9a40' }
+// Birds crossing the morning sky.
+const BIRDS = { glyphs: 'v', count: 4, x: 'mod(rand(k)*w + t*(5+rand(k+1)*3), w+10) - 5', y: '1 + rand(k+2)*2', color: '#c8ccd8' }
+
 // The pieces, in the order they play.
 export const PIECES: Piece[] = [
-  piece('gala', 'Clawd in a pink tutu dances a gala on a little stage', 20, { effect: 'aurora', palette: ['#2a1030', '#4a1a40', '#7a2a50'], speed: 0.4, intensity: 0 }, [NOTES], GALA),
+  piece('gala', 'Clawd in a pink tutu dances a gala on a little stage', 20, { effect: 'aurora', palette: ['#2a1030', '#4a1a40', '#7a2a50'], speed: 0.4, intensity: 0 }, [NOTES, confetti(20, 16.6, 19.4, '#ffd890', 0), confetti(20, 16.6, 19.4, '#ff9ac0', 40)], GALA),
   // Swan Lake's four acts, in order.
   piece('swan lake i', 'Prince Siegfried\'s birthday in the palace garden at dusk', 22, { effect: 'aurora', palette: ['#2a1a30', '#3a2040', '#4a2a50'], speed: 0.2, intensity: 0 }, [], DUETS + SWAN_COMMON + SWAN1),
-  piece('swan lake ii', 'Clawd as the swan queen by the lake at midnight', 22, { effect: 'starfield', palette: ['#203050', '#405a90', '#c0d0ff'], speed: 0.3, intensity: 0 }, [], DUETS + SWAN_COMMON + SWANS),
+  piece('swan lake ii', 'Clawd as the swan queen by the lake at midnight', 22, { effect: 'starfield', palette: ['#203050', '#405a90', '#c0d0ff'], speed: 0.3, intensity: 0 }, [stars('#c0d0ff')], DUETS + SWAN_COMMON + SWANS),
   piece('swan lake iii', 'Odile, the black swan, at the palace ball', 24, { effect: 'pulse', palette: ['#2a1018', '#3a1a26', '#4a2030'], speed: 0.2, intensity: 0 }, [], DUETS + SWAN_COMMON + SWAN3),
-  piece('swan lake iv', 'The lake before dawn: forgiveness, a storm, the spell broken', 24, { effect: 'starfield', palette: ['#203050', '#405a90', '#c0d0ff'], speed: 0.3, intensity: 0 }, [], DUETS + SWAN_COMMON + SWAN4),
+  piece('swan lake iv', 'The lake before dawn: forgiveness, a storm, the spell broken', 24, { effect: 'starfield', palette: ['#203050', '#405a90', '#c0d0ff'], speed: 0.3, intensity: 0 }, [stars('#c0d0ff', 4, during(24, 0, 11.8)), rain(24, 11.8, 16)], DUETS + SWAN_COMMON + SWAN4),
   // The Nutcracker's two acts, in order.
   piece('nutcracker i', 'Christmas Eve: the nutcracker, the mice, and the land of snow', 24, { effect: 'pulse', palette: ['#1a0e12', '#22121a', '#2a1620'], speed: 0.2, intensity: 0 }, [], DUETS + NUT1),
   piece('nutcracker ii', 'Clawd as the Sugar Plum Fairy in the Kingdom of Sweets', 20, { effect: 'pulse', palette: ['#20142a', '#2e1a3a', '#3a2048'], speed: 0.3, intensity: 0 }, [{ glyphs: '*·•', count: 18, x: 'mod(rand(k)*w + sin(t*0.8+k)*2, w)', y: 'mod(rand(k+3)*h + t*(0.6+rand(k+5)*0.6), h)', color: '#e8f0ff' }], SUGAR),
-  piece('firebird', 'Clawd as the Firebird in the enchanted garden', 22, { effect: 'fire', palette: ['#1a0a0c', '#3a1210', '#5a1c10'], speed: 0.4, intensity: 0 }, [], FIRE),
+  piece('firebird', 'Clawd as the Firebird in the enchanted garden', 22, { effect: 'fire', palette: ['#1a0a0c', '#3a1210', '#5a1c10'], speed: 0.4, intensity: 0 }, [EMBERS], FIRE),
   // Mayerling's three acts, in order, so they play one after another.
   piece('mayerling i', 'Crown Prince Rudolf and Princess Stephanie at their wedding ball', 22, { effect: 'aurora', palette: ['#2a1418', '#3a1c20', '#4a2428'], speed: 0.2, intensity: 0 }, [], DUETS + BALL),
   piece('mayerling ii', 'Mitzi Caspar dances with the Hungarian officers in her tavern', 22, { effect: 'pulse', palette: ['#140c08', '#1c120c', '#241810'], speed: 0.3, intensity: 0 }, [], DUETS + TAVERN),
@@ -2502,9 +2493,9 @@ export const PIECES: Piece[] = [
   piece('chroma', 'Wayne McGregor: a sharp duet in a white room', 22, { effect: 'pulse', palette: ['#e4e2dc', '#e4e2dc', '#e4e2dc'], speed: 0.1, intensity: 0 }, [], DUETS + CHROMA),
   piece('infra', 'Wayne McGregor: under an LED screen of walking figures', 24, { effect: 'pulse', palette: ['#08090c', '#0c0d10', '#101216'], speed: 0.2, intensity: 0 }, [], DUETS + INFRA),
   piece('untitled 2023', 'Wayne McGregor: a white canvas cut with green', 22, { effect: 'pulse', palette: ['#eeede8', '#eeede8', '#eeede8'], speed: 0.1, intensity: 0 }, [], DUETS + UNTITLED),
-  piece('don quixote', 'Kitri and Basilio dance their wedding pas de deux in Barcelona', 26, { effect: 'aurora', palette: ['#3a1a14', '#5a2a18', '#7a3a1c'], speed: 0.3, intensity: 0 }, [], DUETS + DONQ),
-  piece('giselle', 'Giselle among the Wilis in the moonlit forest', 24, { effect: 'starfield', palette: ['#101c24', '#2a3c50', '#c0d0e0'], speed: 0.2, intensity: 0 }, [], DUETS + GISELLE),
-  piece('la fille mal gardee', 'The chicken dance, then Lise and Colas with a ribbon in the farmyard', 27, { effect: 'aurora', palette: ['#3a4a6a', '#5a6a8a', '#8a90a8'], speed: 0.2, intensity: 0 }, [], DUETS + FILLE),
+  piece('don quixote', 'Kitri and Basilio dance their wedding pas de deux in Barcelona', 26, { effect: 'aurora', palette: ['#3a1a14', '#5a2a18', '#7a3a1c'], speed: 0.3, intensity: 0 }, [fireworks(26, 21.8, 25.6, '#ffd040', 0), fireworks(26, 21.8, 25.6, '#ff6a8a', 0.7)], DUETS + DONQ),
+  piece('giselle', 'Giselle among the Wilis in the moonlit forest', 24, { effect: 'starfield', palette: ['#101c24', '#2a3c50', '#c0d0e0'], speed: 0.2, intensity: 0 }, [fireflies('#a8e0c0', during(24, 0, 17))], DUETS + GISELLE),
+  piece('la fille mal gardee', 'The chicken dance, then Lise and Colas with a ribbon in the farmyard', 27, { effect: 'aurora', palette: ['#3a4a6a', '#5a6a8a', '#8a90a8'], speed: 0.2, intensity: 0 }, [BIRDS], DUETS + FILLE),
   piece('manon', 'Manon meets Des Grieux in the inn yard at Amiens', 23, { effect: 'pulse', palette: ['#1a1614', '#221c18', '#2a221c'], speed: 0.2, intensity: 0 }, [], DUETS + MANON),
   piece('class', 'Clawd takes ballet class at the barre', 20, { effect: 'pulse', palette: ['#1e1e2a', '#24243a', '#2a2a40'], speed: 0.2, intensity: 0 }, [], CLASS),
 ]

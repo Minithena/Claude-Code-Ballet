@@ -23,7 +23,7 @@ Claude works long enough:
   prince's birthday, a pas de trois, a crossbow, his slow solo, and swans
   flying over for him to chase. II: the lake at midnight (below). III: the
   ball; Odile, the black swan, in an adagio her father works like a
-  puppet, her 32 fouettés (counted on screen), the prince swears to the
+  puppet, her 32 fouettés, the prince swears to the
   wrong swan. IV: the lake before dawn; the swans mourn in unison,
   forgiveness, Rothbart's owl in a storm, and a lift into the sunrise for
   a happy ending. Act II: The swan glides in with its arms
@@ -90,6 +90,10 @@ Claude works long enough:
   its metronome ticking. Pliés, kicks, a
   balance, then pirouettes, sautés and a bow in the center.
 
+![Swan Lake, act IV: forgiveness, the storm, and a lift into the sunrise](docs/swan-lake.gif)
+
+![Don Quixote: Kitri and Basilio's wedding pas de deux, with fireworks over Barcelona](docs/don-quixote.gif)
+
 **Live** (`/ballet live`) is the other mode: one Clawd in the studio whose
 dancing is made of what Claude does, as claude-toons' scenes follow the
 work. Between tool calls Clawd holds still, in a pose for the moment:
@@ -100,6 +104,8 @@ about a second, and calls in quick succession chain their moves
 together into one piece. A label at the top left says what set off the
 move in hand (`grep`, `read live.ts`, `git log`), and between moves what
 Claude is at (thinking, writing the reply, tests running):
+
+![Live mode: Clawd dancing a move for each tool call, labelled with what set it off](docs/live.gif)
 
 - **Reading** a file: up on pointe, the arms opening. `cat` a pas de chat,
   `head` reaching up, `tail` an arabesque and a look back, `wc` three
@@ -138,8 +144,10 @@ Clawd is drawn as on the official stickers (the ballet one above all):
 the same block, two arm stubs and four little legs, a pink checked tutu,
 and three-quarter views with the far side in shade when it turns. Now and
 then it says something in a speech bubble (a title, a story beat, a
-joke), a little differently each time round. A frame takes about
-a millisecond to draw.
+joke), a little differently each time round. Some pieces have weather
+and lights behind them: stars over the lake, rain in Swan Lake's storm,
+confetti over the gala's bow, fireworks over Barcelona. A frame takes
+about a millisecond to draw.
 
 An independent project, not affiliated with or endorsed by Anthropic.
 
@@ -183,9 +191,21 @@ desktop app or an IDE panel, and wants a terminal with 24-bit colour.
 - **`/ballet live`** switches to the live dancer, and **`/ballet
   standard`** (or naming a piece) back to the ballets in turn. The mode is
   remembered across sessions.
+- **`/ballet programme`** (or `settings`) opens the programme, a row a
+  letter: **n** lists every piece, each with a letter to pick it by (0
+  goes back), **m** switches mode, **h** shows or hides Clawd, and **o**,
+  **s** and **l** change the settings. Escape closes it.
 - While you type `/ballet ...`, a dim row above the prompt shows what it
   can complete to, and **Tab** (or → at the end) completes it; Tab again
   steps to the next match.
+
+The settings are also in `/config`, under "Ballet":
+
+| Setting | What it does |
+|---|---|
+| Order | "in turn" follows the programme; "shuffled" picks the next ballet at random, its acts still in order. |
+| Speech bubbles | Off, every piece is danced in silence. |
+| Live label | Off, live mode shows no chip naming what set off each move. |
 
 ## Preview without Claude Code
 
@@ -193,6 +213,8 @@ desktop app or an IDE panel, and wants a terminal with 24-bit colour.
 node --experimental-transform-types scripts/play.ts --piece 1   # plays a piece (0-18) in the terminal; Ctrl-C stops
 node --experimental-transform-types scripts/play.ts --live      # the live dancer, through a made-up session
 node --experimental-transform-types scripts/frames.ts --piece 0 | python3 scripts/gif.py docs/demo.gif   # needs Pillow
+node --experimental-transform-types scripts/frames.ts --live --seconds 30 --fps 15 | python3 scripts/gif.py docs/live.gif
+node --experimental-transform-types scripts/frames.ts --piece 4 --fps 15 | python3 scripts/gif.py docs/swan-lake.gif
 ```
 
 ## License

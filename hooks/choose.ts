@@ -96,11 +96,41 @@ export function modeOf(arg: string): (typeof MODES)[number] | undefined {
   return best
 }
 
-// What Tab offers for the words typed so far: every name (the modes and
-// on/off too) that starts with them, else the one piece they name loosely.
+// Words that open the programme (the pane of pieces and settings).
+export const PROGRAMME = ['programme', 'program', 'settings']
+
+// Whether the words name the programme, typos and all ("progamme",
+// "setings"); a start counts only from four letters, so "p" is no word.
+export function isProgramme(arg: string): boolean {
+  const typed = normal(arg)
+
+  return typed.length >= 4 && PROGRAMME.some(word => near(typed, word) < Infinity)
+}
+
+// The piece after the one at `index`: in turn, the next in the programme;
+// shuffled, its ballet's next act still, else the first act of another
+// ballet at random (`random` in [0, 1)).
+export function following(names: readonly string[], index: number, isShuffled: boolean, random = Math.random): number {
+  const next = (index + 1) % names.length
+  if (!isShuffled) return next
+  const here = split(names[index] ?? '')
+  const after = split(names[next]!)
+  if (after.ballet === here.ballet && after.act > here.act) return next
+  const starts = names.flatMap((name, i) => {
+    const { ballet, act } = split(name)
+
+    return act <= 1 && ballet !== here.ballet ? [i] : []
+  })
+
+  return starts[Math.floor(random() * starts.length)] ?? next
+}
+
+// What Tab offers for the words typed so far: every name (the modes, the
+// programme and on/off too) that starts with them, else the one piece they
+// name loosely.
 export function completions(names: readonly string[], arg: string): string[] {
   const typed = normal(arg)
-  const starting = [...names, ...MODES, 'on', 'off'].filter(n => n.startsWith(typed))
+  const starting = [...names, ...MODES, 'programme', 'on', 'off'].filter(n => n.startsWith(typed))
   if (starting.length) return starting
   const picked = choose(names, arg)
 

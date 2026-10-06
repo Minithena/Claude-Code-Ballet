@@ -1,11 +1,34 @@
 {
   "name": "ballet-clawd",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Clawd in a pink tutu, dancing ballet on a little stage above the prompt while Claude works",
   "author": { "name": "Athena", "url": "https://github.com/Minithena" },
   "homepage": "https://github.com/Minithena/ballet-clawd",
   "repository": "https://github.com/Minithena/ballet-clawd",
   "license": "MIT",
   "types": "./types/index.d.ts",
-  "keywords": ["ballet", "clawd", "animation", "claude-toons"]
+  "keywords": ["ballet", "clawd", "animation", "claude-toons"],
+  "userConfig": {
+    "order": {
+      "type": "string",
+      "title": "Ballet: order",
+      "description": "The order the ballets play in. \"in turn\" follows the programme; \"shuffled\" picks the next ballet at random, its acts still in order.",
+      "default": "in turn",
+      "options": ["in turn", "shuffled"]
+    },
+    "speech": {
+      "type": "string",
+      "title": "Ballet: speech bubbles",
+      "description": "Whether the dancers say anything (a title, a story beat, a joke). Off, every piece is danced in silence.",
+      "default": "on",
+      "options": ["on", "off"]
+    },
+    "label": {
+      "type": "string",
+      "title": "Ballet: live label",
+      "description": "In live mode, the chip at the top left naming what set off each move (grep, read live.ts, git log). Off, Clawd just dances.",
+      "default": "on",
+      "options": ["on", "off"]
+    }
+  }
 }
