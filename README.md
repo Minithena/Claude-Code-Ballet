@@ -9,7 +9,7 @@ Built on [claude-toons](https://github.com/achimala/claude-toons) by Anshu
 Chimala, using toons' renderer, scene language and
 pixel-art Clawd.
 
-![Live mode: Clawd dancing a move for each tool call, labelled with what set it off](docs/live.gif)
+![Live mode mid-request in Claude Code: Claude fixes Odile's missing 32nd fouetté while Clawd dances a move for each tool call, labelled with what set it off](docs/live.gif)
 
 **Live mode** (`/ballet live`). Each tool call fires a quick move of its
 own, labelled at the top left: `grep` a twirl, a file read up on pointe,
@@ -116,7 +116,7 @@ node --experimental-transform-types scripts/play.ts --live      # live mode, thr
 The GIFs (needs Pillow):
 
 ```sh
-node --experimental-transform-types scripts/frames.ts --live --story --seconds 30 --fps 15 | python3 scripts/gif.py docs/live.gif
+node --experimental-transform-types scripts/frames.ts --live --story --seconds 26 --fps 15 | python3 scripts/gif.py docs/live.gif
 node --experimental-transform-types scripts/frames.ts --live --agents --seconds 20 --fps 15 --cols 110 | python3 scripts/gif.py docs/subagents.gif
 node --experimental-transform-types scripts/frames.ts --piece 4 --fps 15 | python3 scripts/gif.py docs/swan-lake.gif
 node --experimental-transform-types scripts/frames.ts --piece 14 --fps 15 | python3 scripts/gif.py docs/don-quixote.gif

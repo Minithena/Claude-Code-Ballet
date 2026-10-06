@@ -930,27 +930,35 @@ const ACT_OF: Partial<Record<Move, Act>> = { read: 'reading', cat: 'reading', he
 // still running a while (tests, builds, sleep), a pause to think every so
 // often, news now and then, a guest and a corps coming and going.
 // A made-up session told as real tool calls, for the README's live GIF
-// (frames.ts --story): each call read by actOf as live mode reads one,
-// with thinking between, a test that fails and then passes, a commit, and
-// the reply written at the end. [seconds in, tool, input, seconds it runs]
-const STORY: [number, string, Record<string, unknown>, number][] = [
-  [1.6, 'Read', { file_path: '/repo/README.md' }, 0],
-  [3.2, 'Bash', { command: 'git status' }, 0],
-  [4.8, 'Bash', { command: 'git log --oneline -5' }, 0],
-  [6.4, 'Grep', { pattern: 'tool.call' }, 0],
-  [9.2, 'Read', { file_path: '/repo/hooks/live.ts' }, 0],
-  [10.8, 'Edit', { file_path: '/repo/hooks/live.ts' }, 0],
-  [12.4, 'Bash', { command: 'npm test' }, 2.4],
-  [16.4, 'Edit', { file_path: '/repo/hooks/live.ts' }, 0],
-  [18, 'Bash', { command: 'npm test' }, 2.4],
-  [21.6, 'Bash', { command: 'git diff' }, 0],
-  [23.2, 'Bash', { command: 'git commit -m "Fix the label"' }, 0],
-  [24.8, 'Bash', { command: 'git push' }, 0],
+// (frames.ts --story), already under way when it starts: Odile turns 31
+// fouettés of her 32, and the fix overshoots to 33 before it lands. Each
+// call is read by actOf as live mode reads one, close enough to chain
+// (the person found it idle with pauses between), thinking only for a
+// story beat; git (and its ribbon) only comes in at the end, to commit. [seconds in, tool, input,
+// seconds it runs]
+export const STORY: [number, string, Record<string, unknown>, number][] = [
+  [0.6, 'Bash', { command: 'rg -n fouette ballets/' }, 0],
+  [1.5, 'Read', { file_path: '/repo/ballets/swan-lake/odile.ts' }, 0],
+  [2.4, 'Glob', { pattern: 'test/**/fouette*' }, 0],
+  [3.3, 'Read', { file_path: '/repo/test/fouettes.test.ts' }, 0],
+  [4.2, 'WebFetch', { url: 'https://en.wikipedia.org/wiki/Fouetté' }, 0],
+  [6.6, 'Edit', { file_path: '/repo/ballets/swan-lake/odile.ts' }, 0],
+  [7.5, 'Bash', { command: 'npm test' }, 1.8],
+  [10.8, 'Edit', { file_path: '/repo/ballets/swan-lake/odile.ts' }, 0],
+  [11.7, 'Bash', { command: 'npm test' }, 1.8],
+  [14.1, 'Write', { file_path: '/repo/test/odile-stops.test.ts' }, 0],
+  [15, 'Bash', { command: 'npm test' }, 1.6],
+  [17.2, 'Bash', { command: 'git status' }, 0],
+  [18.1, 'Bash', { command: 'git diff' }, 0],
+  [19, 'Bash', { command: 'git commit -am "Give Odile her 32nd fouette"' }, 0],
+  [19.9, 'Bash', { command: 'git push' }, 0],
+  [20.8, 'Bash', { command: 'open https://github.com/you/ballet/pull/32' }, 0],
 ]
-// What came of it: the task, the first test run failing, the second passing.
-const STORY_NEWS: [number, News][] = [[0.3, 'task'], [14.8, 'fail'], [20.4, 'pass']]
+// What came of it: the first test run failing, the second passing (the
+// task was set before the GIF starts).
+const STORY_NEWS: [number, News][] = [[9.3, 'fail'], [13.5, 'pass']]
 // When Claude turns to writing the reply.
-const STORY_REPLY = 26.6
+export const STORY_REPLY = 22.4
 
 export function storyAt(t: number): Moment {
   let n = -1

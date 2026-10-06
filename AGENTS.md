@@ -238,9 +238,18 @@ at how toons does a thing before doing it differently here.
   frames for `gif.py`, which draws the README's GIFs under a spinner line
   (the commands are in the README). For the live GIFs, `--story` plays
   `storyAt` (live.ts), a session told as real tool calls read by `actOf`,
-  so the labels are the real ones (`git status`, `read README.md`, a test
+  so the labels are the real ones (`git status`, `read odile.ts`, a test
   that fails and then passes; the person wanted the GIF to show Claude
-  reading and using git), and `--agents` keeps four of the corps on, each
+  reading and using git), and draws the Claude Code session around the
+  stage, as toons' demo does (the prompt, each call and its result in the
+  transcript, the reply; the person asked for more than the animation).
+  It opens mid-request, the transcript already full and Clawd already on
+  (`PRE`, `CLOCK` in frames.ts), and the task is a ballet joke, as the
+  person asked: Odile turns 31 fouettés of 32, the fix overshoots to 33;
+  git (with the stagehand and ribbon) only at the end, to commit, as the
+  person found it off coming in early; calls close enough to chain, with
+  few pauses, as the person wanted it more lively;
+  and `--agents` keeps four of the corps on, each
   dancing its agent's calls.
   toons runs its scripts with bun; here they run under Node 24 with
   `--experimental-transform-types` (toons' interpreter uses parameter
