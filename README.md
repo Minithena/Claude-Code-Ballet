@@ -1,8 +1,8 @@
 # Claude Code Ballet
 
 A plugin for Claude Code CLI that shows Clawd doing ballet when a model is working.
-In live mode each performance is unique, it does moves in response to what Claude is
-doing, a move for each tool call and action.
+In live mode each performance is dynamic & unique, Clawd does moves in response to what Claude is
+doing, responding to each tool call and action.
 There is also a programme of ballets it can perform instead.
 
 Built on [claude-toons](https://github.com/achimala/claude-toons) by Anshu
